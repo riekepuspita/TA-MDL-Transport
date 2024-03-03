@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,29 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->middleware('auth');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/auth', [LoginController::class, 'login'])->name('auth');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
+Route::get('/datapenyewa', function () {
+    return view('menu.datapenyewa');
+});
+
+Route::get('/datamobil', function () {
+    return view('menu.datamobil');
+});
+
+Route::get('/laporan', function () {
+    return view('menu.laporan');
+});
+
+
+// Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+// Route::post('/auth', [LoginController::class, 'login'])->name('auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/auth', [LoginController::class, 'login'])->name('auth');
+Route::get('/registrasi', [RegistrasiController::class, 'registrasi'])->name('registrasi');
+Route::post('/registrasiuser', [RegistrasiController::class, 'registrasiuser'])->name('registrasiuser');
+

@@ -1,14 +1,13 @@
 @extends('layout.app')
 
 @section('title')
-    Login
+    Registrasi
 @endsection
 
 @section('content')
 
     <body data-layout="horizontal" data-topbar="dark">
 
-        {{-- <div class="authentication-bg min-vh-100"> --}}
         <div class="authentication-bg"
             style="background-image: url('{{ asset('assets/images/bg-teal.jpeg') }}'); background-size: cover; background-position: center;">
             <div class="container">
@@ -26,19 +25,19 @@
                             <div class="card">
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
-                                        <h5 class="text" style="color: teal;" >Login</h5>
-                                        <p class="text-muted">Masuk untuk melanjutkan ke MDL Transport !</p>
+                                        <h5 class="text" style="color: teal;">Registrasi Akun</h5>
+                                        <p class="text-muted">Bergabunglah dan daftarkan diri Anda disini !</p>
                                     </div>
                                     <div class="p-2 mt-4">
-                                        <form action="/auth" method="POST">
+                                        <form action="/registrasiuser" method="POST">
                                             @csrf
 
 
-                                            {{-- <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label class="form-label" for="username">Username</label>
                                                 <input type="text" class="form-control" name="username" id="username"
                                                     placeholder="Masukkan Username">
-                                            </div> --}}
+                                            </div>
 
                                             <div class="mb-3">
                                                 <label class="form-label" for="useremail">Email</label>
@@ -53,7 +52,7 @@
 
                                             <div class="mt-3 text-end">
                                                 <button class="btn btn-primary w-sm waves-effect waves-light" style="background-color: #008080;"
-                                                    type="submit">Masuk</button>
+                                                    type="submit">Registrasi</button>
                                             </div>
 
                                             {{-- <div class="mt-4 text-center">
@@ -77,9 +76,8 @@
                                             </div> --}}
 
                                             <div class="mt-4 text-center">
-                                                <p class="text-muted mb-0">Belum punya akun ? <a
-                                                        href="{{ route('registrasi') }}" class="fw-medium text" style="color: teal;">
-                                                        Registrasi</a></p>
+                                                <p class="text-muted mb-0">Sudah punya akun ? <a href="{{ route('login') }}"
+                                                        class="fw-medium text" style="color: teal;"> Login</a></p>
                                             </div>
                                         </form>
                                     </div>

@@ -17,21 +17,21 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
         // dd($request);
 
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (auth()->attempt($credentials)) {
             // Login berhasil
-            return redirect()->intended('/welcome')->with('success', 'Login berhasil!');
+            return redirect()->intended('/dashboard')->with('success', 'Login berhasil!');
         }
 
         // Login gagal
-        return redirect()->route('login')->with('error', 'Login gagal. Periksa username dan password Anda.');
+        return redirect()->route('login')->with('error', 'Login gagal. Periksa email dan password Anda.');
     }
 
     public function logout(Request $request): RedirectResponse
