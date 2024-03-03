@@ -27,4 +27,27 @@ class DataPenyewaController extends Controller
         DataPenyewa::create($request->all());
         return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Ditambahkan');
     }
+
+    public function tampilkanpenyewa($idPenyewa){
+
+        $data = DataPenyewa::find($idPenyewa);
+        // dd($data);
+
+        return view('menu.tampilpenyewa', compact('data'));
+    }
+
+    public function updatepenyewa(Request $request, $idPenyewa){
+        $data = DataPenyewa::find($idPenyewa);
+        $data -> update($request->all());
+
+        return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function delete($idPenyewa){
+        $data = DataPenyewa::find($idPenyewa);
+        $data->delete();
+        
+        return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
+    }
+
 }

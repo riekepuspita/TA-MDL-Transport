@@ -53,6 +53,7 @@
                                         <table class="table mb-12"> <!-- table mb-0-->
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>NIK</th>
                                                     <th>Nama</th>
                                                     <th>Alamat</th>
@@ -62,9 +63,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @php
+                                                    $no = 1;
+                                                @endphp
                                                 @foreach ($data as $row )
                                                 <tr>
-                                                    {{-- <th scope="row">{{ $row->idPenyewa }}</th> --}}
+                                                    <th scope="row">{{ $no++ }}</th>
                                                     <td>{{ $row->noNIK }}</td>
                                                     <td>{{ $row->username }}</td>
                                                     <td>{{ $row->alamat }}</td>
@@ -72,10 +76,10 @@
                                                     <td>{{ $row->email }}</td>
                                                     {{-- <td>{{ $row->password }}</td> --}}
                                                     <td>
-                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
+                                                        <a href="/tampilkanpenyewa/{{ $row->idPenyewa }}" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>
                                                         </a>
-                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
+                                                        <a href="/delete/{{ $row->idPenyewa }}" title="Hapus Data" class="btn btn-danger btn-sm">
                                                             <i class="bx bx-trash"></i>
                                                         </a>
                                                         <a href="" title="Lihat Data" class="btn btn-primary btn-sm">

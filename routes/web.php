@@ -54,5 +54,6 @@ Route::post('/registrasiuser', [RegistrasiController::class, 'registrasiuser'])-
 Route::get('/datapenyewa', [DataPenyewaController::class, 'index'])->name('datapenyewa');
 Route::get('/tambahpenyewa', [DataPenyewaController::class, 'tambahpenyewa'])->name('tambahpenyewa');
 Route::post('/insertpenyewa', [DataPenyewaController::class, 'insertpenyewa'])->name('insertpenyewa');
-
-
+Route::get('/tampilkanpenyewa/{idPenyewa}', [DataPenyewaController::class, 'tampilkanpenyewa'])->name('tampilkanpenyewa');
+Route::post('/updatepenyewa/{idPenyewa}', [DataPenyewaController::class, 'updatepenyewa'])->name('updatepenyewa');
+Route::get('/delete/{idPenyewa}', [DataPenyewaController::class, 'delete'])->name('delete');
