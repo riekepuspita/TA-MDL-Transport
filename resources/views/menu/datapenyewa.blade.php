@@ -36,103 +36,61 @@
                     </div>
                     <!-- end page title -->
 
-                    <div class="row bg-white rounded-3 pb-3 mb-3 mx-2">
-                        <div class="container-fluid table-responsive px-3 py-3">
-                            <table id="table" class="table table-striped" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <td>No</td>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011-07-25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009-01-12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012-03-29</td>
-                                        <td>$433,060</td>
-                                    
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-
-                            {{-- <table id="table" class="table table-striped" style="width:100%">
-
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NIK</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>No HP</th>
-                                        <th>Email</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1345679934735</td>
-                                        <td>Samid</td>
-                                        <td>Bandung</td>
-                                        <td>083456278345</td>
-                                        <td>samid@gmail.com</td>
-                                        <td>
-                                            <a href="" title="Edit Data" class="btn btn-warning btn-sm">
-                                                <i class="bx bx-pencil"></i>
-                                            </a>
-                                            <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
-                                                <i class="bx bx-trash"></i>
-                                            </a>
-                                            <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table> --}}
-
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
+                                <a href="/tambahpenyewa" type="button" class="btn btn-success">Tambah Penyewa</a>
+                            </div>      
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ $message }}
+                              </div>
+                              
+                            @endif               
+                            <div class="card">
+                                <div class="card-body">  
+                                    <div class="table-responsive">
+                                        <table class="table mb-12"> <!-- table mb-0-->
+                                            <thead>
+                                                <tr>
+                                                    <th>NIK</th>
+                                                    <th>Nama</th>
+                                                    <th>Alamat</th>
+                                                    <th>No HP</th>
+                                                    <th>Email</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($data as $row )
+                                                <tr>
+                                                    {{-- <th scope="row">{{ $row->idPenyewa }}</th> --}}
+                                                    <td>{{ $row->noNIK }}</td>
+                                                    <td>{{ $row->username }}</td>
+                                                    <td>{{ $row->alamat }}</td>
+                                                    <td>0{{ $row->noHP }}</td>
+                                                    <td>{{ $row->email }}</td>
+                                                    {{-- <td>{{ $row->password }}</td> --}}
+                                                    <td>
+                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
+                                                            <i class="bx bx-pencil"></i>
+                                                        </a>
+                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
+                                                            <i class="bx bx-trash"></i>
+                                                        </a>
+                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                @endforeach
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

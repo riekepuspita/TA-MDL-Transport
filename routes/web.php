@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrasiController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DataPenyewaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::get('/laporan', function () {
 });
 
 
+// Route::get('/tambahpenyewa', function () {
+//     return view('menu.tambahpenyewa');
+// });
+
 // Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 // Route::post('/auth', [LoginController::class, 'login'])->name('auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
@@ -44,4 +49,10 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/auth', [LoginController::class, 'login'])->name('auth');
 Route::get('/registrasi', [RegistrasiController::class, 'registrasi'])->name('registrasi');
 Route::post('/registrasiuser', [RegistrasiController::class, 'registrasiuser'])->name('registrasiuser');
+
+
+Route::get('/datapenyewa', [DataPenyewaController::class, 'index'])->name('datapenyewa');
+Route::get('/tambahpenyewa', [DataPenyewaController::class, 'tambahpenyewa'])->name('tambahpenyewa');
+Route::post('/insertpenyewa', [DataPenyewaController::class, 'insertpenyewa'])->name('insertpenyewa');
+
 
