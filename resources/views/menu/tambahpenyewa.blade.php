@@ -39,113 +39,104 @@
                                 <div class="card-body">
                                     <form action="/insertpenyewa" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <div class="mb-3 row">
+                                        {{-- <div class="mb-3 row">
                                             <label for="example-search-input" class="col-md-2 col-form-label">NIK</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="noNIK" type="number" value="" id="noNIK"
-                                                    placeholder="Masukkan NIK">
+                                                <input class="form-control" name="noNIK" type="number" value=""
+                                                    id="noNIK" placeholder="Masukkan NIK Penyewa">
+                                            </div>
+                                        </div> --}}
+                                        <div class="mb-3 row">
+                                            <label for="example-nik-input" class="col-md-2 col-form-label">NIK</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="noNIK" type="text" value=""
+                                                    id="noNIK" placeholder="Masukkan NIK Penyewa">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">Nama</label>
+                                            <label for="example-namaLengkap-input" class="col-md-2 col-form-label">Nama
+                                                Lengkap</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="username" type="text" value="" id="username"
-                                                    placeholder="Masukkan Nama Penyewa">
+                                                <input class="form-control" name="namaLengkap" type="text" value=""
+                                                    id="namaLengkap" placeholder="Masukkan Nama Lengkap Penyewa">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-url-input" class="col-md-2 col-form-label">Alamat</label>
+                                            <label for="example-alamat-input" class="col-md-2 col-form-label">Alamat</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="alamat" type="text" value="" id="alamat"
-                                                    placeholder="Masukkan Alamat Penyewa">
+                                                <input class="form-control" name="alamat" type="text" value=""
+                                                    id="alamat" placeholder="Masukkan Alamat Lengkap Penyewa">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-tel-input" class="col-md-2 col-form-label">No HP</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="noHP" type="tel" value="" id="noHP"
-                                                    placeholder="Masukkan No HP Penyewa">
+                                                <input class="form-control" name="noHP" type="tel" value=""
+                                                    id="noHP" placeholder="Masukkan No HP Penyewa">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="email" type="email" value="" id="email"
-                                                    placeholder="Masukkan Email Penyewa">
-                                            </div>
-                                        </div>
-                                        {{-- <div class="mb-3 row">
-                                        <label for="example-password-input" class="col-md-2 col-form-label">Password</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" type="password" value="hunter2" id="password">
-                                        </div>
-                                    
-                                        <div class="mb-3 row">
-                                            <label for="example-number-input" class="col-md-2 col-form-label">Number</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="number" value="42" id="example-number-input">
+                                                <input class="form-control" name="email" type="email" value=""
+                                                    id="email" placeholder="Masukkan Email Penyewa">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Date and time</label>
+                                            <label for="example-password-input"
+                                                class="col-md-2 col-form-label">Password</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00" id="example-datetime-local-input">
+                                                <input class="form-control" name="password" type="password" value=""
+                                                    id="password" placeholder="Masukkan Password Penyewa">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-date-input" class="col-md-2 col-form-label">Date</label>
+                                            <label for="example-gambarktp-input" class="col-md-2 col-form-label">Upload
+                                                KTP</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                                                <input class="form-control" name="ktp" value="" id="ktp"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-month-input" class="col-md-2 col-form-label">Month</label>
+                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
+                                                Selfie KTP</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="month" value="2019-08" id="example-month-input">
+                                                <input class="form-control" name="selfiektp" value="" id="selfiektp"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-week-input" class="col-md-2 col-form-label">Week</label>
+                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
+                                                SIM</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="week" value="2019-W33" id="example-week-input">
+                                                <input class="form-control" name="sim" value="" id="sim"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-time-input" class="col-md-2 col-form-label">Time</label>
+                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
+                                                KK</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                                                <input class="form-control" name="kk" value="" id="kk"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-color-input" class="col-md-2 col-form-label">Color picker</label>
+                                            <label for="example-role-input" class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
-                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#3980c0" title="Choose your color">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label class="col-md-2 col-form-label">Select</label>
-                                            <div class="col-md-10">
-                                                <select class="form-select">
-                                                    <option>Select</option>
-                                                    <option>Large select</option>
-                                                    <option>Small select</option>
+                                                <select class="form-select" id="role" name="role">
+                                                    <option value="" selected disabled hidden>
+                                                        -- Pilih Role --</option>
+                                                        <option value="1">Admin</option>
+                                                        <option value="2">Penyewa</option>
+                                                        </option>
+
                                                 </select>
                                             </div>
                                         </div>
-                        
-                                        <div class="row">
-                                            <label for="exampleDataList" class="col-md-2 col-form-label">Datalist</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                                                <datalist id="datalistOptions">
-                                                    <option value="San Francisco">
-                                                    <option value="New York">
-                                                    <option value="Seattle">
-                                                    <option value="Los Angeles">
-                                                    <option value="Chicago">
-                                                </datalist>
-                                            </div>
-                                        </div> --}}
+
+                                        
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success me-3">Simpan</button>
 

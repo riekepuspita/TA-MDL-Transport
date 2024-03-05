@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>NIK</th>
-                                                    <th>Nama</th>
+                                                    <th>Nama Lengkap</th>
                                                     <th>Alamat</th>
                                                     <th>No HP</th>
                                                     <th>Email</th>
@@ -70,9 +70,9 @@
                                                 <tr>
                                                     <th scope="row">{{ $no++ }}</th>
                                                     <td>{{ $row->noNIK }}</td>
-                                                    <td>{{ $row->username }}</td>
+                                                    <td>{{ $row->namaLengkap }}</td>
                                                     <td>{{ $row->alamat }}</td>
-                                                    <td>0{{ $row->noHP }}</td>
+                                                    <td>{{ $row->noHP }}</td>
                                                     <td>{{ $row->email }}</td>
                                                     {{-- <td>{{ $row->password }}</td> --}}
                                                     <td>

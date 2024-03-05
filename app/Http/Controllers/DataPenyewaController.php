@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\DataPenyewa;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Validator;
 
 class DataPenyewaController extends Controller
 {
@@ -24,6 +26,10 @@ class DataPenyewaController extends Controller
     public function insertpenyewa(Request $request)
     {
         // dd($request->all());
+        // $data = $request->all();
+        
+        // $data['password']= bcrypt($request->password);
+
         DataPenyewa::create($request->all());
         return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Ditambahkan');
     }

@@ -37,20 +37,22 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="/updatepenyewa/{{ $data->idPenyewa }}" method="POST" enctype="multipart/form-data">
+                                    <form action="/updatepenyewa/{{ $data->idPenyewa }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-3 row">
                                             <label for="example-search-input" class="col-md-2 col-form-label">NIK</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="noNIK" type="number"  id="noNIK"
+                                                <input class="form-control" name="noNIK" type="number" id="noNIK"
                                                     placeholder="Masukkan NIK" value="{{ $data->noNIK }}">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Nama</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="username" type="text" id="username"
-                                                    placeholder="Masukkan Nama Penyewa" value="{{ $data->username }}">
+                                                <input class="form-control" name="namaLengkap" type="text"
+                                                    id="namaLengkap" placeholder="Masukkan Nama Penyewa"
+                                                    value="{{ $data->namaLengkap }}">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -74,78 +76,59 @@
                                                     placeholder="Masukkan Email Penyewa" value="{{ $data->email }}">
                                             </div>
                                         </div>
-                                        {{-- <div class="mb-3 row">
-                                        <label for="example-password-input" class="col-md-2 col-form-label">Password</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" type="password" value="hunter2" id="password">
-                                        </div>
-                                    
                                         <div class="mb-3 row">
-                                            <label for="example-number-input" class="col-md-2 col-form-label">Number</label>
+                                            <label for="example-password-input"
+                                                class="col-md-2 col-form-label">Password</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="number" value="42" id="example-number-input">
+                                                <input class="form-control" type="password" value="" id="password">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Date and time</label>
+                                            <label for="example-gambarktp-input" class="col-md-2 col-form-label">Upload
+                                                KTP</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00" id="example-datetime-local-input">
+                                                <input class="form-control" name="ktp" value="{{ $data->ktp }}" id="ktp"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-date-input" class="col-md-2 col-form-label">Date</label>
+                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
+                                                Selfie KTP</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                                                <input class="form-control" name="selfiktp" value="" id="selfiktp"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-month-input" class="col-md-2 col-form-label">Month</label>
+                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
+                                                SIM</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="month" value="2019-08" id="example-month-input">
+                                                <input class="form-control" name="sim" value="" id="sim"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-week-input" class="col-md-2 col-form-label">Week</label>
+                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
+                                                KK</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="week" value="2019-W33" id="example-week-input">
+                                                <input class="form-control" name="kk" value="" id="kk"
+                                                    type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-time-input" class="col-md-2 col-form-label">Time</label>
+                                            <label for="example-selfiektp-input"
+                                                class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-color-input" class="col-md-2 col-form-label">Color picker</label>
-                                            <div class="col-md-10">
-                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#3980c0" title="Choose your color">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label class="col-md-2 col-form-label">Select</label>
-                                            <div class="col-md-10">
-                                                <select class="form-select">
-                                                    <option>Select</option>
-                                                    <option>Large select</option>
-                                                    <option>Small select</option>
+                                                <select class="form-select" id="role" name="role">
+                                                    <option value="" selected disabled hidden>
+                                                        -- Pilih Role --</option>
+                                                    <option value="1">Admin</option>
+                                                    <option value="2">Penyewa</option>
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
-                        
-                                        <div class="row">
-                                            <label for="exampleDataList" class="col-md-2 col-form-label">Datalist</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                                                <datalist id="datalistOptions">
-                                                    <option value="San Francisco">
-                                                    <option value="New York">
-                                                    <option value="Seattle">
-                                                    <option value="Los Angeles">
-                                                    <option value="Chicago">
-                                                </datalist>
-                                            </div>
-                                        </div> --}}
+
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success me-3">Simpan</button>
 

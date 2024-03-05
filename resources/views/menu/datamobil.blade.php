@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
-                                <a href="#" type="button" class="btn btn-success">Tambah Mobil</a>
+                                <a href="/tambahmobil" type="button" class="btn btn-success">Tambah Mobil</a>
                             </div>                     
                             <div class="card">
                                 <div class="card-body">  
@@ -43,21 +43,25 @@
                                         <table class="table mb-12"> <!-- table mb-0-->
                                             <thead>
                                                 <tr>
-                                                    <th>NIK</th>
-                                                    <th>Nama</th>
-                                                    <th>Alamat</th>
-                                                    <th>No HP</th>
-                                                    <th>Email</th>
+                                                    <th>No</th>
+                                                    <th>Jenis Mobil</th>
+                                                    <th>Plat Mobil</th>
+                                                    <th>Deskripsi Mobil</th>
+                                                    <th>Harga Mobil</th>
+                                                    <th>Status</th>
+                                                    <th>Gambar Mobil</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1345679934735</td>
-                                                    <td>Samid</td>
-                                                    <td>Bandung</td>
-                                                    <td>083456278345</td>
-                                                    <td>samid@gmail.com</td>
+                                                    <td>1</td>
+                                                    <td>Avanza</td>
+                                                    <td>AG 4563 0Y</td>
+                                                    <td>Mobil berwarna putih, dapat ditempati sampai 8-9 orang</td>
+                                                    <td>Rp. 300.000/ hari</td>
+                                                    <td> Tersedia </td>
+                                                    <td> ... </td>
                                                     <td>
                                                         <a href="" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>
@@ -71,29 +75,13 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>6754367543890654</td>
-                                                    <td>Raka</td>
-                                                    <td>Surabaya</td>
-                                                    <td>085467538745</td>
-                                                    <td>raka@gmail.com</td>
-                                                    <td>
-                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
-                                                            <i class="bx bx-pencil"></i>
-                                                        </a>
-                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
-                                                            <i class="bx bx-trash"></i>
-                                                        </a>
-                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4653687498478356</td>
-                                                    <td>Yuda</td>
-                                                    <td>Madiun</td>
-                                                    <td>083456278345</td>
-                                                    <td>yuda@gmail.com</td>
+                                                    <td>2</td>
+                                                    <td>Avanza</td>
+                                                    <td>AG 4563 0Y</td>
+                                                    <td>Mobil berwarna putih, dapat ditempati sampai 8-9 orang</td>
+                                                    <td>Rp. 300.000/ hari</td>
+                                                    <td> Tersedia </td>
+                                                    <td> ... </td>
                                                     <td>
                                                         <a href="" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>

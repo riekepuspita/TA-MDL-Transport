@@ -10,7 +10,7 @@ class DataPenyewa extends Model
     use HasFactory;
 
     protected $table = 'users';
-    protected $guarded = ['idPenyewa']; 
+    protected $guarded = ['idPenyewa'];
     protected $primaryKey = 'idPenyewa';
     // protected $fillable = ['username', 'password', 'hakAkses', 'idPegawai'];
     // protected $hidden = ['password', 'remember_token'];
@@ -18,10 +18,17 @@ class DataPenyewa extends Model
 
     protected $fillable = [
         'noNIK',
-        'username',
+        'namaLengkap',
         'alamat',
         'noHP',
         'email',
+        // 'password',
+        // 'ktp',
+        // 'selfiektp',
+        // 'sim',
+        // 'kk',
+        // 'role',
+
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -40,6 +47,6 @@ class DataPenyewa extends Model
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'bycr',
+        'password' => 'bycrypt',
     ];
 }

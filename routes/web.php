@@ -37,9 +37,9 @@ Route::get('/laporan', function () {
 });
 
 
-// Route::get('/tambahpenyewa', function () {
-//     return view('menu.tambahpenyewa');
-// });
+Route::get('/tambahmobil', function () {
+    return view('menu.tambahmobil');
+});
 
 // Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 // Route::post('/auth', [LoginController::class, 'login'])->name('auth');

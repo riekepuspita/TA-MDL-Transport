@@ -15,7 +15,7 @@ class DataPenyewaSeeder extends Seeder
     {
         DB::table('users')->insert([
             'noNIK' => '1564327856482367',
-            'username' => 'Rama',
+            'namaLengkap' => 'Rama',
             'alamat' => 'Kediri',
             'noHP'=> '08533245368',
             'email' => 'rama@gmail.com',
