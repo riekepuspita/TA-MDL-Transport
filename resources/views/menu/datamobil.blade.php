@@ -49,7 +49,7 @@
                                                     <th>Deskripsi Mobil</th>
                                                     <th>Harga Mobil</th>
                                                     <th>Status</th>
-                                                    <th>Gambar Mobil</th>
+                                                    {{-- <th>Gambar Mobil</th> --}}
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -61,7 +61,7 @@
                                                     <td>Mobil berwarna putih, dapat ditempati sampai 8-9 orang</td>
                                                     <td>Rp. 300.000/ hari</td>
                                                     <td> Tersedia </td>
-                                                    <td> ... </td>
+                                                    {{-- <td> ... </td> --}}
                                                     <td>
                                                         <a href="" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>
@@ -81,7 +81,7 @@
                                                     <td>Mobil berwarna putih, dapat ditempati sampai 8-9 orang</td>
                                                     <td>Rp. 300.000/ hari</td>
                                                     <td> Tersedia </td>
-                                                    <td> ... </td>
+                                                    {{-- <td> ... </td> --}}
                                                     <td>
                                                         <a href="" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>

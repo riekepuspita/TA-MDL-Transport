@@ -56,6 +56,17 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
+                                            <label for="example-role-input" class="col-md-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-md-10">
+                                                <select class="form-select" id="jeniskelamin" name="jeniskelamin">
+                                                    <option selected>{{ $data->jeniskelamin }}</option></option>
+                                                        <option value="1">Laki-laki</option>
+                                                        <option value="2">Perempuan</option>
+                                                        </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
                                             <label for="example-url-input" class="col-md-2 col-form-label">Alamat</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="alamat" type="text" id="alamat"
@@ -83,7 +94,7 @@
                                                 <input class="form-control" type="password" value="" id="password">
                                             </div>
                                         </div>
-                                        <div class="mb-3 row">
+                                        {{-- <div class="mb-3 row">
                                             <label for="example-gambarktp-input" class="col-md-2 col-form-label">Upload
                                                 KTP</label>
                                             <div class="col-md-10">
@@ -114,14 +125,13 @@
                                                 <input class="form-control" name="kk" value="" id="kk"
                                                     type="file" accept=".jpg, .jpeg, .png">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-3 row">
                                             <label for="example-selfiektp-input"
                                                 class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="role" name="role">
-                                                    <option value="" selected disabled hidden>
-                                                        -- Pilih Role --</option>
+                                                    <option value selected>{{ $data->role }}</option>
                                                     <option value="1">Admin</option>
                                                     <option value="2">Penyewa</option>
                                                     </option>

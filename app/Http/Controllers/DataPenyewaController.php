@@ -29,7 +29,7 @@ class DataPenyewaController extends Controller
         // $data = $request->all();
         
         // $data['password']= bcrypt($request->password);
-
+        
         DataPenyewa::create($request->all());
         return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Ditambahkan');
     }

@@ -58,7 +58,7 @@
                                                     <th>Nama Lengkap</th>
                                                     <th>Alamat</th>
                                                     <th>No HP</th>
-                                                    <th>Email</th>
+                                                    {{-- <th>Email</th> --}}
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -73,7 +73,7 @@
                                                     <td>{{ $row->namaLengkap }}</td>
                                                     <td>{{ $row->alamat }}</td>
                                                     <td>{{ $row->noHP }}</td>
-                                                    <td>{{ $row->email }}</td>
+                                                    {{-- <td>{{ $row->email }}</td> --}}
                                                     {{-- <td>{{ $row->password }}</td> --}}
                                                     <td>
                                                         <a href="/tampilkanpenyewa/{{ $row->idPenyewa }}" title="Edit Data" class="btn btn-warning btn-sm">

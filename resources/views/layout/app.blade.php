@@ -16,6 +16,7 @@
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
     
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -46,6 +47,7 @@
             // new DataTable('#table');
         });
     </script> --}}
+
     @yield('script')
 </body>
 

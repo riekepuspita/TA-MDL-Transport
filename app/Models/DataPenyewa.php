@@ -19,6 +19,7 @@ class DataPenyewa extends Model
     protected $fillable = [
         'noNIK',
         'namaLengkap',
+        'jeniskelamin',
         'alamat',
         'noHP',
         'email',
@@ -27,7 +28,7 @@ class DataPenyewa extends Model
         // 'selfiektp',
         // 'sim',
         // 'kk',
-        // 'role',
+        'role',
 
     ];
     /**

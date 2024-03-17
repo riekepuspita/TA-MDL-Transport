@@ -42,56 +42,69 @@
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Merek Mobil</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="merekmobil" type="text" value="" id="merekmobil"
+                                                <input class="form-control" name="merekMobil" type="text" value="" id="merekmobil"
                                                     placeholder="Masukkan Merek Mobil">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Model Mobil</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="modelmobil" type="text" value="" id="modelmobil"
+                                                <input class="form-control" name="modelMobil" type="text" value="" id="modelMobil"
                                                     placeholder="Masukkan Model Mobil">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Tahun Mobil</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="tahunMobil" type="text" value="" id="tahunMobil"
+                                                    placeholder="Masukkan Tahun Pembuatan Mobil">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Kapasitas Orang</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="kapasitas" type="text" value="" id="kapasitas"
+                                                <input class="form-control" name="kapasitasMobil" type="text" value="" id="kapasitasMobil"
                                                     placeholder="Masukkan Kapasitas Orang">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-url-input" class="col-md-2 col-form-label">Plat Mobil</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="plat" type="text" value="" id="plat"
+                                                <input class="form-control" name="platMobil" type="text" value="" id="platMobil"
                                                     placeholder="Masukkan Plat Mobil">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-tel-input" class="col-md-2 col-form-label">Deskripsi Mobil</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="deskripsi" type="tel" value="" id="deskripsi"
-                                                    placeholder="Masukkan Deskripsi Mobil">
+                                                <textarea class="form-control" name="deskripsiMobil" id="deskripsiMobil" placeholder="Masukkan Deskripsi Mobil" style="height: 150px;"></textarea>
                                             </div>
                                         </div>
+                                        
                                         <div class="mb-3 row">
                                             <label for="example-email-input" class="col-md-2 col-form-label">Harga Sewa</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="harga" type="text" value="" id="harga"
+                                                <input class="form-control" name="hargaSewa" type="text" value="" id="hargaSewa"
                                                     placeholder="Masukkan Harga Sewa Mobil">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label for="example-email-input" class="col-md-2 col-form-label">Status Mobil</label>
+                                            <label for="example-role-input" class="col-md-2 col-form-label">Status Ketersediaan</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="statusmbl" type="text" value="" id="statusmbl"
-                                                    placeholder="Masukkan Status Mobil">
+                                                <select class="form-select" id="statusMobil" name="statusMobil">
+                                                    <option value="" selected disabled hidden>
+                                                        -- Pilih Status Ketersediaan --</option>
+                                                        <option value="1">Tersedia</option>
+                                                        <option value="2">Tidak Tersedia</option>
+                                                        </option>
+
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-email-input" class="col-md-2 col-form-label">Gambar Mobil</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="gmbrmbl" value="" id="gmbrsmbl"
+                                                <input class="form-control" name="gambarMobil" value="" id="gambarMobil"
                                                  type="file" accept=".jpg, .jpeg, .png" >
                                             </div>
                                         </div>                                        
