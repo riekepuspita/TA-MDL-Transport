@@ -10,9 +10,22 @@ class DataMobil extends Model
     use HasFactory;
 
     protected $table = 'mobil';
-    protected $guarded = ['idMobil'];
-    protected $primaryKey = 'idMobil';
-    // protected $fillable = ['username', 'password', 'hakAkses', 'idPegawai'];
-    // protected $hidden = ['password', 'remember_token'];
+    // protected $guarded = ['noPolisi'];
+    protected $primaryKey = 'noPolisi';
+    public $incrementing = false; // Tambahkan ini jika noPolisi bukanlah sebuah kolom yang auto-increment
     public $timestamps = false;
+
+
+    protected $fillable = [
+        'noPolisi',
+        'merekMobil',
+        'modelMobil',
+        'kapasitasMobil',
+        'tahunMobil',
+        'deskripsiMobil',
+        'hargaSewa',
+        'statusMobil',
+        // 'gambarMobil',
+
+    ];
 }

@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Dasbor
+    Dashboard
 @endsection
 
 @section('content')

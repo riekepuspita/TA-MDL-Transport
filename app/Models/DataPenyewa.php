@@ -24,10 +24,6 @@ class DataPenyewa extends Model
         'noHP',
         'email',
         // 'password',
-        // 'ktp',
-        // 'selfiektp',
-        // 'sim',
-        // 'kk',
         'role',
 
     ];

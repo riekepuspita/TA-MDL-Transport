@@ -18,13 +18,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Tampil Penyewa</h4>
+                                <h4 class="mb-0">Edit Data Penyewa</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Data Penyewa</a></li>
-                                        <li class="breadcrumb-item active">Tampil Penyewa</li>
+                                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/datapenyewa">Data Penyewa</a></li>
+                                        <li class="breadcrumb-item active">Edit Data Penyewa</li>
                                     </ol>
                                 </div>
 
@@ -59,7 +59,8 @@
                                             <label for="example-role-input" class="col-md-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="jeniskelamin" name="jeniskelamin">
-                                                    <option selected>{{ $data->jeniskelamin }}</option></option>
+                                                    <option selected>{{ ucwords(strtolower($data->jeniskelamin)) }}
+                                                    </option>
                                                         <option value="1">Laki-laki</option>
                                                         <option value="2">Perempuan</option>
                                                         </option>
@@ -131,7 +132,7 @@
                                                 class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="role" name="role">
-                                                    <option value selected>{{ $data->role }}</option>
+                                                    <option value selected>{{ ucwords(strtolower($data->role)) }}</option>
                                                     <option value="1">Admin</option>
                                                     <option value="2">Penyewa</option>
                                                     </option>

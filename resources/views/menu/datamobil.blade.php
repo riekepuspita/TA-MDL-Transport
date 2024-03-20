@@ -22,7 +22,7 @@
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Layouts</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                                         <li class="breadcrumb-item active">Data Mobil</li>
                                     </ol>
                                 </div>
@@ -36,16 +36,21 @@
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
                                 <a href="/tambahmobil" type="button" class="btn btn-success">Tambah Mobil</a>
-                            </div>                     
+                            </div>
+                            @if ($message = Session::get('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ $message }}
+                                </div>
+                            @endif
                             <div class="card">
-                                <div class="card-body">  
+                                <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table mb-12"> <!-- table mb-0-->
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Jenis Mobil</th>
-                                                    <th>Plat Mobil</th>
+                                                    <th>No Polisi</th>
+                                                    <th>Merk Mobil</th>
+                                                    <th>Model Mobil</th>
                                                     <th>Deskripsi Mobil</th>
                                                     <th>Harga Mobil</th>
                                                     <th>Status</th>
@@ -54,46 +59,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Avanza</td>
-                                                    <td>AG 4563 0Y</td>
-                                                    <td>Mobil berwarna putih, dapat ditempati sampai 8-9 orang</td>
-                                                    <td>Rp. 300.000/ hari</td>
-                                                    <td> Tersedia </td>
-                                                    {{-- <td> ... </td> --}}
-                                                    <td>
-                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
-                                                            <i class="bx bx-pencil"></i>
-                                                        </a>
-                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
-                                                            <i class="bx bx-trash"></i>
-                                                        </a>
-                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Avanza</td>
-                                                    <td>AG 4563 0Y</td>
-                                                    <td>Mobil berwarna putih, dapat ditempati sampai 8-9 orang</td>
-                                                    <td>Rp. 300.000/ hari</td>
-                                                    <td> Tersedia </td>
-                                                    {{-- <td> ... </td> --}}
-                                                    <td>
-                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
-                                                            <i class="bx bx-pencil"></i>
-                                                        </a>
-                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
-                                                            <i class="bx bx-trash"></i>
-                                                        </a>
-                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                @foreach ($data as $row)
+                                                    <tr>
+                                                        {{-- <th scope="row">{{ $row->noPolisi }}</th> --}}
+                                                        <th>{{ $row->noPolisi }}</th>
+                                                        <td>{{ $row->merekMobil }}</td>
+                                                        <td>{{ $row->modelMobil }}</td>
+                                                        <td>{{ $row->deskripsiMobil }}</td>
+                                                        <td>{{ $row->hargaSewa }}</td>
+                                                        <td>{{ $row->statusMobil }}</td>
+                                                        <td>
+                                                            <a href="/tampilkanmobil/{{ $row->noPolisi }}" title="Edit Data"
+                                                                class="btn btn-warning btn-sm">
+                                                                <i class="bx bx-pencil"></i>
+                                                            </a>
+                                                            <a href="/deletemobil/{{ $row->noPolisi }}" title="Hapus Data"
+                                                                class="btn btn-danger btn-sm">
+                                                                <i class="bx bx-trash"></i>
+                                                            </a>
+                                                            <a href="" title="Lihat Data"
+                                                                class="btn btn-primary btn-sm">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

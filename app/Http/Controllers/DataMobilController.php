@@ -12,6 +12,50 @@ class DataMobilController extends Controller
         $data = DataMobil::all();
 
         // dd($data);
+        // return($data);
         return view('menu.datamobil', compact('data'));
+    }
+
+    public function tambahmobil()
+    {
+        // dd($data);
+        return view('menu.tambahmobil');
+    }
+
+    public function insertmobil(Request $request)
+    {
+        // dd($request->all());
+
+        DataMobil::create($request->all());
+        return redirect()->route('datamobil')->with('success', 'Data Mobil Berhasil Ditambahkan');
+    }
+
+    public function tampilkanmobil($noPolisi)
+    {
+        $data = DataMobil::where('noPolisi', $noPolisi)->first();
+        // $data = DataMobil::find($noPolisi);
+
+        // dd($data);
+        return view('menu.tampilmobil', compact('data'));
+    }
+
+    public function updatemobil(Request $request, $noPolisi)
+    {
+        $data = DataMobil::where('noPolisi', $noPolisi)->first();
+        // $data = DataMobil::find($noPolisi);
+
+        $data->update($request->all());
+        return redirect()->route('datamobil')->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deletemobil($noPolisi)
+    {
+        // $data = DataMobil::where('noPolisi', $noPolisi)->first();
+        $data = DataMobil::find($noPolisi);
+
+        if ($data) {
+            $data->delete();
+            return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        } 
     }
 }

@@ -49,11 +49,21 @@ class DataPenyewaController extends Controller
         return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Diubah');
     }
 
-    public function delete($idPenyewa){
-        $data = DataPenyewa::find($idPenyewa);
-        $data->delete();
+    // public function delete($idPenyewa){
+    //     $data = DataPenyewa::find($idPenyewa);
+    //     $data->delete();
         
-        return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
+    //     return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
+    // }
+
+    public function delete($idPenyewa)
+    {
+        $data = DataPenyewa::find($idPenyewa);
+
+        if ($data) {
+            $data->delete();
+            return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
+        }
     }
 
 }

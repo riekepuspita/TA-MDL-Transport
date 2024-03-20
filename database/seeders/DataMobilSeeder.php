@@ -14,11 +14,11 @@ class DataMobilSeeder extends Seeder
     public function run(): void
     {
         DB::table('mobil')->insert([
+            'noPolisi' => 'B 1234 ABC',
             'merekMobil' => 'Toyota',
             'modelMobil' => 'Toyota Avanza',
-            'tahunMobil' => '2020',
             'kapasitasMobil' => '7',
-            'platMobil' => 'B 1234 ABC',
+            'tahunMobil' => '2018',
             'deskripsiMobil' => 'Mobil keluarga dengan ruang yang luas dan nyaman',
             'hargaSewa' => '300000',
             'statusMobil' => 'Tersedia'
