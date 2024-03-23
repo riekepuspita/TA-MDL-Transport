@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Data Penyewa</h4>
+                                <h4 class="mb-0">Data User</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
-                                <a href="/tambahpenyewa" type="button" class="btn btn-success">Tambah Penyewa</a>
+                                <a href="/tambahuser" type="button" class="btn btn-success">Tambah User</a>
                             </div>      
                             @if ($message = Session::get('success'))
                             <div class="alert alert-success" role="alert">
@@ -54,31 +54,28 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>NIK</th>
-                                                    <th>Nama Lengkap</th>
-                                                    {{-- <th>Alamat</th> --}}
-                                                    <th>No HP</th>
+                                                    <th>Nama User</th>
+                                                    <th>Email</th>
+                                                    <th>Level</th>
+                                                    <th>Status</th>
                                                     {{-- <th>Email</th> --}}
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-                                                @foreach ($data as $row )
+                                                
                                                 <tr>
-                                                    <th scope="row">{{ $no++ }}</th>
-                                                    <td>{{ $row->noNIK }}</td>
-                                                    <td>{{ $row->namaLengkap }}</td>
-                                                    {{-- <td>{{ $row->alamat }}</td> --}}
-                                                    <td>{{ $row->noHP }}</td>
-                                                    {{-- <td>{{ $row->email }}</td> --}}
+                                                    <th scope="row">1</th>
+                                                    <td>Andika</td>
+                                                    <td>andika@gmail.com</td>
+                                                    <td>Super Admin</td>
+                                                    <td>Aktif</td>
+                                                    
                                                     <td>
-                                                        <a href="/tampilkanpenyewa/{{ $row->idPenyewa }}" title="Edit Data" class="btn btn-warning btn-sm">
+                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>
                                                         </a>
-                                                        <a href="/delete/{{ $row->idPenyewa }}" title="Hapus Data" class="btn btn-danger btn-sm">
+                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
                                                             <i class="bx bx-trash"></i>
                                                         </a>
                                                         <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
@@ -86,9 +83,25 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                
-                                                @endforeach
-                                                
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Prasetya</td>
+                                                    <td>prasetya@gmail.com</td>
+                                                    <td>Admin</td>
+                                                    <td>Aktif</td>
+                                                    
+                                                    <td>
+                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
+                                                            <i class="bx bx-pencil"></i>
+                                                        </a>
+                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
+                                                            <i class="bx bx-trash"></i>
+                                                        </a>
+                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

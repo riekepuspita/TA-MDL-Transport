@@ -127,7 +127,7 @@
                                                     type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div> --}}
-                                        <div class="mb-3 row">
+                                        {{-- <div class="mb-3 row">
                                             <label for="example-selfiektp-input"
                                                 class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
@@ -138,7 +138,7 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success me-3">Simpan</button>

@@ -46,6 +46,14 @@ Route::get('/landingpage', function () {
     return view('landingpage.landingpage');
 });
 
+Route::get('/datauser', function () {
+    return view('menu.datauser');
+});
+
+Route::get('/tambahuser', function () {
+    return view('menu.tambahuser');
+});
+
 // Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 // Route::post('/auth', [LoginController::class, 'login'])->name('auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');

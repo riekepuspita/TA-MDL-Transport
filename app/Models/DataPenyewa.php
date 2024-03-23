@@ -9,12 +9,12 @@ class DataPenyewa extends Model
 {
     use HasFactory;
 
-    protected $table = 'users';
+    protected $table = 'penyewa';
     protected $guarded = ['idPenyewa'];
     protected $primaryKey = 'idPenyewa';
     // protected $fillable = ['username', 'password', 'hakAkses', 'idPegawai'];
     // protected $hidden = ['password', 'remember_token'];
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $fillable = [
         'noNIK',
@@ -24,7 +24,7 @@ class DataPenyewa extends Model
         'noHP',
         'email',
         // 'password',
-        'role',
+        // 'role',
 
     ];
     /**

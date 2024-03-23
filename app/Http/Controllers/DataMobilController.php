@@ -26,7 +26,13 @@ class DataMobilController extends Controller
     {
         // dd($request->all());
 
-        DataMobil::create($request->all());
+        $data = DataMobil::create($request->all());
+
+        if($request->hasFile('gambarMobil')){
+            $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
+            $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
+            $data->save();
+        }
         return redirect()->route('datamobil')->with('success', 'Data Mobil Berhasil Ditambahkan');
     }
 

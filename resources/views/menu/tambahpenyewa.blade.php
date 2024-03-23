@@ -134,7 +134,7 @@
                                                     type="file" accept=".jpg, .jpeg, .png">
                                             </div>
                                         </div> --}}
-                                        <div class="mb-3 row">
+                                        {{-- <div class="mb-3 row">
                                             <label for="example-role-input" class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="role" name="role">
@@ -145,7 +145,7 @@
                                                         </option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         
                                         <div class="d-flex justify-content-end">

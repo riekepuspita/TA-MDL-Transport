@@ -49,9 +49,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>No Polisi</th>
+                                                    <th>Gambar Mobil</th>
                                                     <th>Merk Mobil</th>
                                                     <th>Model Mobil</th>
-                                                    <th>Deskripsi Mobil</th>
+                                                    {{-- <th>Deskripsi Mobil</th> --}}
                                                     <th>Harga Mobil</th>
                                                     <th>Status</th>
                                                     {{-- <th>Gambar Mobil</th> --}}
@@ -63,9 +64,12 @@
                                                     <tr>
                                                         {{-- <th scope="row">{{ $row->noPolisi }}</th> --}}
                                                         <th>{{ $row->noPolisi }}</th>
+                                                        <td>
+                                                            <img src="{{ asset('gambarMobil/'.$row->gambarMobil) }}" alt="" style="width: 70px;">
+                                                        </td>
                                                         <td>{{ $row->merekMobil }}</td>
                                                         <td>{{ $row->modelMobil }}</td>
-                                                        <td>{{ $row->deskripsiMobil }}</td>
+                                                        {{-- <td>{{ $row->deskripsiMobil }}</td> --}}
                                                         <td>{{ $row->hargaSewa }}</td>
                                                         <td>{{ $row->statusMobil }}</td>
                                                         <td>

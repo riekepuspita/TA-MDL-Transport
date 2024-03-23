@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class DataPenyewaSeeder extends Seeder
+class DataUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.

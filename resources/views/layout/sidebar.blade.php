@@ -28,28 +28,33 @@
 
                 <li>
                     <a href="/dashboard">
-                        <i class="bx bx-home icon nav-icon"></i>
+                        <i class="fas fa-home icon nav-icon"></i>
                         <span class="menu-item" data-key="t-dashboards">Dashboard</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="/datauser">
+                        <i class="fas fa-user icon nav-icon"></i>
+                        <span class="menu-item" data-key="t-datauser">Data User</span>
+                    </a>
+                </li>
                 <li>
                     <a href="/datapenyewa">
-                        <i class="bx bx-user icon nav-icon"></i>
+                        <i class="fas fa-user-friends icon nav-icon"></i>
                         <span class="menu-item" data-key="t-datapenyewa">Data Penyewa</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/datamobil">
-                        <i class="bx bx-car icon nav-icon"></i>
+                        <i class="fas fa-car icon nav-icon"></i>
                         <span class="menu-item" data-key="t-datamobil">Data Mobil</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/laporan">
-                        <i class="bx bx-file icon nav-icon"></i>
+                        <i class="fas fa-file-alt icon nav-icon"></i>
                         <span class="menu-item" data-key="t-laporan">Laporan</span>
                     </a>
                 </li>
