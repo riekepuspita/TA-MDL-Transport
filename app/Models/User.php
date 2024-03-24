@@ -12,9 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'penyewa';
-    protected $guarded = ['idPenyewa']; 
-    protected $primaryKey = 'idPenyewa';
+    protected $table = 'user';
+    protected $guarded = ['idUser']; 
+    protected $primaryKey = 'idUser';
     // protected $fillable = ['namaLengkap', 'password', 'hakAkses', 'idPegawai'];
     // protected $hidden = ['password', 'remember_token'];
     public $timestamps = false;
@@ -25,9 +25,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'namaLengkap',
+        'namaUser',
         'email',
         'password',
+        'level',
+        'statusUser',
     ];
 
     /**

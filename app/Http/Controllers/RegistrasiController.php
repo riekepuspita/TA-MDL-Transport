@@ -15,7 +15,7 @@ class RegistrasiController extends Controller
     public function registrasiuser(Request $request)
     {
     User::create([
-            'namaLengkap' => $request -> namaLengkap,
+            'namaUser' => $request -> namaUser,
             'email' => $request -> email,
             'password' => bcrypt($request->password),
             //'remember_token' => Str::random(60),

@@ -13,13 +13,11 @@ class DataUserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('penyewa')->insert([
-            'noNIK' => '1564327856482367',
-            'namaLengkap' => 'Rama',
-            'alamat' => 'Kediri',
-            'noHP'=> '08533245368',
-            'email' => 'rama@gmail.com',
-            'password' => bcrypt('87654321'),
+        DB::table('user')->insert([
+            'namaUser' => 'Andika',
+            'email' => 'andika@gmail.com',
+            'password' => bcrypt('12345678'),
+            'level' => 'superadmin'
         ]);
     }
 }

@@ -22,7 +22,8 @@ class DataPenyewa extends Model
         'jeniskelamin',
         'alamat',
         'noHP',
-        'email',
+        'created_at'
+        // 'email',
         // 'password',
         // 'role',
 

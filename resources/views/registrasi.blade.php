@@ -35,7 +35,7 @@
 
                                             <div class="mb-3">
                                                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
-                                                <input type="text" class="form-control" name="namaLengkap" id="namaLengkap"
+                                                <input type="text" class="form-control" name="namaUser" id="namaUser"
                                                     placeholder="Masukkan Nama Lengkap">
                                             </div>
 

@@ -5,7 +5,6 @@
 @endsection
 
 @section('head')
-    
 @endsection
 
 
@@ -40,15 +39,14 @@
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
                                 <a href="/tambahuser" type="button" class="btn btn-success">Tambah User</a>
-                            </div>      
+                            </div>
                             @if ($message = Session::get('success'))
-                            <div class="alert alert-success" role="alert">
-                                {{ $message }}
-                              </div>
-                              
-                            @endif               
+                                <div class="alert alert-success" role="alert">
+                                    {{ $message }}
+                                </div>
+                            @endif
                             <div class="card">
-                                <div class="card-body">  
+                                <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table mb-12"> <!-- table mb-0-->
                                             <thead>
@@ -58,50 +56,33 @@
                                                     <th>Email</th>
                                                     <th>Level</th>
                                                     <th>Status</th>
-                                                    {{-- <th>Email</th> --}}
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Andika</td>
-                                                    <td>andika@gmail.com</td>
-                                                    <td>Super Admin</td>
-                                                    <td>Aktif</td>
-                                                    
-                                                    <td>
-                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
-                                                            <i class="bx bx-pencil"></i>
-                                                        </a>
-                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
-                                                            <i class="bx bx-trash"></i>
-                                                        </a>
-                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Prasetya</td>
-                                                    <td>prasetya@gmail.com</td>
-                                                    <td>Admin</td>
-                                                    <td>Aktif</td>
-                                                    
-                                                    <td>
-                                                        <a href="" title="Edit Data" class="btn btn-warning btn-sm">
-                                                            <i class="bx bx-pencil"></i>
-                                                        </a>
-                                                        <a href="" title="Hapus Data" class="btn btn-danger btn-sm">
-                                                            <i class="bx bx-trash"></i>
-                                                        </a>
-                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+
+                                                @php
+                                                    $no = 1;
+                                                @endphp
+                                                @foreach ($data as $row)
+                                                    <tr>
+                                                        <th scope="row">{{ $no++ }}</th>
+                                                        <td>{{ $row->namaUser }}</td>
+                                                        <td>{{ $row->email }}</td>
+                                                        <td>{{ $row->level }}</td>
+                                                        <td>{{ $row->statusUser }}</td>
+                                                        <td>
+                                                            <a href="/tampilkanuser/{{ $row->idUser }}" title="Edit Data"
+                                                                class="btn btn-warning btn-sm">
+                                                                <i class="bx bx-pencil"></i>
+                                                            </a>
+                                                            <a href="/deleteuser/{{ $row->idUser }}" title="Hapus Data"
+                                                                class="btn btn-danger btn-sm" data-id={{ $row->idUser }}>
+                                                                <i class="bx bx-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -117,32 +98,34 @@
 @endsection
 
 @section('script')
-    <script>
-        // new DataTable('#example');
-        // $(document).ready(function() {
-        //     $('.table').DataTable({
-        //         columnDefs: [{
-        //             orderable: false,
-        //             targets: [6]
-        //         }],
-        //         language: {
-        //             lengthMenu: "Tampilkan MENU data per halaman",
-        //             zeroRecords: "Data tidak ditemukan.",
-        //             info: "Menampilkan START - END dari TOTAL data",
-        //             infoEmpty: "Menampilkan 0 - 0 dari 0 data",
-        //             infoFiltered: "(difilter dari MAX total data)",
-        //             search: "Cari :",
-        //             decimal: ",",
-        //             thousands: ".",
-        //             paginate: {
-        //                 previous: "Sebelumnya",
-        //                 next: "Selanjutnya"
-        //             }
-        //         }
-        //     });
-        // });
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    </script>
-@endsection
+    <script>
+    // Saat dokumen siap
+    $(document).ready(function() {
+        // Event click pada tombol delete
+        $('.delete-btn').click(function() {
+            // Ambil id atau data lain yang diperlukan
+            var idUser = $(this).data('idUser');
 
+            // Tampilkan SweetAlert2 untuk konfirmasi
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: "Anda yakin ingin menghapus data ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                // Jika pengguna menekan tombol Ya
+                if (result.isConfirmed) {
+                    // Lakukan tindakan penghapusan, seperti mengarahkan pengguna ke rute delete
+                    window.location = '/data/delete/' + idUser; // Misalnya, rute delete/id
+                }
+            });
+        });
+    });
+</script>
+
+@endsection

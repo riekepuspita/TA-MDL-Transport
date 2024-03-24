@@ -81,64 +81,6 @@
                                                     placeholder="Masukkan No HP Penyewa" value="{{ $data->noHP }}">
                                             </div>
                                         </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" name="email" type="email" id="email"
-                                                    placeholder="Masukkan Email Penyewa" value="{{ $data->email }}">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-password-input"
-                                                class="col-md-2 col-form-label">Password</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="password" value="" id="password">
-                                            </div>
-                                        </div>
-                                        {{-- <div class="mb-3 row">
-                                            <label for="example-gambarktp-input" class="col-md-2 col-form-label">Upload
-                                                KTP</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" name="ktp" value="{{ $data->ktp }}" id="ktp"
-                                                    type="file" accept=".jpg, .jpeg, .png">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
-                                                Selfie KTP</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" name="selfiktp" value="" id="selfiktp"
-                                                    type="file" accept=".jpg, .jpeg, .png">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
-                                                SIM</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" name="sim" value="" id="sim"
-                                                    type="file" accept=".jpg, .jpeg, .png">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="example-gambarsim-input" class="col-md-2 col-form-label">Upload
-                                                KK</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" name="kk" value="" id="kk"
-                                                    type="file" accept=".jpg, .jpeg, .png">
-                                            </div>
-                                        </div> --}}
-                                        {{-- <div class="mb-3 row">
-                                            <label for="example-selfiektp-input"
-                                                class="col-md-2 col-form-label">Role</label>
-                                            <div class="col-md-10">
-                                                <select class="form-select" id="role" name="role">
-                                                    <option value selected>{{ ucwords(strtolower($data->role)) }}</option>
-                                                    <option value="1">Admin</option>
-                                                    <option value="2">Penyewa</option>
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success me-3">Simpan</button>

@@ -81,10 +81,6 @@
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="bx bx-trash"></i>
                                                             </a>
-                                                            <a href="" title="Lihat Data"
-                                                                class="btn btn-primary btn-sm">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

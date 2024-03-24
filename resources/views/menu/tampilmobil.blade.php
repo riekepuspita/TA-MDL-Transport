@@ -130,7 +130,6 @@
                                         
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success me-3">Simpan</button>
-
                                             <a href="/datamobil" class="btn btn-danger me-3">Batal</a>
                                         </div>
                                     </form>
@@ -138,7 +137,6 @@
                             </div>
                         </div> <!-- end col -->
                     </div>
-
                     <!-- end row -->
                 </div>
             </div>

@@ -56,9 +56,8 @@
                                                     <th>No</th>
                                                     <th>NIK</th>
                                                     <th>Nama Lengkap</th>
-                                                    {{-- <th>Alamat</th> --}}
                                                     <th>No HP</th>
-                                                    {{-- <th>Email</th> --}}
+                                                    <th>Hari dan Tanggal</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -71,18 +70,14 @@
                                                     <th scope="row">{{ $no++ }}</th>
                                                     <td>{{ $row->noNIK }}</td>
                                                     <td>{{ $row->namaLengkap }}</td>
-                                                    {{-- <td>{{ $row->alamat }}</td> --}}
                                                     <td>{{ $row->noHP }}</td>
-                                                    {{-- <td>{{ $row->email }}</td> --}}
+                                                    <td>{{ $row->created_at->locale('id')->format('l, d F Y') }}</td>
                                                     <td>
                                                         <a href="/tampilkanpenyewa/{{ $row->idPenyewa }}" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>
                                                         </a>
                                                         <a href="/delete/{{ $row->idPenyewa }}" title="Hapus Data" class="btn btn-danger btn-sm">
                                                             <i class="bx bx-trash"></i>
-                                                        </a>
-                                                        <a href="" title="Lihat Data" class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-eye"></i>
                                                         </a>
                                                     </td>
                                                 </tr>

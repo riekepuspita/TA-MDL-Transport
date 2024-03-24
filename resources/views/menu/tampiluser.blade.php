@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Tambah User
+    Edit User
 @endsection
 
 @section('content')
@@ -18,13 +18,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Tambah User</h4>
+                                <h4 class="mb-0">Edit User</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                                         <li class="breadcrumb-item"><a href="/datauser">Data User</a></li>
-                                        <li class="breadcrumb-item active">Tambah User</li>
+                                        <li class="breadcrumb-item active">Edit User</li>
                                     </ol>
                                 </div>
 
@@ -37,26 +37,26 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="/insertuser" method="POST" enctype="multipart/form-data">
+                                    <form action="/updateuser/{{ $data->idUser }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Nama User</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="namaUser" type="text" value=""
+                                                <input class="form-control" name="namaUser" type="text" value="{{ $data->namaUser }}"
                                                     id="namaUser" placeholder="Masukkan Nama User">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Email</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="email" type="text" value=""
+                                                <input class="form-control" name="email" type="text" value="{{ $data->email }}"
                                                     id="email" placeholder="Masukkan Email User">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Password</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="password" type="text" value=""
+                                                <input class="form-control" name="password" type="text" value="{{ $data->password }}"
                                                     id="password" placeholder="Masukkan Password">
                                             </div>
                                         </div>
@@ -64,8 +64,8 @@
                                             <label for="example-level-input" class="col-md-2 col-form-label">Level</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="level" name="level">
-                                                    <option value="" selected disabled hidden>
-                                                        -- Pilih Level User--</option>
+                                                    <option selected>{{ ucwords(strtolower($data->level)) }}
+                                                    </option>
                                                     <option value="1">Super Admin</option>
                                                     <option value="2">Admin</option>
                                                     <option value="3">User</option>
@@ -77,8 +77,8 @@
                                             <label for="example-status-input" class="col-md-2 col-form-label">Status User</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="statusUser" name="statusUser">
-                                                    <option value="" selected disabled hidden>
-                                                        -- Pilih Status User --</option>
+                                                    <option selected>{{ ucwords(strtolower($data->statusUser)) }}
+                                                    </option>
                                                         <option value="1">Aktif</option>
                                                         <option value="2">Tidak Aktif</option>
                                                         </option>
