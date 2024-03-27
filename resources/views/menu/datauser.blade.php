@@ -72,14 +72,12 @@
                                                         <td>{{ $row->level }}</td>
                                                         <td>{{ $row->statusUser }}</td>
                                                         <td>
-                                                            <a href="/tampilkanuser/{{ $row->idUser }}" title="Edit Data"
-                                                                class="btn btn-warning btn-sm">
+                                                            <a href="/tampilkanuser/{{ $row->idUser }}" title="Edit Data" class="btn btn-warning btn-sm">
                                                                 <i class="bx bx-pencil"></i>
                                                             </a>
-                                                            <a href="/deleteuser/{{ $row->idUser }}" title="Hapus Data"
-                                                                class="btn btn-danger btn-sm" data-id={{ $row->idUser }}>
+                                                            <button title="Hapus Data" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $row->idUser }}')">
                                                                 <i class="bx bx-trash"></i>
-                                                            </a>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -98,34 +96,79 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    // Fungsi untuk menampilkan SweetAlert konfirmasi
+    function confirmDelete(idUser) {
+        Swal.fire({
+            icon: "warning",
+            title: "Konfirmasi",
+            text: "Apakah Anda yakin ingin menghapus data ini?",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Hapus",
+            cancelButtonText: "Tidak",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna menekan "Ya", maka arahkan ke URL penghapusan
+                window.location.href = "/deleteuser/" + idUser;
+            }
+        });
+    }
+</script>
+
+    {{-- // Event click pada tombol delete
+    // $('.btn-danger').click(function(e) {
+    //     e.preventDefault(); // Menghentikan default action dari anchor tag
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: "You won't be able to revert this!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes, delete it!"
+    //     })}).then((result) => {
+    //         if (result.isConfirmed) {
+    //             Swal.fire({
+    //                 title: "Deleted!",
+    //                 text: "Your file has been deleted.",
+    //                 icon: "success"
+    //             });
+    //         }
+    // });
+     --}}
     
-    <script>
+
+
+
+    {{-- <script>
     // Saat dokumen siap
     $(document).ready(function() {
         // Event click pada tombol delete
-        $('.delete-btn').click(function() {
+        $('.btn-danger').click(function(e) {
+            e.preventDefault(); // Menghentikan default action dari anchor tag
+
             // Ambil id atau data lain yang diperlukan
-            var idUser = $(this).data('idUser');
+            var idUser = $(this).data('{{ $row->idUser }}');
 
             // Tampilkan SweetAlert2 untuk konfirmasi
             Swal.fire({
                 title: 'Konfirmasi',
-                text: "Anda yakin ingin menghapus data ini?",
-                icon: 'warning',
+                text: "Apakah Anda yakin ingin menghapus data ini?",
+                icon: 'info',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, Hapus!'
+                cancelButtonText: 'Tidak, Batalkan',
+                confirmButtonText: 'Ya, Lanjutkan!'
             }).then((result) => {
                 // Jika pengguna menekan tombol Ya
                 if (result.isConfirmed) {
                     // Lakukan tindakan penghapusan, seperti mengarahkan pengguna ke rute delete
-                    window.location = '/data/delete/' + idUser; // Misalnya, rute delete/id
+                    window.location = '/deleteuser/' + idUser; // Rute deleteuser/id
                 }
             });
         });
     });
-</script>
+</script> --}}
 
 @endsection

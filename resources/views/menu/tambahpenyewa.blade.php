@@ -50,7 +50,7 @@
                                             <label for="example-nik-input" class="col-md-2 col-form-label">NIK</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="noNIK" type="text" value=""
-                                                    id="noNIK" placeholder="Masukkan NIK Penyewa">
+                                                    id="noNIK" placeholder="Masukkan NIK Penyewa" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -58,13 +58,13 @@
                                                 Lengkap</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="namaLengkap" type="text" value=""
-                                                    id="namaLengkap" placeholder="Masukkan Nama Lengkap Penyewa">
+                                                    id="namaLengkap" placeholder="Masukkan Nama Lengkap Penyewa" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-role-input" class="col-md-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-md-10">
-                                                <select class="form-select" id="jeniskelamin" name="jeniskelamin">
+                                                <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
                                                     <option value="" selected disabled hidden>
                                                         -- Pilih Jenis Kelamin --</option>
                                                         <option value="1">Laki-laki</option>
@@ -77,21 +77,21 @@
                                             <label for="example-alamat-input" class="col-md-2 col-form-label">Alamat</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="alamat" type="text" value=""
-                                                    id="alamat" placeholder="Masukkan Alamat Lengkap Penyewa">
+                                                    id="alamat" placeholder="Masukkan Alamat Lengkap Penyewa" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-tel-input" class="col-md-2 col-form-label">No HP</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="noHP" type="tel" value=""
-                                                    id="noHP" placeholder="Masukkan No HP Penyewa">
+                                                    id="noHP" placeholder="Masukkan No HP Penyewa" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-tel-input" class="col-md-2 col-form-label">Hari/ tanggal</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="created_at" type="date" value=""
-                                                    id="created_at" placeholder="">
+                                                    id="created_at" placeholder="" required>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
@@ -112,3 +112,15 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+
+<script>
+    Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Your work has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+</script>

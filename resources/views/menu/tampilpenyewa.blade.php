@@ -44,7 +44,7 @@
                                             <label for="example-search-input" class="col-md-2 col-form-label">NIK</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="noNIK" type="number" id="noNIK"
-                                                    placeholder="Masukkan NIK" value="{{ $data->noNIK }}">
+                                                    placeholder="Masukkan NIK" value="{{ $data->noNIK }}" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -52,14 +52,14 @@
                                             <div class="col-md-10">
                                                 <input class="form-control" name="namaLengkap" type="text"
                                                     id="namaLengkap" placeholder="Masukkan Nama Penyewa"
-                                                    value="{{ $data->namaLengkap }}">
+                                                    value="{{ $data->namaLengkap }}" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-role-input" class="col-md-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-md-10">
-                                                <select class="form-select" id="jeniskelamin" name="jeniskelamin">
-                                                    <option selected>{{ ucwords(strtolower($data->jeniskelamin)) }}
+                                                <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
+                                                    <option selected hidden>{{ ucwords(strtolower($data->jeniskelamin)) }}
                                                     </option>
                                                         <option value="1">Laki-laki</option>
                                                         <option value="2">Perempuan</option>
@@ -71,14 +71,14 @@
                                             <label for="example-url-input" class="col-md-2 col-form-label">Alamat</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="alamat" type="text" id="alamat"
-                                                    placeholder="Masukkan Alamat Penyewa" value="{{ $data->alamat }}">
+                                                    placeholder="Masukkan Alamat Penyewa" value="{{ $data->alamat }}" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-tel-input" class="col-md-2 col-form-label">No HP</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="noHP" type="tel" id="noHP"
-                                                    placeholder="Masukkan No HP Penyewa" value="{{ $data->noHP }}">
+                                                    placeholder="Masukkan No HP Penyewa" value="{{ $data->noHP }}" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')"required>
                                             </div>
                                         </div>
 

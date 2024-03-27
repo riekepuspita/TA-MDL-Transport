@@ -49,22 +49,22 @@
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Email</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="email" type="text" value="{{ $data->email }}"
-                                                    id="email" placeholder="Masukkan Email User">
+                                                <input class="form-control" name="email" type="email" value="{{ $data->email }}"
+                                                    id="email" placeholder="Masukkan Email User" required>
                                             </div>
                                         </div>
-                                        <div class="mb-3 row">
+                                        {{-- <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Password</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" name="password" type="text" value="{{ $data->password }}"
                                                     id="password" placeholder="Masukkan Password">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-3 row">
                                             <label for="example-level-input" class="col-md-2 col-form-label">Level</label>
                                             <div class="col-md-10">
-                                                <select class="form-select" id="level" name="level">
-                                                    <option selected>{{ ucwords(strtolower($data->level)) }}
+                                                <select class="form-select" id="level" name="level" required>
+                                                    <option selected hidden>{{ ucwords(strtolower($data->level)) }}
                                                     </option>
                                                     <option value="1">Super Admin</option>
                                                     <option value="2">Admin</option>
@@ -76,8 +76,8 @@
                                         <div class="mb-3 row">
                                             <label for="example-status-input" class="col-md-2 col-form-label">Status User</label>
                                             <div class="col-md-10">
-                                                <select class="form-select" id="statusUser" name="statusUser">
-                                                    <option selected>{{ ucwords(strtolower($data->statusUser)) }}
+                                                <select class="form-select" id="statusUser" name="statusUser" required>
+                                                    <option selected hidden>{{ ucwords(strtolower($data->statusUser)) }}
                                                     </option>
                                                         <option value="1">Aktif</option>
                                                         <option value="2">Tidak Aktif</option>

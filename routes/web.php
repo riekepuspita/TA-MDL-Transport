@@ -38,14 +38,9 @@ Route::get('/laporan', function () {
     return view('menu.laporan');
 });
 
-
-// Route::get('/tambahmobil', function () {
-//     return view('menu.tambahmobil');
-// });
-
-Route::get('/landingpage', function () {
-    return view('landingpage.landingpage');
-});
+Route::get('/mdltransport', function () {
+    return view('mdltransport');
+})->name('mdltransport');
 
 
 Route::middleware('guest')->group(function () {

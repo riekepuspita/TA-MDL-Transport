@@ -78,10 +78,11 @@
                                                                 <i class="bx bx-pencil"></i>
                                                             </a>
                                                             <a href="/deletemobil/{{ $row->noPolisi }}" title="Hapus Data"
-                                                                class="btn btn-danger btn-sm">
+                                                                class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $row->noPolisi }}')">
                                                                 <i class="bx bx-trash"></i>
                                                             </a>
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -96,4 +97,29 @@
             @include('layout.footer')
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    // Fungsi untuk menampilkan SweetAlert konfirmasi
+    function confirmDelete(noPolisi) {
+        Swal.fire({
+            icon: "warning",
+            title: "Konfirmasi",
+            text: "Apakah Anda yakin ingin menghapus data ini?",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Hapus",
+            cancelButtonText: "Tidak",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna menekan "Ya", maka arahkan ke URL penghapusan
+                window.location.href = "/deletemobil/" + noPolisi;
+            }
+        });
+
+        // Mencegah tindakan default dari tombol
+        event.preventDefault();
+    }
+</script>
+
 @endsection

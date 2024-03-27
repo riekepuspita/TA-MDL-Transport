@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataPenyewa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 // use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Validator;
 
@@ -27,14 +28,21 @@ class DataPenyewaController extends Controller
     {
         // dd($request->all());
         // $data = $request->all();
-        
-        // $data['password']= bcrypt($request->password);
-        
+
         DataPenyewa::create($request->all());
-        return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Ditambahkan');
+
+        // Menyimpan pesan sukses ke dalam session
+        Session::flash('alert', [
+            'type' => 'success',
+            'title' => 'Data Berhasil Ditambahkan',
+            'message' => "",
+        ]);
+
+        return redirect()->route('datapenyewa');
     }
 
-    public function tampilkanpenyewa($idPenyewa){
+    public function tampilkanpenyewa($idPenyewa)
+    {
 
         $data = DataPenyewa::find($idPenyewa);
         // dd($data);
@@ -42,17 +50,24 @@ class DataPenyewaController extends Controller
         return view('menu.tampilpenyewa', compact('data'));
     }
 
-    public function updatepenyewa(Request $request, $idPenyewa){
+    public function updatepenyewa(Request $request, $idPenyewa)
+    {
         $data = DataPenyewa::find($idPenyewa);
-        $data -> update($request->all());
+        $data->update($request->all());
 
-        return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Diubah');
+        Session::flash('alert', [
+            'type' => 'success',
+            'title' => 'Data Berhasil Diubah',
+            'message' => "",
+        ]);
+
+        return redirect()->route('datapenyewa');
     }
 
     // public function delete($idPenyewa){
     //     $data = DataPenyewa::find($idPenyewa);
     //     $data->delete();
-        
+
     //     return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
     // }
 
@@ -61,9 +76,24 @@ class DataPenyewaController extends Controller
         $data = DataPenyewa::find($idPenyewa);
 
         if ($data) {
+            Session::flash('alert', [
+                'type' => 'success',
+                'title' => 'Data ' . $data->namaLengkap . ' Berhasil Dihapus',
+                'message' => "",
+            ]);
             $data->delete();
-            return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
+        } else {
+            Session::flash('alert', [
+                'type' => 'error',
+                'title' => 'Hapus Data Gagal',
+                'message' => 'ID Penyewa Tidak Valid!',
+            ]);
         }
+        return back();
     }
 
+    // if ($data) {
+    //     $data->delete();
+    //     return redirect()->route('datapenyewa')->with('success', 'Data Berhasil Dihapus');
+    // }
 }

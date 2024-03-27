@@ -76,10 +76,11 @@
                                                         <a href="/tampilkanpenyewa/{{ $row->idPenyewa }}" title="Edit Data" class="btn btn-warning btn-sm">
                                                             <i class="bx bx-pencil"></i>
                                                         </a>
-                                                        <a href="/delete/{{ $row->idPenyewa }}" title="Hapus Data" class="btn btn-danger btn-sm">
+                                                        <button title="Hapus Data" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $row->idPenyewa }}')">
                                                             <i class="bx bx-trash"></i>
-                                                        </a>
+                                                        </button>
                                                     </td>
+                                                    
                                                 </tr>
                                                 
                                                 @endforeach
@@ -99,32 +100,27 @@
 @endsection
 
 @section('script')
-    <script>
-        // new DataTable('#example');
-        // $(document).ready(function() {
-        //     $('.table').DataTable({
-        //         columnDefs: [{
-        //             orderable: false,
-        //             targets: [6]
-        //         }],
-        //         language: {
-        //             lengthMenu: "Tampilkan MENU data per halaman",
-        //             zeroRecords: "Data tidak ditemukan.",
-        //             info: "Menampilkan START - END dari TOTAL data",
-        //             infoEmpty: "Menampilkan 0 - 0 dari 0 data",
-        //             infoFiltered: "(difilter dari MAX total data)",
-        //             search: "Cari :",
-        //             decimal: ",",
-        //             thousands: ".",
-        //             paginate: {
-        //                 previous: "Sebelumnya",
-        //                 next: "Selanjutnya"
-        //             }
-        //         }
-        //     });
-        // });
+<script>
+    // Fungsi untuk menampilkan SweetAlert konfirmasi
+    function confirmDelete(idPenyewa) {
+        Swal.fire({
+            icon: "warning",
+            title: "Konfirmasi",
+            text: "Apakah Anda yakin ingin menghapus data ini?",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Hapus",
+            cancelButtonText: "Tidak",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna menekan "Ya", maka arahkan ke URL penghapusan
+                window.location.href = "/delete/" + idPenyewa;
+            }
+        });
 
-    
-    </script>
+        // Mencegah tindakan default dari tombol
+        event.preventDefault();
+    }
+</script>
+
 @endsection
 
