@@ -18,12 +18,14 @@
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-7 text-center">
-                                        <p class="fs-4 text-white animated zoomIn">Welcome to <strong class="text-dark">MDL
+                                        <p class="fs-4 text-secondary animated zoomIn">Welcome to <strong
+                                                class="text-dark">MDL
                                                 Transport</strong></p>
                                         <h1 class="display-1 text-dark mb-4 animated zoomIn">Repeat Order Anda Senyum Bagi
                                             Kami</h1>
                                         <a href=""
-                                            class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
+                                            class="btn btn-secondary rounded-pill py-3 px-5 animated zoomIn">Explore
+                                            More</a>
                                     </div>
                                 </div>
                             </div>
@@ -35,12 +37,14 @@
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-7 text-center">
-                                        <p class="fs-4 text-white animated zoomIn">Welcome to <strong class="text-dark">MDL
+                                        <p class="fs-4 text-secondary animated zoomIn">Welcome to <strong
+                                                class="text-dark">MDL
                                                 Transport</strong></p>
                                         <h1 class="display-1 text-dark mb-4 animated zoomIn">Repeat Order Anda Senyum Bagi
                                             Kami</h1>
                                         <a href=""
-                                            class="btn btn-light rounded-pill py-3 px-5 animated zoomIn">Explore More</a>
+                                            class="btn btn-secondary rounded-pill py-3 px-5 animated zoomIn">Explore
+                                            More</a>
                                     </div>
                                 </div>
                             </div>
@@ -74,9 +78,11 @@
                         </div>
                         <p class="mb-4">MDL Transport adalah sebuah perusahaan yang berdedikasi dalam bidang transportasi,
                             dengan komitmen untuk memberikan layanan yang berkualitas tinggi dan terpercaya kepada
-                            pelanggan. Berlokasi strategis di Jombang, MDL Transport telah menjadi pilihan utama bagi
-                            individu dan perusahaan yang membutuhkan solusi transportasi yang efisien dan handal.</p>
-                        <p class="mb-4">Didukung oleh armada kendaraan yang modern dan terawat dengan baik, serta tenaga kerja yang profesional
+                            pelanggan. Berlokasi strategis di JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten
+                            Jombang, Jawa Timur. MDL Transport telah menjadi pilihan utama bagi individu dan perusahaan yang
+                            membutuhkan solusi transportasi yang efisien dan handal.</p>
+                        <p class="mb-4">Didukung oleh armada kendaraan yang modern dan terawat dengan baik, serta tenaga
+                            kerja yang profesional
                             dan berpengalaman, MDL Transport memberikan jaminan akan pengalaman perjalanan yang aman,
                             nyaman, dan tepat waktu bagi setiap pelanggan. Keandalan dan keunggulan layanan menjadi landasan
                             utama dalam setiap operasi MDL Transport, menjadikan mereka sebagai mitra yang dapat diandalkan
@@ -93,80 +99,54 @@
         <div class="container-fluid product py-5 my-5">
             <div class="container py-5">
                 <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                    <p class="fs-5 fw-medium fst-italic text-secondary">Our Products</p>
-                    <h1 class="display-6">Tea has a complex positive effect on the body</h1>
+                    <p class="fs-5 fw-medium fst-italic text-secondary">Galeri MDL Transport</p>
+                    {{-- <h1 class="display-6">Tea has a complex positive effect on the body</h1> --}}
                 </div>
                 <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
                     <a href="" class="d-block product-item rounded">
-                        <img src="{{ asset('landingpage/img/product-1.jpg') }}" alt="">
-                        <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                        <img src="{{ asset('landingpage/img/bg1.jpg') }}" alt="">
+                        {{-- <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
                             <h4 class="text-secondary">Green Tea</h4>
                             <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                        </div>
+                        </div> --}}
                     </a>
                     <a href="" class="d-block product-item rounded">
-                        <img src="{{ asset('landingpage/img/product-2.jpg') }}" alt="">
-                        <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                        <img src="{{ asset('landingpage/img/bg2.jpg') }}" alt="">
+                        {{-- <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
                             <h4 class="text-secondary">Black Tea</h4>
                             <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                        </div>
+                        </div> --}}
                     </a>
                     <a href="" class="d-block product-item rounded">
-                        <img src="{{ asset('landingpage/img/product-3.jpg') }}" alt="">
-                        <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                        <img src="{{ asset('landingpage/img/bg3.jpg') }}" alt="">
+                        {{-- <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
                             <h4 class="text-secondary">Spiced Tea</h4>
                             <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                        </div>
+                        </div> --}}
                     </a>
                     <a href="" class="d-block product-item rounded">
-                        <img src="{{ asset('landingpage/img/product-4.jpg') }}" alt="">
-                        <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
+                        <img src="{{ asset('landingpage/img/gambar4.jpg') }}" alt="">
+                        {{-- <div class="bg-white shadow-sm text-center p-4 position-relative mt-n5 mx-4">
                             <h4 class="text-secondary">Organic Tea</h4>
                             <span class="text-body">Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum</span>
-                        </div>
+                        </div> --}}
                     </a>
                 </div>
             </div>
         </div>
         <!-- Products End -->
 
-
-
-        <!-- Video Modal Start -->
-        <div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- 16:9 aspect ratio -->
-                        <div class="ratio ratio-16x9">
-                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
-                                allowscriptaccess="always" allow="autoplay"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Video Modal End -->
-
-
         <!-- Store Start -->
         <div class="container-xxl py-5">
             <div class="container">
-                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
-                    style="max-width: 500px;">
-                    <p class="fs-5 fw-medium fst-italic text-secondary">Online Store</p>
-                    <h1 class="display-6">Want to stay healthy? Choose tea taste</h1>
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <p class="fs-5 fw-medium fst-italic text-secondary">Mau sewa mobil?</p>
+                    <h1 class="display-6">Pilih Mobilmu, Nikmati Perjalananmu!</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="store-item position-relative text-center">
-                            <img class="img-fluid" src="{{ asset('landingpage/img/store-product-1.jpg') }}"
-                                alt="">
+                            <img class="img-fluid" src="{{ asset('landingpage/img/store-product-1.jpg') }}" alt="">
                             <div class="p-4">
                                 <div class="text-center mb-3">
                                     <small class="fa fa-star text-secondary"></small>
@@ -236,56 +216,41 @@
                         </div>
                     </div>
                     <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                        <a href="" class="btn btn-secondary rounded-pill py-3 px-5">View More Products</a>
+                        <a href="/mobil" class="btn btn-secondary rounded-pill py-3 px-5">Lebih Banyak Mobil</a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Store End -->
 
-
         <!-- Testimonial Start -->
         <div class="container-fluid testimonial py-5 my-5">
             <div class="container py-5">
                 <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
                     style="max-width: 500px;">
-                    <p class="fs-5 fw-medium fst-italic text-white">Testimonial</p>
-                    <h1 class="display-6">What our clients say about our tea</h1>
+                    <p class="fs-5 fw-medium fst-italic text-secondary">Contact Us</p>
+                    <h1 class="display-6">Hubungi Kami Sekarang Juga!</h1>
                 </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="testimonial-item p-4 p-lg-5">
-                        <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem
-                            et sit, sed stet lorem sit clita duo justo</p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img class="img-fluid flex-shrink-0" src="{{ asset('landingpage/img/testimonial-1.jpg') }}"
-                                alt="">
-                            <div class="text-start ms-3">
-                                <h5>Client Name</h5>
-                                <span class="text-secondary">Profession</span>
+                <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-8">
+                        <div class="row g-5">
+                            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="btn-square mx-auto mb-3">
+                                    <i class="fab fa-instagram fa-2x text-secondary"></i>
+                                </div>
+                                <p class="mb-2">@anndeka_mdlgarage</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item p-4 p-lg-5">
-                        <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem
-                            et sit, sed stet lorem sit clita duo justo</p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img class="img-fluid flex-shrink-0" src="{{ asset('landingpage/img/testimonial-2.jpg') }}"
-                                alt="">
-                            <div class="text-start ms-3">
-                                <h5>Client Name</h5>
-                                <span class="text-secondary">Profession</span>
+                            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="btn-square mx-auto mb-3">
+                                    <i class="fa fa-phone fa-2x text-secondary"></i>
+                                </div>
+                                <p class="mb-2">0856-4942-6390</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item p-4 p-lg-5">
-                        <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem
-                            et sit, sed stet lorem sit clita duo justo</p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img class="img-fluid flex-shrink-0" src="{{ asset('landingpage/img/testimonial-3.jpg') }}"
-                                alt="">
-                            <div class="text-start ms-3">
-                                <h5>Client Name</h5>
-                                <span class="text-secondary">Profession</span>
+                            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.5s">
+                                <div class="btn-square mx-auto mb-3">
+                                    <i class="fa fa-map-marker-alt fa-2x text-secondary"></i>
+                                </div>
+                                <p class="mb-2">JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten Jombang, Jawa Timur 61418</p>
                             </div>
                         </div>
                     </div>
@@ -293,48 +258,16 @@
             </div>
         </div>
         <!-- Testimonial End -->
-
-
-        <!-- Contact Start -->
+        
         <div class="container-xxl contact py-5">
             <div class="container">
-                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
-                    style="max-width: 500px;">
-                    <p class="fs-5 fw-medium fst-italic text-secondary">Contact Us</p>
-                    <h1 class="display-6">Contact us right now</h1>
-                </div>
-                <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="col-lg-8">
-                        <p class="text-center mb-5">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat
-                            ipsum et lorem et sit, sed stet lorem sit clita duo justo Diam dolor diam ipsum sit. Aliqu diam
-                            amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
-                        <div class="row g-5">
-                            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="btn-square mx-auto mb-3">
-                                    <i class="fa fa-envelope fa-2x text-white"></i>
-                                </div>
-                                <p class="mb-2">info@example.com</p>
-                                <p class="mb-0">support@example.com</p>
-                            </div>
-                            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.4s">
-                                <div class="btn-square mx-auto mb-3">
-                                    <i class="fa fa-phone fa-2x text-white"></i>
-                                </div>
-                                <p class="mb-2">+012 345 67890</p>
-                                <p class="mb-0">+012 345 67890</p>
-                            </div>
-                            <div class="col-md-4 text-center wow fadeInUp" data-wow-delay="0.5s">
-                                <div class="btn-square mx-auto mb-3">
-                                    <i class="fa fa-map-marker-alt fa-2x text-white"></i>
-                                </div>
-                                <p class="mb-2">123 Street</p>
-                                <p class="mb-0">New York, USA</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <h1 class="display-6">"Your trip is my Job"</h1>
+                    <p>Rencanakan liburan dengan teman dan keluarga anda bersama MDL TRANSPORT</p>
                 </div>
             </div>
         </div>
-        @include('landingpage.footer')
-        <!-- Contact Start -->
-    @endsection
+    </div>
+    @include('landingpage.footer')
+    <!-- Contact Start -->
+@endsection

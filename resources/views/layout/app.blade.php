@@ -29,6 +29,7 @@
 
 <body>
     @yield('content')
+    @yield('modal')
     @if(Session::has('alert'))
         <script>
             let timerInterval

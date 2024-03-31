@@ -42,6 +42,17 @@ Route::get('/mdltransport', function () {
     return view('mdltransport');
 })->name('mdltransport');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/mobil', function () {
+    return view('mobil');
+})->name('mobil');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::middleware('guest')->group(function () {
     

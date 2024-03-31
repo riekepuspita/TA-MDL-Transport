@@ -200,7 +200,7 @@
 }
 
 .page-header {
-    background: linear-gradient(rgba(255, 236, 179, .7), rgba(255, 236, 179, .7)), url(../img/carousel-1.jpg) center center no-repeat;
+    background: linear-gradient(rgba(255, 236, 179, .7), rgba(255, 236, 179, .7)), url(../img/gambar1.jpg) center center no-repeat;
     background-size: cover;
 }
 
@@ -255,7 +255,7 @@
 
 /*** Products ***/
 .product {
-    background: linear-gradient(rgba(136, 180, 78, .1), rgba(136, 180, 78, .1)), url(../img/product-bg.png) left bottom no-repeat;
+    background: linear-gradient(rgba(255, 236, 179, .7), rgba(255, 236, 179, .7)),  left bottom no-repeat;
     background-size: auto;
 }
 
@@ -398,7 +398,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(138, 180, 78, .3);
+    background: rgba(255, 236, 179, .7);
     opacity: 0;
     transition: .5s;
 }
@@ -420,7 +420,7 @@
 
 /*** Testimonial ***/
 .testimonial {
-    background: linear-gradient(rgba(255, 236, 179, .7), rgba(255, 236, 179, .7)), url(../img/testimonial-bg.jpg) center center no-repeat;
+    background: linear-gradient(rgba(255, 236, 179, .7), rgba(255, 236, 179, .7)), center center no-repeat;
     background-size: cover;
 }
 

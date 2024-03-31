@@ -39,7 +39,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
-                                <a href="/tambahpenyewa" type="button" class="btn btn-success">Tambah Penyewa</a>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPenyewa">Tambah
+                                    Penyewa</button>
+                                {{-- <a href="/tambahpenyewa" type="button" class="btn btn-success">Tambah Penyewa</a> --}}
                             </div>      
                             @if ($message = Session::get('success'))
                             <div class="alert alert-success" role="alert">
@@ -97,6 +99,58 @@
         </div>
     </div>
     @include('layout.footer')
+@endsection
+
+@section('modal')
+    <div class="modal fade" id="tambahPenyewa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Penyewa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/insertpenyewa" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="noNIK" class="col-form-label">NIK</label>
+                            <input type="text" class="form-control" id="noNIK" name="noNIK" placeholder="Masukkan NIK Penyewa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="namaLengkap" class="col-form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="namaLengkap" name="namaLengkap" placeholder="Masukkan Nama Lengkap Penyewa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
+                            <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
+                                <option value="" selected disabled hidden>
+                                    -- Pilih Jenis Kelamin--</option>
+                                <option value="1">Laki-laki</option>
+                                <option value="2">Perempuan</option>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="col-form-label">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Penyewa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="noHP" class="col-form-label">No HP</label>
+                            <input type="tel" class="form-control" id="noHP" name="noHP" placeholder="Masukkan No HP Penyewa" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')"required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="noHP" class="col-form-label">Hari / Tanggal</label>
+                            <input type="date" class="form-control" id="created_at" name="created_at" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')

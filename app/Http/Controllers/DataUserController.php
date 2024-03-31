@@ -17,10 +17,10 @@ class DataUserController extends Controller
         return view('menu.datauser', compact('data'));
     }
 
-    public function tambahuser()
-    {
-        return view('menu.tambahuser');
-    }
+    // public function tambahuser()
+    // {
+    //     return view('menu.tambahuser');
+    // }
 
     public function insertuser(Request $request)
     {
