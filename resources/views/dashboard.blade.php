@@ -34,7 +34,7 @@
 
                     <div class="col-xl-12">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
+                            {{-- <div class="col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="avatar">
@@ -47,7 +47,7 @@
                                                     class="mdi mdi-arrow-down"></i> 10%</sup></h4>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-4 col-md-6">
                                 <div class="card">
                                     <div class="card-body">
@@ -57,8 +57,8 @@
                                             </span>
                                         </div>
                                         <p class="text-muted mt-4 mb-0">Total Mobil</p>
-                                        <h4 class="mt-1 mb-0">6,48,249 <sup class="text-success fw-medium font-size-14"><i
-                                                    class="mdi mdi-arrow-down"></i> 22%</sup></h4>
+                                        <h4 class="mt-1 mb-0">{{ $mobil }} <sup class="text-success fw-medium font-size-14"><i
+                                                    class="mdi mdi-arrow-down"></i></sup></h4>
                                     </div>
                                 </div>
                             </div>
@@ -72,11 +72,26 @@
                                             </span>
                                         </div>
                                         <p class="text-muted mt-4 mb-0">Total Penyewa</p>
-                                        <h4 class="mt-1 mb-0">$5,265,3 <sup class="text-danger fw-medium font-size-14"><i
-                                                    class="mdi mdi-arrow-down"></i> 18%</sup></h4>
+                                        <h4 class="mt-1 mb-0">{{ $penyewa }} <sup class="text-danger fw-medium font-size-14"><i
+                                                    class="mdi mdi-arrow-down"></i></sup></h4>
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- <div class="col-lg-4 col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="avatar">
+                                            <span class="avatar-title bg-success-subtle rounded">
+                                                <i class="mdi mdi-account-multiple-outline text-success font-size-24"></i>
+                                            </span>
+                                        </div>
+                                        <p class="text-muted mt-4 mb-0">Total Admin</p>
+                                        <h4 class="mt-1 mb-0">{{ $penyewa }} <sup class="text-danger fw-medium font-size-14"><i
+                                                    class="mdi mdi-arrow-down"></i></sup></h4>
+                                    </div>
+                                </div>
+                            </div> --}}
 
                         </div>
                     </div>

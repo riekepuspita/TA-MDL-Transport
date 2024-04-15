@@ -1,7 +1,7 @@
 @extends('landingpage.app')
 
 @section('title')
-    MDL Transport
+    {{ $title }}
 @endsection
 
 @section('content')
@@ -76,18 +76,12 @@
                             <p class="fs-5 fw-medium fst-italic text-secondary">MDL Transport</p>
                             <h1 class="display-6">"Your Reliable Partner in Transportation Excellence"</h1>
                         </div>
-                        <p class="mb-4">MDL Transport adalah sebuah perusahaan yang berdedikasi dalam bidang transportasi,
-                            dengan komitmen untuk memberikan layanan yang berkualitas tinggi dan terpercaya kepada
-                            pelanggan. Berlokasi strategis di JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten
-                            Jombang, Jawa Timur. MDL Transport telah menjadi pilihan utama bagi individu dan perusahaan yang
-                            membutuhkan solusi transportasi yang efisien dan handal.</p>
-                        <p class="mb-4">Didukung oleh armada kendaraan yang modern dan terawat dengan baik, serta tenaga
-                            kerja yang profesional
-                            dan berpengalaman, MDL Transport memberikan jaminan akan pengalaman perjalanan yang aman,
-                            nyaman, dan tepat waktu bagi setiap pelanggan. Keandalan dan keunggulan layanan menjadi landasan
-                            utama dalam setiap operasi MDL Transport, menjadikan mereka sebagai mitra yang dapat diandalkan
-                            dalam memenuhi kebutuhan transportasi di berbagai situasi dan keperluan.</p>
-                        {{-- <a href="" class="btn btn-secondary rounded-pill py-3 px-5">Read More</a> --}}
+                        <p class="mb-4">MDL Transport, berlokasi di JL. Pattimura, Gg. V Blk. A No.01/08, Sengon,
+                            Kabupaten Jombang, Jawa Timur, adalah penyedia layanan transportasi yang berkomitmen pada
+                            kualitas tinggi dan kehandalan. Dengan armada kendaraan modern dan staf yang profesional, kami
+                            memberikan pengalaman perjalanan yang aman, nyaman, dan tepat waktu bagi pelanggan kami. Dari
+                            individu hingga perusahaan, MDL Transport menjadi pilihan utama untuk solusi transportasi
+                            efisien dan handal.</p>
                     </div>
                 </div>
             </div>
@@ -162,7 +156,7 @@
                             <div class="store-overlay">
                                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
                                         class="fa fa-arrow-right ms-2"></i></a>
-                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i
+                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi<i
                                         class="fa fa-cart-plus ms-2"></i></a>
                             </div>
                         </div>
@@ -186,7 +180,7 @@
                             <div class="store-overlay">
                                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
                                         class="fa fa-arrow-right ms-2"></i></a>
-                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i
+                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi <i
                                         class="fa fa-cart-plus ms-2"></i></a>
                             </div>
                         </div>
@@ -210,7 +204,7 @@
                             <div class="store-overlay">
                                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
                                         class="fa fa-arrow-right ms-2"></i></a>
-                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i
+                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi<i
                                         class="fa fa-cart-plus ms-2"></i></a>
                             </div>
                         </div>
@@ -250,7 +244,8 @@
                                 <div class="btn-square mx-auto mb-3">
                                     <i class="fa fa-map-marker-alt fa-2x text-secondary"></i>
                                 </div>
-                                <p class="mb-2">JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten Jombang, Jawa Timur 61418</p>
+                                <p class="mb-2">JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten Jombang, Jawa
+                                    Timur 61418</p>
                             </div>
                         </div>
                     </div>
@@ -258,10 +253,11 @@
             </div>
         </div>
         <!-- Testimonial End -->
-        
+
         <div class="container-xxl contact py-5">
             <div class="container">
-                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
+                    style="max-width: 500px;">
                     <h1 class="display-6">"Your trip is my Job"</h1>
                     <p>Rencanakan liburan dengan teman dan keluarga anda bersama MDL TRANSPORT</p>
                 </div>

@@ -1,12 +1,13 @@
 @extends('landingpage.app')
 
 @section('title')
-    About 
+    {{ $title }}
 @endsection
 
 @section('content')
     <div id="layout-wrapper">
         @include('landingpage.header')
+
         <body>
             <!-- Page Header Start -->
             <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
@@ -31,53 +32,67 @@
                             <div class="row g-3">
                                 <div class="col-6 text-end">
                                     <img class="img-fluid bg-white w-100 mb-3 wow fadeIn" data-wow-delay="0.1s"
-                                        src="{{ asset('landingpage/img/about-1.jpg') }}" alt="">
+                                        src="{{ asset('landingpage/img/bg5.jpg') }}" alt="">
                                     <img class="img-fluid bg-white w-50 wow fadeIn" data-wow-delay="0.2s"
-                                        src="{{ asset('landingpage/img/about-3.jpg') }}" alt="">
+                                        src="{{ asset('landingpage/img/bg4.jpg') }}" alt="">
                                 </div>
                                 <div class="col-6">
                                     <img class="img-fluid bg-white w-50 mb-3 wow fadeIn" data-wow-delay="0.3s"
-                                        src="{{ asset('landingpage/img/about-4.jpg') }}" alt="">
+                                        src="{{ asset('landingpage/img/bg3.jpg') }}" alt="">
                                     <img class="img-fluid bg-white w-100 wow fadeIn" data-wow-delay="0.4s"
-                                        src="{{ asset('landingpage/img/about-2.jpg') }}" alt="">
+                                        src="{{ asset('landingpage/img/bg1.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <div class="section-title">
-                                <p class="fs-5 fw-medium fst-italic text-secondary">About Us</p>
-                                <h1 class="display-6">The success history of TEA House in 25 years</h1>
+                                <p class="fs-5 fw-medium fst-italic text-secondary">About MDL Transport</p>
+                                <h1 class="display-6">"Your trip is my Job"</h1>
                             </div>
                             <div class="row g-3 mb-4">
                                 <div class="col-sm-4">
-                                    <img class="img-fluid bg-white w-100" src="{{ asset('landingpage/img/about-5.jpg') }}"
+                                    <img class="img-fluid bg-white w-100" src="{{ asset('landingpage/img/gambar1.jpg') }}"
                                         alt="">
                                 </div>
                                 <div class="col-sm-8">
-                                    <h5>Our tea is one of the most popular drinks in the world</h5>
-                                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-                                        diam amet diam et eos. Clita erat ipsum et lorem et sit</p>
+                                    <h5>MDL Transport memiliki kepanjangan Monggo DoLan Transport adalah sebuah perusahaan
+                                        yang berdedikasi dalam bidang transportasi.</h5>
+                                    <p class="mb-0">Berkomitmen memberikan layanan yang berkualitas tinggi dan terpercaya
+                                        kepada
+                                        pelanggan. Berlokasi di JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten
+                                        Jombang, Jawa Timur.</p>
                                 </div>
                             </div>
-                            <div class="border-top mb-4"></div>
-                            <div class="row g-3">
-                                <div class="col-sm-8">
-                                    <h5>Daily use of a cup of tea is good for your health</h5>
-                                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-                                        diam amet diam et eos. Clita erat ipsum et lorem et sit</p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <img class="img-fluid bg-white w-100" src="{{ asset('landingpage/img/about-6.jpg') }}"
-                                        alt="">
-                                </div>
+                        </div>
+                        <div class="border-top mb-4"></div>
+                        <div class="row g-3">
+                            <div class="col-sm-8">
+                                <h5>MDL Transport telah menjadi pilihan utama bagi individu dan perusahaan yang
+                                    membutuhkan solusi transportasi yang efisien dan handal.</h5>
+                                <p class="mb-0">
+                                    Didukung oleh armada kendaraan yang modern dan terawat dengan baik, serta tenaga
+                                    kerja yang profesional
+                                    dan berpengalaman, MDL Transport memberikan jaminan akan pengalaman perjalanan yang
+                                    aman,
+                                    nyaman, dan tepat waktu bagi setiap pelanggan.Dengan layanan yang ramah, profesional,
+                                    dan berorientasi pada kepuasan pelanggan, MDL Transport berkomitmen untuk memberikan
+                                    pengalaman transportasi yang memuaskan dan membangun hubungan jangka panjang dengan
+                                    pelanggan kami. Bersama MDL Transport, Anda dapat mengandalkan solusi transportasi yang
+                                    efisien dan handal untuk keperluan pribadi atau bisnis Anda.</p>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="img-fluid bg-white w-100" src="{{ asset('landingpage/img/bg2.jpg') }}"
+                                    alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </body>
-        <!-- About End -->
-        @include('landingpage.footer')
-        <!-- Footer End -->
+    </div>
+    </body>
+    <!-- About End -->
+    @include('landingpage.footer')
+    <!-- Footer End -->
     </div>
 @endsection

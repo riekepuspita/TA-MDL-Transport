@@ -52,8 +52,25 @@ class DataPenyewaController extends Controller
 
     public function updatepenyewa(Request $request, $idPenyewa)
     {
-        $data = DataPenyewa::find($idPenyewa);
-        $data->update($request->all());
+        // $data = DataPenyewa::find($idPenyewa);
+        // $data->update($request->all());
+
+        // Session::flash('alert', [
+        //     'type' => 'success',
+        //     'title' => 'Data Berhasil Diubah',
+        //     'message' => "",
+        // ]);
+
+        // return redirect()->route('datapenyewa');
+        $data = DataPenyewa::findOrFail($idPenyewa);
+
+        $data->noNIK = $request->noNIK;
+        $data->namaLengkap = $request->namaLengkap;
+        $data->jeniskelamin = $request->jeniskelamin;
+        $data->alamat = $request->alamat;
+        $data->noHP = $request->noHP;
+
+        $data->save();
 
         Session::flash('alert', [
             'type' => 'success',

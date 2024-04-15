@@ -37,7 +37,8 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="/updatemobil/{{ $data->noPolisi }}" method="POST" enctype="multipart/form-data">
+                                    <form action="/updatemobil/{{ $data->noPolisi }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-3 row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">No
@@ -72,7 +73,8 @@
                                             <div class="col-md-10">
                                                 <input class="form-control" name="kapasitasMobil" type="number"
                                                     value="{{ $data->kapasitasMobil }}" id="kapasitasMobil"
-                                                    placeholder="Masukkan Kapasitas Orang" min="0" max="99" required>
+                                                    placeholder="Masukkan Kapasitas Orang" min="0" max="99"
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -81,15 +83,16 @@
                                             <div class="col-md-10">
                                                 <input class="form-control" name="tahunMobil" type="text"
                                                     value="{{ $data->tahunMobil }}" id="tahunMobil"
-                                                    placeholder="Masukkan Tahun Pembuatan Mobil" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                    placeholder="Masukkan Tahun Pembuatan Mobil" pattern="[0-9]+"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="example-tel-input" class="col-md-2 col-form-label">Deskripsi
                                                 Mobil</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" name="deskripsiMobil" id="deskripsiMobil"
-                                                    placeholder="Masukkan Deskripsi Mobil" style="height: 150px;" required>{{ $data->deskripsiMobil }}</textarea>
+                                                <textarea class="form-control" name="deskripsiMobil" id="deskripsiMobil" placeholder="Masukkan Deskripsi Mobil"
+                                                    style="height: 150px;" required>{{ $data->deskripsiMobil }}</textarea>
                                             </div>
                                         </div>
 
@@ -99,7 +102,8 @@
                                             <div class="col-md-10">
                                                 <input class="form-control" name="hargaSewa" type="text"
                                                     value="{{ $data->hargaSewa }}" id="hargaSewa"
-                                                    placeholder="Masukkan Harga Sewa Mobil" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                    placeholder="Masukkan Harga Sewa Mobil" pattern="[0-9]+"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -107,7 +111,8 @@
                                                 Ketersediaan</label>
                                             <div class="col-md-10">
                                                 <select class="form-select" id="statusMobil" name="statusMobil" required>
-                                                    <option selected hidden>{{ ucwords(strtolower($data->statusMobil)) }}</option>
+                                                    <option selected hidden>{{ ucwords(strtolower($data->statusMobil)) }}
+                                                    </option>
                                                     <option value="1">Tersedia</option>
                                                     <option value="2">Tidak Tersedia</option>
                                                     </option>
@@ -120,14 +125,17 @@
                                             <label for="gambarMobil" class="col-md-2 col-form-label">Gambar Mobil</label>
                                             <div class="col-md-10">
 
-                                                <input class="form-control" name="gambarMobil" id="gambarMobil" type="file" accept=".jpg, .jpeg, .png">
-                                                
+                                                <input class="form-control" name="gambarMobil" id="gambarMobil"
+                                                    type="file" accept=".jpg, .jpeg, .png">
+
                                                 @if ($data->gambarMobil)
-                                                    <img src="{{ asset('gambarMobil/' . $data->gambarMobil) }}" alt="Gambar Mobil" class="mt-2" style="max-width: 300px;">
+                                                    <img src="{{ asset('gambarMobil/' . $data->gambarMobil) }}"
+                                                        alt="Gambar Mobil" class="mt-2" style="max-width: 300px;">
                                                 @endif
+                                                <H2>{{ $data->gambarMobil }}</H2>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-success me-3">Simpan</button>
                                             <a href="/datamobil" class="btn btn-danger me-3">Batal</a>

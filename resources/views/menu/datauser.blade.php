@@ -70,11 +70,26 @@
                                                         <th scope="row">{{ $no++ }}</th>
                                                         <td>{{ $row->namaUser }}</td>
                                                         <td>{{ $row->email }}</td>
-                                                        <td>{{ $row->level }}</td>
-                                                        <td>{{ $row->statusUser }}</td>
+                                                        <td>
+                                                            @if ($row->level == 'superadmin')
+                                                            Super Admin
+                                                        @elseif ($row->statusUser == 'admin')
+                                                            Admin
+                                                            @else 
+                                                            User
+                                                        @endif</td>
+                                                        {{-- <td>{{ $row->statusUser }}</td> --}}
+                                                        <td>
+                                                            @if ($row->statusUser == 'aktif')
+                                                                Aktif
+                                                            @elseif ($row->statusUser == 'tidakaktif')
+                                                                Tidak Aktif
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <a href="/tampilkanuser/{{ $row->idUser }}" title="Edit Data"
-                                                                class="btn btn-warning btn-sm">
+                                                                class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                                data-bs-target="#edituser{{ $row->idUser }}">
                                                                 <i class="bx bx-pencil"></i>
                                                             </a>
                                                             <button title="Hapus Data" class="btn btn-danger btn-sm"
@@ -147,6 +162,70 @@
             </div>
         </div>
     </div>
+
+    @foreach ($data as $row)
+        <div class="modal fade" id="edituser{{ $row->idUser }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            {{-- <span aria-hidden="true">&times;</span> --}}
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form edit data -->
+                        <form action="{{ route('updateuser', $row->idUser) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="namaUser">Nama User</label>
+                                <input type="text" name="namaUser" class="form-control" id="namaUser"
+                                    value="{{ $row->namaUser }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" class="form-control" id="email"
+                                    value="{{ $row->email }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="level" class="col-form-label">Level</label>
+                                <select class="form-select" id="level" name="level" required>
+                                    <option value="1" {{ $row->level == 'superadmin' ? 'selected' : '' }}>Super Admin
+                                    </option>
+                                    <option value="2" {{ $row->level == 'admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="3" {{ $row->level == 'user' ? 'selected' : '' }}>User</option>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+
+                                <label for="statusUser" class="col-form-label">Status User</label>
+                                <select class="form-select" id="statusUser" name="statusUser" required>
+
+                                    <option value="1" {{ $row->statusUser == 'aktif' ? 'selected' : '' }}>
+                                        Aktif
+                                    </option>
+
+                                    <option value="2" {{ $row->statusUser == 'tidakaktif' ? 'selected' : '' }}>
+                                        Tidak Aktif
+                                    </option>
+
+                                </select>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="simpanPerubahan">Simpan
+                                    Perubahan</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @section('script')

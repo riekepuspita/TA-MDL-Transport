@@ -65,14 +65,25 @@ class DataUserController extends Controller
     public function tampilkanuser($idUser){
 
         $data = User::find($idUser);
-        // dd($data);
+        // dd($data);   
 
         return view('menu.tampiluser', compact('data'));
     }
 
-    public function updateuser(Request $request, $idUser){
-        $data = User::find($idUser);
-        $data -> update($request->all());
+    public function updateuser(Request $request){
+
+        $data = User::findOrFail($request->idUser);
+
+        $data->namaUser = $request->namaUser;
+        $data->email = $request->email;
+        $data->level = $request->level;
+        $data->statusUser = $request->statusUser;
+
+        $data->save();
+
+
+        // $data = User::find($idUser);
+        // $data -> update($request->all());
         
         Session::flash('alert', [
             'type' => 'success',

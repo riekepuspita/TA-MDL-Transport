@@ -25,8 +25,6 @@ class DataMobilController extends Controller
 
     public function insertmobil(Request $request)
     {
-        // dd($request->all());
-
         $data = DataMobil::create($request->all());
 
         Session::flash('alert', [
@@ -35,12 +33,12 @@ class DataMobilController extends Controller
             'message' => "",
         ]);
 
-
-        if($request->hasFile('gambarMobil')){
+        if ($request->hasFile('gambarMobil')) {
             $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
             $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
             $data->save();
         }
+
         return redirect()->route('datamobil');
     }
 
@@ -53,18 +51,35 @@ class DataMobilController extends Controller
         return view('menu.tampilmobil', compact('data'));
     }
 
+
     public function updatemobil(Request $request, $noPolisi)
     {
-        $data = DataMobil::where('noPolisi', $noPolisi)->first();
-        // $data = DataMobil::find($noPolisi);
+        // $data = DataMobil::where('noPolisi', $noPolisi)->first();
+        // // $data = DataMobil::find($noPolisi);
 
-        Session::flash('alert', [
-            'type' => 'success',
-            'title' => 'Data Berhasil Diubah',
-            'message' => "",
-        ]);
+        // Session::flash('alert', [
+        //     'type' => 'success',
+        //     'title' => 'Data Berhasil Diubah',
+        //     'message' => "",
+        // ]);
 
-        $data->update($request->all());
+        // $data->update($request->all());
+        // return redirect()->route('datamobil');
+        $data = DataMobil::findOrFail($noPolisi);
+
+        $data->merekMobil = $request->merekMobil;
+        $data->modelMobil = $request->modelMobil;
+        $data->kapasitasMobil = $request->kapasitasMobil;
+        $data->tahunMobil = $request->tahunMobil;
+        $data->deskripsiMobil = $request->deskripsiMobil;
+        $data->hargaSewa = $request->hargaSewa;
+        $data->statusMobil = $request->statusMobil;
+        if ($request->hasFile('gambarMobil')) {
+            $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
+            $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
+        }
+
+        $data->save();
         return redirect()->route('datamobil');
     }
 

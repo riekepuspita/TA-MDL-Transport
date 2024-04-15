@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataMobilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\DataPenyewaController;
 use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,24 +40,29 @@ Route::get('/laporan', function () {
     return view('menu.laporan');
 });
 
-Route::get('/mdltransport', function () {
-    return view('mdltransport');
-})->name('mdltransport');
+// Route::get('/mdltransport', function () {
+//     return view('mdltransport');
+// })->name('mdltransport');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/mdltransport', [LandingPageController::class, 'homeIndex'])->name('mdltransport');
+Route::get('/about', [LandingPageController::class, 'aboutIndex'])->name('aboutmdltransport');
+Route::get('/mobil', [LandingPageController::class, 'mobilIndex'])->name('mobilmdltransport');
+Route::get('/contact', [LandingPageController::class, 'contactIndex'])->name('contactmdltransport');
 
-Route::get('/mobil', function () {
-    return view('mobil');
-})->name('mobil');
+// Route::get('/about', function () {
+//     return view('about');
+// })->name('about');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+// Route::get('/mobil', function () {
+//     return view('mobil');
+// })->name('mobil');
+
+// Route::get('/contact', function () {
+//     return view('contact');
+// })->name('contact');
 
 Route::middleware('guest')->group(function () {
-    
+
     Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
     Route::post('/auth', [LoginController::class, 'login'])->name('auth')->middleware('guest');
     Route::get('/registrasi', [RegistrasiController::class, 'registrasi'])->name('registrasi')->middleware('guest');
@@ -70,29 +77,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/datauser', [DataUserController::class, 'index'])->name('datauser');
     Route::get('/tambahuser', [DataUserController::class, 'tambahuser'])->name('tambahuser');
     Route::post('/insertuser', [DataUserController::class, 'insertuser'])->name('insertuser');
-    Route::get('/tampilkanuser/{idUser}', [DataUserController::class, 'tampilkanuser'])->name('tampilkanuser');
-    Route::post('/updateuser/{idUser}', [DataUserController::class, 'updateuser'])->name('updateuser');
+    Route::put('/tampilkanuser/{idUser}', [DataUserController::class, 'tampilkanuser'])->name('tampilkanuser');
+    Route::put('/updateuser/{idUser}', [DataUserController::class, 'updateuser'])->name('updateuser');
     Route::get('/deleteuser/{idUser}', [DataUserController::class, 'deleteuser'])->name('deleteuser');
 
     Route::get('/datapenyewa', [DataPenyewaController::class, 'index'])->name('datapenyewa');
     Route::get('/tambahpenyewa', [DataPenyewaController::class, 'tambahpenyewa'])->name('tambahpenyewa');
     Route::post('/insertpenyewa', [DataPenyewaController::class, 'insertpenyewa'])->name('insertpenyewa');
-    Route::get('/tampilkanpenyewa/{idPenyewa}', [DataPenyewaController::class, 'tampilkanpenyewa'])->name('tampilkanpenyewa');
-    Route::post('/updatepenyewa/{idPenyewa}', [DataPenyewaController::class, 'updatepenyewa'])->name('updatepenyewa');
+    Route::put('/tampilkanpenyewa/{idPenyewa}', [DataPenyewaController::class, 'tampilkanpenyewa'])->name('tampilkanpenyewa');
+    Route::put('/updatepenyewa/{idPenyewa}', [DataPenyewaController::class, 'updatepenyewa'])->name('updatepenyewa');
     Route::get('/delete/{idPenyewa}', [DataPenyewaController::class, 'delete'])->name('delete');
 
     Route::get('/datamobil', [DataMobilController::class, 'index'])->name('datamobil');
     Route::get('/tambahmobil', [DataMobilController::class, 'tambahmobil'])->name('tambahmobil');
     Route::post('/insertmobil', [DataMobilController::class, 'insertmobil'])->name('insertmobil');
     Route::get('/tampilkanmobil/{noPolisi}', [DataMobilController::class, 'tampilkanmobil'])->name('tampilkanmobil');
-    Route::post('/updatemobil/{noPolisi}', [DataMobilController::class, 'updatemobil'])->name('updatemobil');
+    Route::put('/updatemobil/{noPolisi}', [DataMobilController::class, 'updatemobil'])->name('updatemobil');
     Route::get('/deletemobil/{noPolisi}', [DataMobilController::class, 'deletemobil'])->name('deletemobil');
-
-
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::resource('/dashboard', DashboardController::class); 
 
 
 

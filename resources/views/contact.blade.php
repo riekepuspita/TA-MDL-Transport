@@ -1,7 +1,7 @@
 @extends('landingpage.app')
 
 @section('title')
-    About
+    {{ $title }}
 @endsection
 
 @section('content')
@@ -55,7 +55,8 @@
                         <div class="btn-square mx-auto mb-3">
                             <i class="fa fa-map-marker-alt fa-2x text-white"></i>
                         </div>
-                        <p class="mb-2">JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten Jombang, Jawa Timur 6141</p>
+                        <p class="mb-2">JL.Pattimura, Gg. V Blk. A No.01/08, Sengon, Kabupaten Jombang, Jawa Timur 6141
+                        </p>
                     </div>
                 </div>
                 <div class="row g-5">

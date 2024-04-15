@@ -1,7 +1,7 @@
 @extends('landingpage.app')
 
 @section('title')
-    Mobil
+    {{ $title }}
 @endsection
 
 @section('content')
@@ -56,7 +56,7 @@
                             <div class="store-overlay">
                                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
                                         class="fa fa-arrow-right ms-2"></i></a>
-                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i
+                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi <i
                                         class="fa fa-cart-plus ms-2"></i></a>
                             </div>
                         </div>
@@ -79,15 +79,14 @@
                             <div class="store-overlay">
                                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
                                         class="fa fa-arrow-right ms-2"></i></a>
-                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i
+                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi <i
                                         class="fa fa-cart-plus ms-2"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="store-item position-relative text-center">
-                            <img class="img-fluid" src="{{ asset('landingpage/img/store-product-3.jpg') }}"
-                                alt="">
+                            <img class="img-fluid" src="{{ asset('landingpage/img/store-product-3.jpg') }}" alt="">
                             <div class="p-4">
                                 <div class="text-center mb-3">
                                     <small class="fa fa-star text-secondary"></small>
@@ -103,7 +102,7 @@
                             <div class="store-overlay">
                                 <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
                                         class="fa fa-arrow-right ms-2"></i></a>
-                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Add to Cart <i
+                                <a href="" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi <i
                                         class="fa fa-cart-plus ms-2"></i></a>
                             </div>
                         </div>
