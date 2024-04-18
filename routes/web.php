@@ -28,17 +28,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('auth');
 
-// Route::get('/datapenyewa', function () {
-//     return view('menu.datapenyewa');
-// });
-
-Route::get('/datamobil', function () {
-    return view('menu.datamobil');
-});
-
 Route::get('/laporan', function () {
     return view('menu.laporan');
 });
+
+// Route::get('/detailmobil', function () {
+//     return view('detailmobil');
+// })->name('detailmobil');
 
 // Route::get('/mdltransport', function () {
 //     return view('mdltransport');
@@ -49,17 +45,8 @@ Route::get('/about', [LandingPageController::class, 'aboutIndex'])->name('aboutm
 Route::get('/mobil', [LandingPageController::class, 'mobilIndex'])->name('mobilmdltransport');
 Route::get('/contact', [LandingPageController::class, 'contactIndex'])->name('contactmdltransport');
 
-// Route::get('/about', function () {
-//     return view('about');
-// })->name('about');
-
-// Route::get('/mobil', function () {
-//     return view('mobil');
-// })->name('mobil');
-
-// Route::get('/contact', function () {
-//     return view('contact');
-// })->name('contact');
+Route::get('/detailmobil/{noPolisi}', [LandingPageController::class, 'detailMobil'])->name('detailMobil');
+Route::get('/reservasi/{noPolisi}', [LandingPageController::class, 'reservasi'])->name('reservasi');
 
 Route::middleware('guest')->group(function () {
 

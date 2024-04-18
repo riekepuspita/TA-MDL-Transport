@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataPenyewa;
+use App\Models\DataPemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 // use Illuminate\Support\Facades\Hash;
@@ -19,10 +20,10 @@ class DataPenyewaController extends Controller
         return view('menu.datapenyewa', compact('data'));
     }
 
-    public function tambahpenyewa()
-    {
-        return view('menu.tambahpenyewa');
-    }
+    // public function tambahpenyewa()
+    // {
+    //     return view('menu.tambahpenyewa');
+    // }
 
     public function insertpenyewa(Request $request)
     {
@@ -30,6 +31,7 @@ class DataPenyewaController extends Controller
         // $data = $request->all();
 
         DataPenyewa::create($request->all());
+        
 
         // Menyimpan pesan sukses ke dalam session
         Session::flash('alert', [

@@ -186,18 +186,6 @@
                                     value="{{ $row->namaLengkap }}" required>
                             </div>
 
-                            {{-- <div class="mb-3">
-                                <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
-                                <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
-                                    <option value="" selected disabled hidden>
-                                        {{ ucwords(strtolower($row->jeniskelamin)) }}
-                                    </option>
-                                    <option value="1">Laki-laki</option>
-                                    <option value="2">Perempuan</option>
-                                    </option>
-                                </select>
-                            </div> --}}
-
                             <div class="mb-3">
                                 <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
                                 <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
@@ -224,8 +212,8 @@
                                     value="{{ $row->created_at->format('Y-m-d') }}" required>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             </div>
                         </form>
                     </div>

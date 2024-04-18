@@ -80,7 +80,7 @@
                                                         <td>
                                                             @if ($row->statusMobil == 'tersedia')
                                                                 Tersedia
-                                                            @elseif ($row->statusMobil == 'tidaktersedia')
+                                                            @elseif ($row->statusMobil == 'tidak tersedia')
                                                                 Tidak Tersedia
                                                             @endif
                                                         </td>
@@ -191,7 +191,7 @@
                                                                                             Tersedia
                                                                                         </option>
                                                                                         <option value="2"
-                                                                                            {{ $row->statusMobil == 'tidaktersedia' ? 'selected' : '' }}>
+                                                                                            {{ $row->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
                                                                                             Tidak
                                                                                             Tersedia</option>
                                                                                         </option>
@@ -206,15 +206,15 @@
                                                                                         id="gambarMobil"
                                                                                         name="gambarMobil"
                                                                                         accept=".jpg, .jpeg, .png"
-                                                                                        required>
+                                                                                        >
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
                                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary">Tambah</button>
+                                                                                    <button type="submit"
+                                                                                    class="btn btn-primary">Simpan Perubahan</button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
@@ -284,7 +284,7 @@
                             <label for="hargaSewa" class="col-form-label">Harga Sewa</label>
                             <input type="text" class="form-control" id="hargaSewa" name="hargaSewa" required>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="statusMobil" class="col-form-label">Status Mobil</label>
                             <select class="form-select" id="statusMobil" name="statusMobil" required>
                                 <option value="" selected disabled hidden>
@@ -292,6 +292,15 @@
                                 <option value="1">Tersedia</option>
                                 <option value="2">Tidak Tersedia</option>
                                 </option>
+                            </select>
+                        </div> --}}
+                        <div class="mb-3">
+                            <label for="statusMobil" class="col-form-label">StatusMobil</label>
+                            <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
+                                <option value="1" {{ $row->statusMobil == 'tersedia' ? 'selected' : '' }}>
+                                    Tersedia</option>
+                                <option value="2" {{ $row->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
+                                    Tidak Tersedia</option>
                             </select>
                         </div>
                         <div class="mb-3">

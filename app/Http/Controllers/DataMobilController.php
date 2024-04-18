@@ -17,27 +17,27 @@ class DataMobilController extends Controller
         return view('menu.datamobil', compact('data'));
     }
 
-    public function tambahmobil()
-    {
-        // dd($data);
-        return view('menu.tambahmobil');
-    }
+    // public function tambahmobil()
+    // {
+    //     // dd($data);
+    //     return view('menu.tambahmobil');
+    // }
 
     public function insertmobil(Request $request)
     {
-        $data = DataMobil::create($request->all());
-
-        Session::flash('alert', [
-            'type' => 'success',
-            'title' => 'Data Berhasil Ditambahkan',
-            'message' => "",
-        ]);
+        $data = DataMobil::create($request->all());    
 
         if ($request->hasFile('gambarMobil')) {
             $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
             $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
             $data->save();
         }
+
+        Session::flash('alert', [
+            'type' => 'success',
+            'title' => 'Data Berhasil Ditambahkan',
+            'message' => "",
+        ]);
 
         return redirect()->route('datamobil');
     }
@@ -51,22 +51,26 @@ class DataMobilController extends Controller
         return view('menu.tampilmobil', compact('data'));
     }
 
-
     public function updatemobil(Request $request, $noPolisi)
     {
-        // $data = DataMobil::where('noPolisi', $noPolisi)->first();
-        // // $data = DataMobil::find($noPolisi);
-
-        // Session::flash('alert', [
-        //     'type' => 'success',
-        //     'title' => 'Data Berhasil Diubah',
-        //     'message' => "",
-        // ]);
-
-        // $data->update($request->all());
-        // return redirect()->route('datamobil');
         $data = DataMobil::findOrFail($noPolisi);
 
+        // Hapus gambar lama jika ada
+        if ($request->hasFile('gambarMobil')) {
+            $gambarLama = $data->gambarMobil;
+            if ($gambarLama !== null) {
+                // Hapus gambar lama dari direktori penyimpanan
+                $path = public_path('gambarMobil/' . $gambarLama);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+            // Unggah gambar baru dan simpan nama file ke database
+            $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
+            $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
+        }
+
+        // Update data mobil dengan data baru
         $data->merekMobil = $request->merekMobil;
         $data->modelMobil = $request->modelMobil;
         $data->kapasitasMobil = $request->kapasitasMobil;
@@ -74,27 +78,67 @@ class DataMobilController extends Controller
         $data->deskripsiMobil = $request->deskripsiMobil;
         $data->hargaSewa = $request->hargaSewa;
         $data->statusMobil = $request->statusMobil;
-        if ($request->hasFile('gambarMobil')) {
-            $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
-            $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
-        }
 
+        // Simpan perubahan
         $data->save();
+
         return redirect()->route('datamobil');
     }
 
+    // public function updatemobil(Request $request, $noPolisi)
+    // {
+    //     // $data = DataMobil::where('noPolisi', $noPolisi)->first();
+    //     // // $data = DataMobil::find($noPolisi);
+
+    //     // Session::flash('alert', [
+    //     //     'type' => 'success',
+    //     //     'title' => 'Data Berhasil Diubah',
+    //     //     'message' => "",
+    //     // ]);
+
+    //     // $data->update($request->all());
+    //     // return redirect()->route('datamobil');
+
+    //     $data = DataMobil::findOrFail($noPolisi);
+
+    //     $data->merekMobil = $request->merekMobil;
+    //     $data->modelMobil = $request->modelMobil;
+    //     $data->kapasitasMobil = $request->kapasitasMobil;
+    //     $data->tahunMobil = $request->tahunMobil;
+    //     $data->deskripsiMobil = $request->deskripsiMobil;
+    //     $data->hargaSewa = $request->hargaSewa;
+    //     $data->statusMobil = $request->statusMobil;
+    //     if ($request->hasFile('gambarMobil')) {
+    //         $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
+    //         $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
+    //     }
+
+    //     $data->save();
+    //     return redirect()->route('datamobil');
+    // }
     public function deletemobil($noPolisi)
     {
-        // $data = DataMobil::where('noPolisi', $noPolisi)->first();
         $data = DataMobil::find($noPolisi);
-
+    
         if ($data) {
+            // Hapus gambar mobil jika ada
+            $gambarLama = $data->gambarMobil;
+            if ($gambarLama !== null) {
+                // Hapus gambar dari direktori penyimpanan
+                $path = public_path('gambarMobil/' . $gambarLama);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+    
+            // Hapus entri mobil dari database
+            $data->delete();
+    
             Session::flash('alert', [
                 'type' => 'success',
                 'title' => 'Data ' . $data->modelMobil . ' Berhasil Dihapus',
                 'message' => "",
             ]);
-            $data->delete();
         } else {
             Session::flash('alert', [
                 'type' => 'error',
@@ -103,10 +147,28 @@ class DataMobilController extends Controller
             ]);
         }
         return back();
-
-        // if ($data) {
-        //     $data->delete();
-        //     return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        // } 
     }
+    
+
+    // public function deletemobil($noPolisi)
+    // {
+    //     // $data = DataMobil::where('noPolisi', $noPolisi)->first();
+    //     $data = DataMobil::find($noPolisi);
+
+    //     if ($data) {
+    //         Session::flash('alert', [
+    //             'type' => 'success',
+    //             'title' => 'Data ' . $data->modelMobil . ' Berhasil Dihapus',
+    //             'message' => "",
+    //         ]);
+    //         $data->delete();
+    //     } else {
+    //         Session::flash('alert', [
+    //             'type' => 'error',
+    //             'title' => 'Hapus Data Gagal',
+    //             'message' => 'ID Mobil Tidak Valid!',
+    //         ]);
+    //     }
+    //     return back();
+    // }
 }
