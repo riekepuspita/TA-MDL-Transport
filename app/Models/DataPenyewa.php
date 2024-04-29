@@ -23,9 +23,6 @@ class DataPenyewa extends Model
         'alamat',
         'noHP',
         'created_at'
-        // 'email',
-        // 'password',
-        // 'role',
 
     ];
     /**
@@ -47,4 +44,9 @@ class DataPenyewa extends Model
         'email_verified_at' => 'datetime',
         'password' => 'bycrypt',
     ];
+
+    public function pemesanan()
+    {
+        return $this->hasMany(DataPemesanan::class, 'penyewa_idPenyewa');
+    }
 }

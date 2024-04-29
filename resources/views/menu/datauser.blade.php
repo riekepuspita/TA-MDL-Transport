@@ -126,11 +126,11 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="namaUser" class="col-form-label">Nama User</label>
-                            <input type="text" class="form-control" id="namaUser" name="namaUser" required>
+                            <input type="text" class="form-control" id="namaUser" name="namaUser" placeholder="Masukkan Nama User" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email User" required>
                         </div>
                         <div class="mb-3">
                             <label for="level" class="col-form-label">Level</label>

@@ -64,35 +64,35 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($data as $row)
+                                                @foreach ($data as $mobil)
                                                     <tr>
                                                         {{-- <th scope="row">{{ $row->noPolisi }}</th> --}}
-                                                        <th>{{ $row->noPolisi }}</th>
+                                                        <th>{{ $mobil->noPolisi }}</th>
                                                         <td>
-                                                            <img src="{{ asset('gambarMobil/' . $row->gambarMobil) }}"
+                                                            <img src="{{ asset('gambarMobil/' . $mobil->gambarMobil) }}"
                                                                 alt="" style="width: 70px;">
                                                         </td>
-                                                        <td>{{ $row->merekMobil }}</td>
-                                                        <td>{{ $row->modelMobil }}</td>
+                                                        <td>{{ $mobil->merekMobil }}</td>
+                                                        <td>{{ $mobil->modelMobil }}</td>
                                                         {{-- <td>{{ $row->deskripsiMobil }}</td> --}}
-                                                        <td>{{ $row->hargaSewa }}</td>
+                                                        <td>{{ $mobil->hargaSewa }}</td>
                                                         {{-- <td>{{ $row->statusMobil }}</td> --}}
                                                         <td>
-                                                            @if ($row->statusMobil == 'tersedia')
+                                                            @if ($mobil->statusMobil == 'tersedia')
                                                                 Tersedia
-                                                            @elseif ($row->statusMobil == 'tidak tersedia')
+                                                            @elseif ($mobil->statusMobil == 'tidak tersedia')
                                                                 Tidak Tersedia
                                                             @endif
                                                         </td>
                                                         <td>
 
-                                                            <a href="/tampilkanmobil/{{ $row->noPolisi }}" title="Edit Data"
+                                                            <a href="/tampilkanmobil/{{ $mobil->noPolisi }}" title="Edit Data"
                                                                 class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                                                data-bs-target="#editmobil{{ $row->noPolisi }}">
+                                                                data-bs-target="#editmobil{{ $mobil->noPolisi }}">
                                                                 <i class="bx bx-pencil"></i>
                                                             </a>
 
-                                                            <div class="modal fade" id="editmobil{{ $row->noPolisi }}"
+                                                            <div class="modal fade" id="editmobil{{ $mobil->noPolisi }}"
                                                                 tabindex="-1" aria-labelledby="exampleModalLabel"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
@@ -105,7 +105,7 @@
                                                                                 aria-label="Close"></button>
                                                                         </div>
                                                                         <form
-                                                                            action="{{ route('updatemobil', $row->noPolisi) }}"
+                                                                            action="{{ route('updatemobil', $mobil->noPolisi) }}"
                                                                             method="POST" enctype="multipart/form-data">
                                                                             @csrf
                                                                             @method('PUT')
@@ -117,7 +117,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control" id="noPolisi"
                                                                                         name="noPolisi" required
-                                                                                        value="{{ $row->noPolisi }}">
+                                                                                        value="{{ $mobil->noPolisi }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="merekMobil"
@@ -126,7 +126,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control" id="merekMobil"
                                                                                         name="merekMobil" required
-                                                                                        value="{{ $row->merekMobil }}">
+                                                                                        value="{{ $mobil->merekMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="modelMobil"
@@ -135,7 +135,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control" id="modelMobil"
                                                                                         name="modelMobil" required
-                                                                                        value="{{ $row->modelMobil }}">
+                                                                                        value="{{ $mobil->modelMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="kapasitasMobil"
@@ -145,7 +145,7 @@
                                                                                         class="form-control"
                                                                                         id="kapasitasMobil"
                                                                                         name="kapasitasMobil" required
-                                                                                        value="{{ $row->kapasitasMobil }}">
+                                                                                        value="{{ $mobil->kapasitasMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="tahunMobil"
@@ -154,7 +154,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control" id="tahunMobil"
                                                                                         name="tahunMobil" required
-                                                                                        value="{{ $row->tahunMobil }}">
+                                                                                        value="{{ $mobil->tahunMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="deskripsiMobil"
@@ -164,7 +164,7 @@
                                                                                         class="form-control"
                                                                                         id="deskripsiMobil"
                                                                                         name="deskripsiMobil" required
-                                                                                        value="{{ $row->deskripsiMobil }}">
+                                                                                        value="{{ $mobil->deskripsiMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="hargaSewa"
@@ -174,7 +174,7 @@
                                                                                         class="form-control"
                                                                                         id="hargaSewa" name="hargaSewa"
                                                                                         required
-                                                                                        value="{{ $row->hargaSewa }}">
+                                                                                        value="{{ $mobil->hargaSewa }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="statusMobil"
@@ -187,11 +187,11 @@
                                                                                             disabled hidden>
                                                                                             -- Pilih Status Mobil--</option>
                                                                                         <option value="1"
-                                                                                            {{ $row->statusMobil == 'tersedia' ? 'selected' : '' }}>
+                                                                                            {{ $mobil->statusMobil == 'tersedia' ? 'selected' : '' }}>
                                                                                             Tersedia
                                                                                         </option>
                                                                                         <option value="2"
-                                                                                            {{ $row->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
+                                                                                            {{ $mobil->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
                                                                                             Tidak
                                                                                             Tersedia</option>
                                                                                         </option>
@@ -221,9 +221,9 @@
                                                                 </div>
                                                             </div>
 
-                                                            <a href="/deletemobil/{{ $row->noPolisi }}"
+                                                            <a href="/deletemobil/{{ $mobil->noPolisi }}"
                                                                 title="Hapus Data" class="btn btn-danger btn-sm"
-                                                                onclick="confirmDelete('{{ $row->noPolisi }}')">
+                                                                onclick="confirmDelete('{{ $mobil->noPolisi }}')">
                                                                 <i class="bx bx-trash"></i>
                                                             </a>
                                                         </td>
@@ -256,35 +256,35 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="noPolisi" class="col-form-label">No Polisi</label>
-                            <input type="text" class="form-control" id="noPolisi" name="noPolisi" required>
+                            <input type="text" class="form-control" id="noPolisi" name="noPolisi" placeholder="Masukkan No Polisi" required>
                         </div>
                         <div class="mb-3">
                             <label for="merekMobil" class="col-form-label">Merek Mobil</label>
-                            <input type="text" class="form-control" id="merekMobil" name="merekMobil" required>
+                            <input type="text" class="form-control" id="merekMobil" name="merekMobil" placeholder="Masukkan Merek Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="modelMobil" class="col-form-label">Model Mobil </label>
-                            <input type="text" class="form-control" id="modelMobil" name="modelMobil" required>
+                            <input type="text" class="form-control" id="modelMobil" name="modelMobil" placeholder="Masukkan Model Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="kapasitasMobil" class="col-form-label">Kapasitas Mobil</label>
-                            <input type="text" class="form-control" id="kapasitasMobil" name="kapasitasMobil"
+                            <input type="text" class="form-control" id="kapasitasMobil" name="kapasitasMobil" placeholder="Masukkan Kapasitas Mobil"
                                 required>
                         </div>
                         <div class="mb-3">
                             <label for="tahunMobil" class="col-form-label">Tahun Mobil</label>
-                            <input type="text" class="form-control" id="tahunMobil" name="tahunMobil" required>
+                            <input type="text" class="form-control" id="tahunMobil" name="tahunMobil" placeholder="Masukkan Tahun Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="deskripsiMobil" class="col-form-label">Deskripsi Mobil</label>
-                            <input type="text" class="form-control" id="deskripsiMobil" name="deskripsiMobil"
+                            <input type="text" class="form-control" id="deskripsiMobil" name="deskripsiMobil" placeholder="Masukkan Deskripsi Mobil"
                                 required>
                         </div>
                         <div class="mb-3">
                             <label for="hargaSewa" class="col-form-label">Harga Sewa</label>
-                            <input type="text" class="form-control" id="hargaSewa" name="hargaSewa" required>
+                            <input type="text" class="form-control" id="hargaSewa" name="hargaSewa" placeholder="Masukkan Harga Sewa Mobil" required>
                         </div>
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="statusMobil" class="col-form-label">Status Mobil</label>
                             <select class="form-select" id="statusMobil" name="statusMobil" required>
                                 <option value="" selected disabled hidden>
@@ -293,16 +293,16 @@
                                 <option value="2">Tidak Tersedia</option>
                                 </option>
                             </select>
-                        </div> --}}
-                        <div class="mb-3">
+                        </div>
+                        {{-- <div class="mb-3">
                             <label for="statusMobil" class="col-form-label">StatusMobil</label>
                             <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
-                                <option value="1" {{ $row->statusMobil == 'tersedia' ? 'selected' : '' }}>
+                                <option value="1" {{ $mobil->statusMobil == 'tersedia' ? 'selected' : '' }}>
                                     Tersedia</option>
-                                <option value="2" {{ $row->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
+                                <option value="2" {{ $mobil->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
                                     Tidak Tersedia</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="gambarMobil" class="col-form-label">Gambar Mobil</label>
                             <input type="file" class="form-control" id="gambarMobil" name="gambarMobil"

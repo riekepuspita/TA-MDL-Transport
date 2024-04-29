@@ -28,4 +28,9 @@ class DataMobil extends Model
         // 'gambarMobil',
 
     ];
+
+    public function pemesanan()
+    {
+        return $this->hasMany(DataPemesanan::class, 'mobil_noPolisi');
+    }
 }

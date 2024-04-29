@@ -17,7 +17,8 @@
                     <ol class="breadcrumb justify-content-center mb-0">
                         <li class="breadcrumb-item"><a href="{{ route('mdltransport') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('mobilmdltransport') }}">Mobil</a></li>
-                        <li class="breadcrumb-item"><a href="/detailmobil/{{ $mobil->noPolisi }}">{{ $mobil->merekMobil }}</a></li>
+                        <li class="breadcrumb-item"><a
+                                href="/detailmobil/{{ $mobil->noPolisi }}">{{ $mobil->merekMobil }}</a></li>
                         <li class="breadcrumb-item text-dark" aria-current="page">Reservasi</li>
                     </ol>
                 </nav>
@@ -40,10 +41,10 @@
                     <h5 class="text-secondary">Harga: Rp. {{ $mobil->hargaSewa }}</h5>
                     <a href="#" class="btn btn-dark rounded-pill py-2 px-4 m-2 " style="float:right;">Reservasi <i
                         class="fa fa-cart-plus ms-2"></i></a> --}}
-                    <!-- Tambahkan informasi lainnya sesuai kebutuhan -->
-                {{-- </div>
+        <!-- Tambahkan informasi lainnya sesuai kebutuhan -->
+        {{-- </div>
             </div>
-        </div> --}} 
+        </div> --}}
 
         <div class="container py-5">
             <div class="row">
@@ -69,7 +70,7 @@
                                         Lengkap</label>
                                     <div class="col-md-12">
                                         <input class="form-control" name="namaLengkap" type="text" value=""
-                                            id="namaLengkap" placeholder="Masukkan Nama Lengkap Penyewa" required>
+                                            id="namaLengkap" placeholder="Masukkan Nama Lengkap" required>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -78,9 +79,9 @@
                                         <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
                                             <option value="" selected disabled hidden>
                                                 -- Pilih Jenis Kelamin --</option>
-                                                <option value="1">Laki-laki</option>
-                                                <option value="2">Perempuan</option>
-                                                </option>
+                                            <option value="1">Laki-laki</option>
+                                            <option value="2">Perempuan</option>
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -88,14 +89,15 @@
                                     <label for="example-alamat-input" class="col-md-3 col-form-label">Alamat</label>
                                     <div class="col-md-12">
                                         <input class="form-control" name="alamat" type="text" value=""
-                                            id="alamat" placeholder="Masukkan Alamat Lengkap Penyewa" required>
+                                            id="alamat" placeholder="Masukkan Alamat Lengkap" required>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="example-tel-input" class="col-md-3 col-form-label">No HP</label>
                                     <div class="col-md-12">
                                         <input class="form-control" name="noHP" type="tel" value=""
-                                            id="noHP" placeholder="Masukkan No HP Penyewa" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                            id="noHP" placeholder="Masukkan No HP" pattern="[0-9]+"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -105,6 +107,27 @@
                                             id="created_at" placeholder="" required>
                                     </div>
                                 </div>
+                                <div class="mb-3 row">
+                                    <label for="example-tel-input" class="col-md-3 col-form-label">Tanggal Mulai</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control" name="tanggalMulai" type="date" value=""
+                                            id="tanggalMulai" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="example-tel-input" class="col-md-3 col-form-label">Tanggal Selesai</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control" name="tanggalSelesai" type="date" value=""
+                                            id="tanggalSelesai" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="example-alamat-input" class="col-md-3 col-form-label">Tujuan</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control" name="tujuan" type="text" value=""
+                                            id="tujuan" placeholder="Masukkan Tujuan" required>
+                                    </div>
+                                </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-success me-3">Kirim</button>
                                     <a href="/mobil" class="btn btn-danger me-3">Batal</a>
@@ -112,13 +135,13 @@
                             </form>
                         </div>
                     </div>
-        
+
                 </div>
             </div>
         </div>
-        
 
-        
+
+
         <!-- Detail Mobil End -->
 
 
