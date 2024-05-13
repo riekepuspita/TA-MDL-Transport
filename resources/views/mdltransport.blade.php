@@ -140,7 +140,7 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="store-item position-relative text-center">
-                            <img class="img-fluid" src="{{ asset('landingpage/img/store-product-1.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('gambarMobil/Toyota Avanza 2022 Silver.jpg') }}" alt="">
                             <div class="p-4">
                                 <div class="text-center mb-3">
                                     <small class="fa fa-star text-secondary"></small>
@@ -149,9 +149,9 @@
                                     <small class="fa fa-star text-secondary"></small>
                                     <small class="fa fa-star text-secondary"></small>
                                 </div>
-                                <h4 class="mb-3">Nature close tea</h4>
-                                <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>
-                                <h4 class="text-secondary">$19.00</h4>
+                                <h4 class="mb-3">Toyota - Avanza</h4>
+                                <p>2022</p>
+                                {{-- <h4 class="text-secondary">$19.00</h4> --}}
                             </div>
                             <div class="store-overlay">
                                 {{-- <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
@@ -172,9 +172,9 @@
                                     <small class="fa fa-star text-secondary"></small>
                                     <small class="fa fa-star text-secondary"></small>
                                 </div>
-                                <h4 class="mb-3">Green tea tulsi</h4>
-                                <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>
-                                <h4 class="text-secondary">$19.00</h4>
+                                <h4 class="mb-3">Toyota - Calya</h4>
+                                <p>2022</p>
+                                {{-- <h4 class="text-secondary">$19.00</h4> --}}
                             </div>
                             <div class="store-overlay">
                                 {{-- <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i
@@ -186,7 +186,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="store-item position-relative text-center">
-                            <img class="img-fluid" src="{{ asset('landingpage/img/store-product-3.jpg') }}"
+                            <img class="img-fluid" src="{{ asset('gambarMobil/Inova.png') }}"
                                 alt="">
                             <div class="p-4">
                                 <div class="text-center mb-3">
@@ -196,9 +196,9 @@
                                     <small class="fa fa-star text-secondary"></small>
                                     <small class="fa fa-star text-secondary"></small>
                                 </div>
-                                <h4 class="mb-3">Instant tea premix</h4>
-                                <p>Aliqu diam amet diam et eos. Clita erat ipsum lorem erat ipsum lorem sit sed</p>
-                                <h4 class="text-secondary">$19.00</h4>
+                                <h4 class="mb-3">Toyota - Innova</h4>
+                                <p>2020</p>
+                                {{-- <h4 class="text-secondary">$19.00</h4> --}}
                             </div>
                             <div class="store-overlay">
                                 {{-- <a href="" class="btn btn-secondary rounded-pill py-2 px-4 m-2">More Detail <i

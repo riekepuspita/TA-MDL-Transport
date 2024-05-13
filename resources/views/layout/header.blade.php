@@ -178,8 +178,12 @@
                     <button type="button" class="btn header-item user text-start d-flex align-items-center"
                         id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-1.jpg') }}"
+                        <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/profil.png') }}"
                             alt="Header Avatar">
+                        <div class="user-info ms-2 d-none d-xl-inline-block">
+                            <span class="user-name">{{ Auth::user()->namaUser }}</span>
+                            <span class="user-email">{{ Auth::user()->email }}</span>
+                        </div>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end pt-0">
                         <a class="dropdown-item" href="contacts-profile.html"><i
@@ -190,6 +194,7 @@
                                 class="align-middle">Logout</span></a>
                     </div>
                 </div>
+                
             </div>
         </div>
     </header>

@@ -37,8 +37,10 @@
                     <p> Tahun Mobil : {{ $mobil->tahunMobil }}</p>
                     <p> Deskripsi Mobil : {{ $mobil->deskripsiMobil }}</p>
                     <h5 class="text-secondary">Harga Sewa : Rp. {{ $mobil->hargaSewa }}</h5>
+                    <a href="/mobil" class="btn btn-secondary rounded-pill py-2 px-4 m-2" style="float:right;">Kembali</a>
                     <a href="/reservasi/{{ $mobil->noPolisi }}" class="btn btn-dark rounded-pill py-2 px-4 m-2 " style="float:right;">Reservasi <i
                         class="fa fa-cart-plus ms-2"></i></a>
+                    
                     <!-- Tambahkan informasi lainnya sesuai kebutuhan -->
                 </div>
             </div>

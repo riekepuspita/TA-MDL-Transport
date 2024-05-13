@@ -17,22 +17,35 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
-
-        // dd($request);
-
+    
         $credentials = $request->only('email', 'password');
-
-        if (auth()->attempt($credentials)) {
+    
+        if (Auth::attempt($credentials)) {
             // Login berhasil
-            return redirect()->intended('/dashboard')->with('success', 'Login berhasil !');
-        } 
-
+            $user = Auth::user();
+            if ($user->level === 'superadmin' || $user->level === 'admin') {
+                // Jika pengguna adalah superadmin atau admin, arahkan ke dashboard sesuai peran
+                if ($user->level === 'superadmin') {
+                    return redirect()->route('dashboard')->with('success', 'Login berhasil !');
+                } elseif ($user->level === 'admin') {
+                    return redirect()->route('dashboard')->with('success', 'Login berhasil !');
+                }
+            } else {
+                // Jika pengguna adalah pengguna biasa, arahkan ke halaman landing page
+                return redirect()->route('mdltransport')->with('success', 'Login berhasil !');
+            }
+        }
+    
         // Login gagal
         return redirect()->route('login')->with('error', 'Login gagal. Periksa email dan password Anda.');
     }
+    
+    
+
+
 
     public function logout(Request $request): RedirectResponse
     {

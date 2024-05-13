@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Data Penyewa
+    Data User
 @endsection
 
 @section('head')
@@ -73,7 +73,7 @@
                                                         <td>
                                                             @if ($row->level == 'superadmin')
                                                             Super Admin
-                                                        @elseif ($row->statusUser == 'admin')
+                                                        @elseif ($row->level == 'admin')
                                                             Admin
                                                             @else 
                                                             User

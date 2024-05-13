@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataMobil;
+use App\Models\DataPenyewa;
 use Illuminate\Http\Request;
+use App\Models\DataPemesanan;
 
 class LandingPageController extends Controller
 {
@@ -67,6 +69,64 @@ class LandingPageController extends Controller
         return view('reservasi', [
             "title" => "Mobil",
             'mobil' => $data
+        ]);
+    }
+
+        public function insertreservasi(Request $request)
+    {
+        // Validasi request
+        $validatedData = $request->validate([
+            'noNIK' => 'required',
+            'namaLengkap' => 'required',
+            'jeniskelamin' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
+            'created_at' => 'required',
+            'tanggalMulai' => 'required',
+            'tanggalSelesai' => 'required',
+            'tujuan' => 'required',
+            'mobil_noPolisi' => 'required', // Tambahkan validasi untuk mobil_noPolisi
+        ]);
+
+        // Simpan data penyewa
+        $penyewa = new DataPenyewa();
+        $penyewa->noNIK = $validatedData['noNIK'];
+        $penyewa->namaLengkap = $validatedData['namaLengkap'];
+        $penyewa->jeniskelamin = $validatedData['jeniskelamin'];
+        $penyewa->alamat = $validatedData['alamat'];
+        $penyewa->noHP = $validatedData['noHP'];
+        $penyewa->created_at = $validatedData['created_at'];
+        $penyewa->save();
+
+        // Simpan data pemesanan
+        $pemesanan = new DataPemesanan();
+        $pemesanan->penyewa_idPenyewa = $penyewa->idPenyewa;
+        $pemesanan->mobil_noPolisi = $validatedData['mobil_noPolisi']; // Gunakan nilai mobil_noPolisi yang diterima
+        $pemesanan->tanggalMulai = $validatedData['tanggalMulai'];
+        $pemesanan->tanggalSelesai = $validatedData['tanggalSelesai'];
+        $pemesanan->tujuan = $validatedData['tujuan'];
+        $pemesanan->save();
+
+        // Redirect kembali dengan pesan sukses atau apapun yang diperlukan
+        return redirect()->route('detailreservasi', ['idPemesanan' => $pemesanan->idPemesanan])->with('success', 'Data berhasil disimpan');
+    }
+
+        public function detailreservasi($idPemesanan)
+    {
+        $pemesanan = DataPemesanan::findOrFail($idPemesanan);
+        
+        $penyewa = $pemesanan->penyewa;
+
+        // Dapatkan data mobil berdasarkan nomor polisi dari DataMobil
+        $mobil = DataMobil::where('noPolisi', $pemesanan->noPolisi)->first();
+
+        // dd($pemesanan);
+
+        return view('detailreservasi', [
+            "title" => "Mobil",
+            "pemesanan" => $pemesanan,
+            "penyewa" => $penyewa,
+            "mobil" => $mobil // Tambahkan data mobil ke array
         ]);
     }
 }

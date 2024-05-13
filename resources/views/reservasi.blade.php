@@ -56,8 +56,9 @@
                     <h2>{{ $mobil->merekMobil }} - {{ $mobil->modelMobil }}</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form action="/insertpenyewa" method="POST" enctype="multipart/form-data">
+                            <form action="/insertreservasi" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="mobil_noPolisi" value="{{ $mobil->noPolisi }}">
                                 <div class="mb-3 row">
                                     <label for="example-nik-input" class="col-md-3 col-form-label">NIK</label>
                                     <div class="col-md-12">
@@ -128,9 +129,10 @@
                                             id="tujuan" placeholder="Masukkan Tujuan" required>
                                     </div>
                                 </div>
+                                
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-success me-3">Kirim</button>
-                                    <a href="/mobil" class="btn btn-danger me-3">Batal</a>
+                                    <a href="/mobil" class="btn btn-danger me-3" type="button">Batal</a>
                                 </div>
                             </form>
                         </div>
