@@ -8,7 +8,6 @@
     @include('landingpage.header')
 
     <body>
-
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
@@ -56,10 +55,11 @@
                     <h2>{{ $mobil->merekMobil }} - {{ $mobil->modelMobil }}</h2>
                     <div class="card">
                         <div class="card-body">
+
                             <form action="/insertreservasi" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="mobil_noPolisi" value="{{ $mobil->noPolisi }}">
-                                <div class="mb-3 row">
+                                {{-- <div class="mb-3 row">
                                     <label for="example-nik-input" class="col-md-3 col-form-label">NIK</label>
                                     <div class="col-md-12">
                                         <input class="form-control" name="noNIK" type="text" value=""
@@ -100,7 +100,7 @@
                                             id="noHP" placeholder="Masukkan No HP" pattern="[0-9]+"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="mb-3 row">
                                     <label for="example-tel-input" class="col-md-3 col-form-label">Hari/ tanggal</label>
                                     <div class="col-md-12">
@@ -129,12 +129,13 @@
                                             id="tujuan" placeholder="Masukkan Tujuan" required>
                                     </div>
                                 </div>
-                                
+
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-success me-3">Kirim</button>
                                     <a href="/mobil" class="btn btn-danger me-3" type="button">Batal</a>
                                 </div>
                             </form>
+
                         </div>
                     </div>
 

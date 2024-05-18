@@ -38,45 +38,54 @@
                     @if ($pemesanan->mobil)
                         <h2> Reservasi {{ $pemesanan->mobil->merekMobil }} - {{ $pemesanan->mobil->modelMobil }}</h2>
                         <div class="mb-4"></div>
-                        @endif
+                    @endif
                     <div class="card">
                         <div class="container">
                             <h4>Detail Reservasi</h4>
                             <table>
                                 <tr>
-                                    <td>No NIK :</td>
+                                    <td>No NIK</td>
+                                    <td>:</td>
                                     <td>{{ $penyewa->noNIK }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Lengkap :</td>
-                                    <td>{{ $penyewa->namaLengkap }}</td>
+                                    <td>Nama Lengkap</td>
+                                    <td>:</td>
+                                    <td>{{ $pemesanan->penyewa->user->namaUser }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis Kelamin :</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>:</td>
                                     <td>{{ $penyewa->jeniskelamin }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Alamat :</td>
+                                    <td>Alamat</td>
+                                    <td>:</td>
                                     <td>{{ $penyewa->alamat }}</td>
                                 </tr>
                                 <tr>
-                                    <td>No HP :</td>
+                                    <td>No HP</td>
+                                    <td>:</td>
                                     <td>{{ $penyewa->noHP }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Mulai :</td>
+                                    <td>Tanggal Mulai</td>
+                                    <td>:</td>
                                     <td>{{ $pemesanan->tanggalMulai }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Selesai :</td>
+                                    <td>Tanggal Selesai</td>
+                                    <td>:</td>
                                     <td>{{ $pemesanan->tanggalSelesai }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Tujuan :</td>
+                                    <td>Tujuan</td>
+                                    <td>:</td>
                                     <td>{{ $pemesanan->tujuan }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Pembayaran :</td>
+                                    <td>Pembayaran</td>
+                                    <td>:</td>
                                     <td>{{ $pemesanan->mobil->hargaSewa }}</td>
                                 </tr>
                             </table>
@@ -84,20 +93,14 @@
                                 <button class="btn btn-secondary" style="margin-bottom: 20px;">Bayar Sekarang</button>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
-        
+
 
     </body>
     <!-- Store End -->
     @include('landingpage.footer')
 @endsection
-
-
-
-
-
-

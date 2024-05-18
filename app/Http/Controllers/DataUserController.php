@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\DataPenyewa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -11,16 +12,13 @@ class DataUserController extends Controller
 {
     public function index()
     {
-        $data = User::all();
+        //$user = User::all();
+        $user = User::with('datapenyewa')->get();
+        $penyewa = DataPenyewa::all();
 
         // dd($data);
-        return view('menu.datauser', compact('data'));
+        return view('menu.datauser', compact('user', 'penyewa'));
     }
-
-    // public function tambahuser()
-    // {
-    //     return view('menu.tambahuser');
-    // }
 
     public function insertuser(Request $request)
     {
@@ -32,8 +30,12 @@ class DataUserController extends Controller
             'email' => 'required',
             'level' => 'required',
             'statusUser' => 'required',
+            'noNIK' => 'required',
+            'jeniskelamin' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
             // dd($request);
             Session::flash('alert', [
@@ -43,48 +45,91 @@ class DataUserController extends Controller
             ]);
         } else {
             // dd($validator);
-            User::create([
+            $user = User::create([
                 'namaUser' => $request->namaUser,
                 'email' => $request->email,
                 'password' => bcrypt('12345678'),
                 'level' => $request->level,
                 'statusUser' => $request->statusUser,
             ]);
-    
 
-        Session::flash('alert', [
-            'type' => 'success',
-            'title' => 'Data Berhasil Ditambahkan',
-            'message' => "",
-        ]);
+            // Menyimpan data penyewa ke database
+            $penyewa = DataPenyewa::create([
+                'user_idUser' => $user->idUser, // foreign key untuk menghubungkan dengan tabel users
+                'namaLengkap' => $user->namaUser,
+                'noNIK' => $request->noNIK,
+                'jeniskelamin' => $request->jeniskelamin,
+                'alamat' => $request->alamat,
+                'noHP' => $request->noHP,
+            ]);
+
+            // dd($penyewa);
+
+
+            Session::flash('alert', [
+                'type' => 'success',
+                'title' => 'Data Berhasil Ditambahkan',
+                'message' => "",
+            ]);
         }
 
         return redirect()->route('datauser');
     }
 
-    public function tampilkanuser($idUser){
+    public function tampilkanuser($idUser)
+    {
 
-        $data = User::find($idUser);
-        // dd($data);   
+        $user = User::find($idUser);
+        $penyewa = DataPenyewa::where('user_idUser', $user->idUser)->first(); // Asumsi 'user_id' adalah foreign key di tabel DataPenyewa 
 
-        return view('menu.tampiluser', compact('data'));
+        return view('menu.tampiluser', compact('user', 'penyewa'));
     }
 
-    public function updateuser(Request $request){
+    public function updateuser(Request $request, $idUser)
+    {
 
-        $data = User::findOrFail($request->idUser);
+        $validatedData = $request->validate([
+            'namaUser' => 'required',
+            'email' => 'required',
+            'level' => 'required',
+            'statusUser' => 'required',
+            'noNIK' => 'required',
+            'jeniskelamin' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
+        ]);
 
-        $data->namaUser = $request->namaUser;
-        $data->email = $request->email;
-        $data->level = $request->level;
-        $data->statusUser = $request->statusUser;
+        $user = User::findOrFail($request->idUser);
 
-        $data->save();
+        $user->update([
+            'namaUser' => $validatedData['namaUser'],
+            'email' => $validatedData['email'],
+            'level' => $validatedData['level'],
+            'statusUser' => $validatedData['statusUser'],
+
+        ]);
+
+        $penyewa = DataPenyewa::where('user_idUser', $idUser)->first();
+        if ($penyewa) {
+            $penyewa->update([
+                'user_iduser' => $request->user_idUser,
+                'noNIK' => $request->noNIK,
+                'jeniskelamin' => $request->jeniskelamin,
+                'alamat' => $request->alamat,
+                'noHP' => $request->noHP,
+            ]);
+        }
+        // $user->namaUser = $request->namaUser;
+        // $user->email = $request->email;
+        // $user->level = $request->level;
+        // $user->statusUser = $request->statusUser;
+
+        $user->save();
 
 
         // $data = User::find($idUser);
         // $data -> update($request->all());
-        
+
         Session::flash('alert', [
             'type' => 'success',
             'title' => 'Data Berhasil Diubah',
@@ -105,24 +150,51 @@ class DataUserController extends Controller
     //     }
     // }
 
-    public function deleteuser($idUser){
-    $data = User::find($idUser);
+    // public function deleteuser($idUser){
+    // $data = User::find($idUser);
 
-    if($data) {
-        Session::flash('alert', [
-            'type' => 'success',
-            'title' => 'Data '.$data->namaUser.' Berhasil Dihapus',
-            'message' => "",
-        ]); 
-        $data->delete();
-    } else {
-        Session::flash('alert', [
-            'type' => 'error',
-            'title' => 'Hapus Data Gagal',
-            'message' => 'ID Admin Tidak Valid!',
-        ]); 
-    }
-    return back();
-    }
+    // if($data) {
+    //     Session::flash('alert', [
+    //         'type' => 'success',
+    //         'title' => 'Data '.$data->namaUser.' Berhasil Dihapus',
+    //         'message' => "",
+    //     ]); 
+    //     $data->delete();
+    // } else {
+    //     Session::flash('alert', [
+    //         'type' => 'error',
+    //         'title' => 'Hapus Data Gagal',
+    //         'message' => 'ID Admin Tidak Valid!',
+    //     ]); 
+    // }
+    // return back();
+    // }
 
+    public function deleteuser($idUser)
+    {
+        $user = User::find($idUser);
+
+        if ($user) {
+            // Hapus data penyewa terkait jika ada
+            $penyewa = $user->datapenyewa;
+            if ($penyewa) {
+                $penyewa->delete();
+            }
+
+            // Hapus user
+            Session::flash('alert', [
+                'type' => 'success',
+                'title' => 'Data ' . $user->namaUser . ' Berhasil Dihapus',
+                'message' => "",
+            ]);
+            $user->delete();
+        } else {
+            Session::flash('alert', [
+                'type' => 'error',
+                'title' => 'Hapus Data Gagal',
+                'message' => 'ID Admin Tidak Valid!',
+            ]);
+        }
+        return back();
+    }
 }

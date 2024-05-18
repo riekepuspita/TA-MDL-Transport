@@ -28,7 +28,17 @@
                             class="nav-item nav-link {{ $title === 'Contact' ? 'active' : '' }}">Contact</a>
                     </div>
                     <div class="border-start ps-4 d-none d-lg-block">
-                        <a href="/login" class="btn btn-secondary">LOGIN</a>
+                        @auth
+                            <a href="{{ route('logout') }}" class="btn btn-secondary"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                LOGOUT
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @else
+                            <a href="/login" class="btn btn-secondary">LOGIN</a>
+                        @endauth
                     </div>
                 </div>
             </nav>

@@ -12,34 +12,24 @@ class DataPenyewa extends Model
     protected $table = 'penyewa';
     protected $guarded = ['idPenyewa'];
     protected $primaryKey = 'idPenyewa';
-    // protected $fillable = ['username', 'password', 'hakAkses', 'idPegawai'];
-    // protected $hidden = ['password', 'remember_token'];
-    // public $timestamps = false;
 
     protected $fillable = [
         'noNIK',
+        'user_idUser',
         'namaLengkap',
         'jeniskelamin',
         'alamat',
         'noHP',
-        'created_at'
+        'created_at',
+        'user_idUser',
 
     ];
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+  
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'bycrypt',
@@ -48,5 +38,10 @@ class DataPenyewa extends Model
     public function pemesanan()
     {
         return $this->hasMany(DataPemesanan::class, 'penyewa_idPenyewa');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_idUser');
     }
 }

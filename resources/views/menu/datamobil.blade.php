@@ -157,15 +157,10 @@
                                                                                         value="{{ $mobil->tahunMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
-                                                                                    <label for="deskripsiMobil"
-                                                                                        class="col-form-label">Deskripsi
-                                                                                        Mobil</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="deskripsiMobil"
-                                                                                        name="deskripsiMobil" required
-                                                                                        value="{{ $mobil->deskripsiMobil }}">
+                                                                                    <label for="deskripsiMobil" class="col-form-label">Deskripsi Mobil</label>
+                                                                                    <textarea class="form-control" id="deskripsiMobil" name="deskripsiMobil" required>{{ $mobil->deskripsiMobil }}</textarea>
                                                                                 </div>
+                                                                                
                                                                                 <div class="mb-3">
                                                                                     <label for="hargaSewa"
                                                                                         class="col-form-label">Harga
@@ -272,7 +267,7 @@
                                 required>
                         </div>
                         <div class="mb-3">
-                            <label for="tahunMobil" class="col-form-label">Tahun Mobil</label>
+                            <label for="tahunMobil"     class="col-form-label">Tahun Mobil</label>
                             <input type="text" class="form-control" id="tahunMobil" name="tahunMobil" placeholder="Masukkan Tahun Mobil" required>
                         </div>
                         <div class="mb-3">

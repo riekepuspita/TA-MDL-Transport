@@ -48,10 +48,12 @@
                                     <h4 class="text-secondary">Harga Sewa : Rp. {{ $mobil->hargaSewa }}</h4>
                                 </div>
                                 <div class="store-overlay">
-                                    <a href="/detailmobil/{{ $mobil->noPolisi }}" class="btn btn-secondary rounded-pill py-2 px-4 m-2">Selengkapnya <i
+                                    <a href="/detailmobil/{{ $mobil->noPolisi }}"
+                                        class="btn btn-secondary rounded-pill py-2 px-4 m-2">Selengkapnya <i
                                             class="fa fa-arrow-right ms-2"></i></a>
-                                            
-                                    <a href="/reservasi/{{ $mobil->noPolisi }}" class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi <i
+
+                                    <a href="/reservasi/{{ $mobil->noPolisi }}"
+                                        class="btn btn-dark rounded-pill py-2 px-4 m-2">Reservasi <i
                                             class="fa fa-cart-plus ms-2"></i></a>
                                 </div>
                             </div>

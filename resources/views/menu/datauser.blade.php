@@ -61,24 +61,36 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 @php
                                                     $no = 1;
                                                 @endphp
-                                                @foreach ($data as $row)
+
+                                                @foreach ($user as $row)
                                                     <tr>
                                                         <th scope="row">{{ $no++ }}</th>
+
+                                                        {{-- <td>{{ $row->namaUser }}</td>
+                                                        <td>{{ $row->email }}</td>
+                                                        @if ($row->datapenyewa)
+                                                            <td>{{ $row->datapenyewa->noNIK }}</td>
+                                                            <td>{{ $row->datapenyewa->jeniskelamin }}</td>
+                                                        @else
+                                                            <td colspan="2">Data Penyewa Tidak Ada</td>
+                                                        @endif --}}
+
                                                         <td>{{ $row->namaUser }}</td>
                                                         <td>{{ $row->email }}</td>
                                                         <td>
                                                             @if ($row->level == 'superadmin')
-                                                            Super Admin
-                                                        @elseif ($row->level == 'admin')
-                                                            Admin
-                                                            @else 
-                                                            User
-                                                        @endif</td>
-                                                        {{-- <td>{{ $row->statusUser }}</td> --}}
+                                                                Super Admin
+                                                            @elseif ($row->level == 'admin')
+                                                                Admin
+                                                            @else
+                                                                User
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $row->statusUser }}</td>
+
                                                         <td>
                                                             @if ($row->statusUser == 'aktif')
                                                                 Aktif
@@ -86,8 +98,9 @@
                                                                 Tidak Aktif
                                                             @endif
                                                         </td>
+
                                                         <td>
-                                                            <a href="/tampilkanuser/{{ $row->idUser }}" title="Edit Data"
+                                                            <a href="" title="Edit Data"
                                                                 class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                                                 data-bs-target="#edituser{{ $row->idUser }}">
                                                                 <i class="bx bx-pencil"></i>
@@ -96,6 +109,168 @@
                                                                 onclick="confirmDelete('{{ $row->idUser }}')">
                                                                 <i class="bx bx-trash"></i>
                                                             </button>
+
+                                                            {{-- Start Modal Edit --}}
+                                                            <div class="modal fade" id="edituser{{ $row->idUser }}"
+                                                                tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                                Edit Data User
+                                                                            </h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+
+                                                                            <form
+                                                                                action="{{ route('updateuser', $row->idUser) }}"
+                                                                                method="POST">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="mb-3">
+                                                                                    <label for="namaUser"
+                                                                                        class="col-form-label">Nama
+                                                                                        User</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control" id="namaUser"
+                                                                                        name="namaUser"
+                                                                                        value="{{ $row->namaUser }}"
+                                                                                        placeholder="Masukkan Nama User"
+                                                                                        required>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="email"
+                                                                                        class="col-form-label">Email</label>
+                                                                                    <input type="email"
+                                                                                        class="form-control" id="email"
+                                                                                        name="email"
+                                                                                        value="{{ $row->email }}"
+                                                                                        placeholder="Masukkan Email User"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                <div class="mb-3">
+                                                                                    <label for="level"
+                                                                                        class="col-form-label">Level</label>
+                                                                                    <select class="form-select"
+                                                                                        id="level" name="level"
+                                                                                        required>
+                                                                                        <option value="" selected
+                                                                                            disabled hidden>
+                                                                                            -- Pilih Level User--</option>
+                                                                                        <option value="1"
+                                                                                            {{ $row->level == 'superadmin' ? 'selected' : '' }}>
+                                                                                            Super Admin
+                                                                                        </option>
+                                                                                        <option value="2"
+                                                                                            {{ $row->level == 'admin' ? 'selected' : '' }}>
+                                                                                            Admin
+                                                                                        </option>
+                                                                                        <option value="3"
+                                                                                            {{ $row->level == 'user' ? 'selected' : '' }}>
+                                                                                            User</option>
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <div class="mb-3">
+                                                                                    <label for="statusUser"
+                                                                                        class="col-form-label">Status
+                                                                                        User</label>
+                                                                                    <select class="form-select"
+                                                                                        id="statusUser" name="statusUser"
+                                                                                        required>
+                                                                                        <option value="" selected
+                                                                                            disabled hidden>
+                                                                                            -- Pilih Status User --</option>
+                                                                                        <option value="1"
+                                                                                            {{ $row->statusUser == 'aktif' ? 'selected' : '' }}>
+                                                                                            Aktif
+                                                                                        </option>
+                                                                                        <option value="2"
+                                                                                            {{ $row->statusUser == 'tidakaktif' ? 'selected' : '' }}>
+                                                                                            Tidak Aktif
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <div class="mb-3">
+                                                                                    <label for="noNIK"
+                                                                                        class="col-form-label">NIK</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control" id="noNIK"
+                                                                                        name="noNIK"
+                                                                                        value="@if ($row->datapenyewa) {{ $row->datapenyewa->noNIK }} @endif"
+                                                                                        placeholder="Masukkan NIK Penyewa"
+                                                                                        required>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="jeniskelamin"
+                                                                                        class="col-form-label">Jenis
+                                                                                        Kelamin</label>
+                                                                                    <select class="form-select"
+                                                                                        id="jeniskelamin"
+                                                                                        name="jeniskelamin" required>
+                                                                                        <option value="" selected
+                                                                                            disabled hidden>
+                                                                                            -- Pilih Jenis Kelamin--
+                                                                                        </option>
+                                                                                        @if ($row->datapenyewa)
+                                                                                            <option value="1"
+                                                                                                {{ $row->datapenyewa->jeniskelamin == 'lakilaki' ? 'selected' : '' }}>
+                                                                                                Laki-laki
+                                                                                            </option>
+                                                                                            <option value="2"
+                                                                                                {{ $row->datapenyewa->jeniskelamin == 'perempuan' ? 'selected' : '' }}>
+                                                                                                Perempuan
+                                                                                            </option>
+                                                                                        @endif
+
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="alamat"
+                                                                                        class="col-form-label">Alamat</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="alamat" name="alamat"
+                                                                                        value="@if ($row->datapenyewa) {{ $row->datapenyewa->alamat }} @endif"
+                                                                                        placeholder="Masukkan Alamat Penyewa"
+                                                                                        required>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="noHP"
+                                                                                        class="col-form-label">No
+                                                                                        HP</label>
+                                                                                    <input type="tel"
+                                                                                        class="form-control"
+                                                                                        id="noHP" name="noHP"
+                                                                                        placeholder="Masukkan No HP Penyewa"
+                                                                                        value="@if ($row->datapenyewa) {{ $row->datapenyewa->noHP }} @endif"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary">Simpan
+                                                                                        Perubahan</button>
+                                                                                </div>
+
+                                                                            </form>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {{-- End Modal Edit --}}
+
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -126,11 +301,13 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="namaUser" class="col-form-label">Nama User</label>
-                            <input type="text" class="form-control" id="namaUser" name="namaUser" placeholder="Masukkan Nama User" required>
+                            <input type="text" class="form-control" id="namaUser" name="namaUser"
+                                placeholder="Masukkan Nama User" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email User" required>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Masukkan Email User" required>
                         </div>
                         <div class="mb-3">
                             <label for="level" class="col-form-label">Level</label>
@@ -153,6 +330,33 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="noNIK" class="col-form-label">NIK</label>
+                            <input type="text" class="form-control" id="noNIK" name="noNIK"
+                                placeholder="Masukkan NIK Penyewa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
+                            <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
+                                <option value="" selected disabled hidden>
+                                    -- Pilih Jenis Kelamin--</option>
+                                <option value="1">Laki-laki</option>
+                                <option value="2">Perempuan</option>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="col-form-label">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat"
+                                placeholder="Masukkan Alamat Penyewa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="noHP" class="col-form-label">No HP</label>
+                            <input type="tel" class="form-control" id="noHP" name="noHP"
+                                placeholder="Masukkan No HP Penyewa" pattern="[0-9]+"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"required>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -162,71 +366,8 @@
             </div>
         </div>
     </div>
-
-    @foreach ($data as $row)
-        <div class="modal fade" id="edituser{{ $row->idUser }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            {{-- <span aria-hidden="true">&times;</span> --}}
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Form edit data -->
-                        <form action="{{ route('updateuser', $row->idUser) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="form-group">
-                                <label for="namaUser">Nama User</label>
-                                <input type="text" name="namaUser" class="form-control" id="namaUser"
-                                    value="{{ $row->namaUser }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" name="email" class="form-control" id="email"
-                                    value="{{ $row->email }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="level" class="col-form-label">Level</label>
-                                <select class="form-select" id="level" name="level" required>
-                                    <option value="1" {{ $row->level == 'superadmin' ? 'selected' : '' }}>Super Admin
-                                    </option>
-                                    <option value="2" {{ $row->level == 'admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="3" {{ $row->level == 'user' ? 'selected' : '' }}>User</option>
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-
-                                <label for="statusUser" class="col-form-label">Status User</label>
-                                <select class="form-select" id="statusUser" name="statusUser" required>
-
-                                    <option value="1" {{ $row->statusUser == 'aktif' ? 'selected' : '' }}>
-                                        Aktif
-                                    </option>
-
-                                    <option value="2" {{ $row->statusUser == 'tidakaktif' ? 'selected' : '' }}>
-                                        Tidak Aktif
-                                    </option>
-
-                                </select>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" id="simpanPerubahan">Simpan
-                                    Perubahan</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
 @endsection
+
 
 @section('script')
     <script>

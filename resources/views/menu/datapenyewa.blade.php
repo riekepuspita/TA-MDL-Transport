@@ -58,7 +58,6 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-
                                         <table class="table mb-12">
                                             <thead>
                                                 <tr>
@@ -74,216 +73,222 @@
                                                 @php
                                                     $no = 1;
                                                 @endphp
-                                                @foreach ($data as $index => $penyewa)
-                                                    @foreach ($penyewa->pemesanan as $pesanan)
-                                                        <tr>
-                                                            <td>{{ $no++ }}</td>
-                                                            <td>{{ $penyewa->noNIK }}</td>
-                                                            <td>{{ $penyewa->namaLengkap }}</td>
-                                                            <td>{{ $penyewa->noHP }}</td>
-                                                            <td>{{ $penyewa->created_at->format('d-m-Y') }}</td>
+                                                @foreach ($penyewa as $row)
+                                                    <tr>
+                                                        <th scope="row">{{ $no++ }}</th>
+                                                        <td>{{ $row->noNIK }}</td>
 
-                                                            <td>
-                                                                {{-- Button Edit Modal --}}
-                                                                <a href="" title="Edit Data"
-                                                                    class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                                                    data-bs-target="#editpenyewa{{ $penyewa->idPenyewa }}">
-                                                                    <i class="bx bx-pencil"></i>
-                                                                </a>
-                                                                <button title="Hapus Data" class="btn btn-danger btn-sm"
-                                                                    onclick="confirmDelete('{{ $penyewa->idPenyewa }}')">
-                                                                    <i class="bx bx-trash"></i>
-                                                                </button>
+                                                        @if ($row->user)
+                                                            <td>{{ $row->user->namaUser }}</td>
+                                                        @endif
 
-                                                                {{-- Start Modal Edit --}}
-                                                                <div class="modal fade"
-                                                                    id="editpenyewa{{ $penyewa->idPenyewa }}" tabindex="-1"
-                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title"
-                                                                                    id="exampleModalLabel">Edit Data Penyewa
-                                                                                </h5>
-                                                                                <button type="button" class="btn-close"
-                                                                                    data-bs-dismiss="modal"
-                                                                                    aria-label="Close">
-                                                                                    {{-- <span aria-hidden="true">&times;</span> --}}
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
+                                                        <td>{{ $row->noHP }}</td>
+                                                        <td>{{ $row->created_at->format('d F Y') }}</td>
+                                                        <td>
+                                                            {{-- Button Edit Modal --}}
+                                                            <a href="" title="Edit Data"
+                                                                class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                                data-bs-target="#editpenyewa{{ $row->idPenyewa }}">
+                                                                <i class="bx bx-pencil"></i>
+                                                            </a>
+                                                            <button title="Hapus Data" class="btn btn-danger btn-sm"
+                                                                onclick="confirmDelete('{{ $row->idPenyewa }}')">
+                                                                <i class="bx bx-trash"></i>
+                                                            </button>
 
-                                                                                <!-- Form edit data -->
-                                                                                <form action="{{ route('updatepenyewa', $penyewa->idPenyewa) }}" method="POST">
-                                                                                    @csrf
-                                                                                    @method('PUT')
-                                                                                    <div class="form-group">
-                                                                                        <label for="noNIK">NIK</label>
-                                                                                        <input type="text" name="noNIK"
-                                                                                            class="form-control"
-                                                                                            id="noNIK"
-                                                                                            value="{{ $penyewa->noNIK }}"
-                                                                                            required>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="namaLengkap">Nama
-                                                                                            Lengkap</label>
-                                                                                        <input type="text"
-                                                                                            name="namaLengkap"
-                                                                                            class="form-control"
-                                                                                            id="namaLengkap"
-                                                                                            value="{{ $penyewa->namaLengkap }}"
-                                                                                            required>
-                                                                                    </div>
+                                                            {{-- Start Modal Edit --}}
+                                                            <div class="modal fade" id="editpenyewa{{ $row->idPenyewa }}"
+                                                                tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                                Edit Data Penyewa
+                                                                            </h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                                                {{-- <span aria-hidden="true">&times;</span> --}}
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
 
-                                                                                    <div class="mb-3">
-                                                                                        <label for="jeniskelamin"
-                                                                                            class="col-form-label">Jenis
-                                                                                            Kelamin</label>
-                                                                                        <select class="form-select"
-                                                                                            id="jeniskelamin"
-                                                                                            name="jeniskelamin" required>
+                                                                            <!-- Form edit data -->
+                                                                            <form
+                                                                                action="{{ route('updatepenyewa', $row->idPenyewa) }}"
+                                                                                method="POST">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="form-group">
+                                                                                    <label for="noNIK">NIK</label>
+                                                                                    <input type="text" name="noNIK"
+                                                                                        class="form-control" id="noNIK"
+                                                                                        value="{{ $row->noNIK }}"
+                                                                                        required>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="namaLengkap">Nama
+                                                                                        Lengkap</label>
+                                                                                    <input type="text" name="namaLengkap"
+                                                                                        class="form-control"
+                                                                                        id="namaLengkap"
+                                                                                        value="@if ($row->user) {{ $row->user->namaUser }} @endif"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                <div class="mb-3">
+                                                                                    <label for="jeniskelamin"
+                                                                                        class="col-form-label">Jenis
+                                                                                        Kelamin</label>
+                                                                                    <select class="form-select"
+                                                                                        id="jeniskelamin"
+                                                                                        name="jeniskelamin" required>
+                                                                                        <option value="1"
+                                                                                            {{ $row->jeniskelamin == 'lakilaki' ? 'selected' : '' }}>
+                                                                                            Laki-laki</option>
+                                                                                        <option value="2"
+                                                                                            {{ $row->jeniskelamin == 'perempuan' ? 'selected' : '' }}>
+                                                                                            Perempuan</option>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="alamat">Alamat</label>
+                                                                                    <input type="text" name="alamat"
+                                                                                        class="form-control" id="alamat"
+                                                                                        value="{{ $row->alamat }}"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="noHP">No HP</label>
+                                                                                    <input type="tel" name="noHP"
+                                                                                        class="form-control" id="noHP"
+                                                                                        value="{{ $row->noHP }}"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="created_at">Hari /
+                                                                                        Tanggal</label>
+                                                                                    <input type="date" name="created_at"
+                                                                                        class="form-control" id="created_at"
+                                                                                        value="{{ $row->created_at->format('Y-m-d') }}"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="tes">TES</label>
+                                                                                    <input type="date" name="created_at"
+                                                                                        class="form-control"
+                                                                                        id="created_at"
+                                                                                        value="Isi dengan merekMobil pada database Mobil"
+                                                                                        required>
+                                                                                </div>
+
+                                                                                {{-- <div class="form-group">
+                                                                                    <label for="mobil_noPolisi">Pilih
+                                                                                        Mobil</label>
+                                                                                    <select name="mobil_noPolisi"
+                                                                                        class="form-select"
+                                                                                        id="mobil_noPolisi">
+                                                                                        <option value="" disabled>--
+                                                                                            Pilih Mobil --</option>
+                                                                                        @if ($row->pemesanan)
                                                                                             <option value="1"
-                                                                                                {{ $penyewa->jeniskelamin == 'lakilaki' ? 'selected' : '' }}>
-                                                                                                Laki-laki</option>
-                                                                                            <option value="2"
-                                                                                                {{ $penyewa->jeniskelamin == 'perempuan' ? 'selected' : '' }}>
-                                                                                                Perempuan</option>
-                                                                                        </select>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label for="alamat">Alamat</label>
-                                                                                        <input type="text" name="alamat"
-                                                                                            class="form-control"
-                                                                                            id="alamat"
-                                                                                            value="{{ $penyewa->alamat }}"
-                                                                                            required>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="noHP">No HP</label>
-                                                                                        <input type="tel" name="noHP"
-                                                                                            class="form-control"
-                                                                                            id="noHP"
-                                                                                            value="{{ $penyewa->noHP }}"
-                                                                                            required>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="created_at">Hari /
-                                                                                            Tanggal</label>
-                                                                                        <input type="date"
-                                                                                            name="created_at"
-                                                                                            class="form-control"
-                                                                                            id="created_at"
-                                                                                            value="{{ $penyewa->created_at->format('Y-m-d') }}"
-                                                                                            required>
-                                                                                    </div>
-
-
-                                                                                    <div class="form-group">
-                                                                                        <label for="mobil_noPolisi">Pilih Mobil</label>
-                                                                                        <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi">
-                                                                                            <option value="" disabled>-- Pilih Mobil --</option>
-                                                                                            @foreach ($mobil as $dataMobil)
-                                                                                                <option value="{{ $dataMobil->noPolisi }}" {{ $pesanan->mobil_noPolisi == $dataMobil->noPolisi ? 'selected' : '' }}>
-                                                                                                    {{ $dataMobil->noPolisi }} - {{ $dataMobil->merekMobil }} {{ $dataMobil->modelMobil }}
-                                                                                                </option>
-                                                                                            @endforeach
-                                                                                        </select>
-                                                                                    </div>
-
-                                                                                    {{-- <div class="form-group">
-                                                                                        <label for="mobil_noPolisi">Pilih
-                                                                                            Mobil</label>
-                                                                                        <select name="mobil_noPolisi"
-                                                                                            class="form-select"
-                                                                                            id="mobil_noPolisi">
-                                                                                            <option value="" selected
-                                                                                                disabled hidden>
-                                                                                                {{ $pesanan->mobil->noPolisi }}
-                                                                                                -
-                                                                                                {{ $pesanan->mobil->merekMobil }}
-                                                                                                {{ $pesanan->mobil->modelMobil }}
+                                                                                                {{ $row->datapenyewa->jeniskelamin == 'lakilaki' ? 'selected' : '' }}>
+                                                                                                Laki-laki
                                                                                             </option>
-                                                                                            @foreach ($mobil as $dataMobil)
-                                                                                                <option
-                                                                                                    value="{{ $dataMobil->noPolisi }}">
-                                                                                                    {{ $dataMobil->noPolisi }}
-                                                                                                    -
-                                                                                                    {{ $dataMobil->merekMobil }}
-                                                                                                    {{ $dataMobil->modelMobil }}
-                                                                                                </option>
-                                                                                            @endforeach
-                                                                                        </select>
-                                                                                    </div> --}}
+                                                                                            <option value="2"
+                                                                                                {{ $row->datapenyewa->jeniskelamin == 'perempuan' ? 'selected' : '' }}>
+                                                                                                Perempuan
+                                                                                            </option>
+                                                                                        @endif
+                                                                                    </select>
+                                                                                </div> --}}
 
-                                                                                    <div class="mb-3 row">
-                                                                                        <label for="tanggalMulai"
-                                                                                            class="col-form-label">Tanggal
-                                                                                            Mulai</label>
-                                                                                        <input class="form-control"
-                                                                                            name="tanggalMulai"
-                                                                                            type="date"
-                                                                                            id="tanggalMulai"
-                                                                                            placeholder="Masukkan Tanggal Mulai"
-                                                                                            value="{{ $pesanan->tanggalMulai }}">
-                                                                                    </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="tanggalMulai"
+                                                                                        class="col-form-label">Tanggal
+                                                                                        Mulai</label>
+                                                                                    <input class="form-control"
+                                                                                        name="tanggalMulai" type="date"
+                                                                                        id="tanggalMulai"
+                                                                                        placeholder="Masukkan Tanggal Mulai"
+                                                                                        value="">
+                                                                                </div>
 
-                                                                                    <div class="mb-3 row">
-                                                                                        <label for="tanggalSelesai"
-                                                                                            class="col-form-label">Tanggal
-                                                                                            Selesai</label>
-                                                                                        <input class="form-control"
-                                                                                            name="tanggalSelesai"
-                                                                                            type="date"
-                                                                                            id="tanggalSelesai"
-                                                                                            placeholder="Masukkan Tanggal Selesai"
-                                                                                            value="{{ $pesanan->tanggalSelesai }}">
-                                                                                    </div>
-                                                                                    <div class="mb-3 row">
-                                                                                        <label for="tujuan"
-                                                                                            class="col-form-label">Tujuan</label>
-                                                                                        <input class="form-control"
-                                                                                            name="tujuan" type="text"
-                                                                                            value="{{ $pesanan->tujuan }}"
-                                                                                            id="tujuan"
-                                                                                            placeholder="Masukkan Tujuan Penyewa">
-                                                                                    </div>
-                                                                                    <div class="mb-3 row">
-                                                                                        <label for="keberangkatan"
-                                                                                            class="col-form-label">Keberangkatan</label>
-                                                                                        <input class="form-control"
-                                                                                            name="keberangkatan"
-                                                                                            type="datetime-local"
-                                                                                            value="{{ $pesanan->keberangkatan }}"
-                                                                                            id="keberangkatan"
-                                                                                            placeholder="Masukkan Keberangkatan">
-                                                                                    </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="tanggalSelesai"
+                                                                                        class="col-form-label">Tanggal
+                                                                                        Selesai</label>
+                                                                                    <input class="form-control"
+                                                                                        name="tanggalSelesai"
+                                                                                        type="date" id="tanggalSelesai"
+                                                                                        placeholder="Masukkan Tanggal Selesai"
+                                                                                        value="">
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="tujuan"
+                                                                                        class="col-form-label">Tujuan</label>
+                                                                                    <input class="form-control"
+                                                                                        name="tujuan" type="text"
+                                                                                        value="" id="tujuan"
+                                                                                        placeholder="Masukkan Tujuan Penyewa">
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="keberangkatan"
+                                                                                        class="col-form-label">Keberangkatan</label>
+                                                                                    <input class="form-control"
+                                                                                        name="keberangkatan"
+                                                                                        type="datetime-local"
+                                                                                        value="" id="keberangkatan"
+                                                                                        placeholder="Masukkan Keberangkatan">
+                                                                                </div>
 
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-secondary"
-                                                                                            data-bs-dismiss="modal">Close</button>
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary">Simpan
-                                                                                            Perubahan</button>
-                                                                                    </div>
-                                                                                </form>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary">Simpan
+                                                                                        Perubahan</button>
+                                                                                </div>
+                                                                            </form>
 
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {{-- End Modal Edit --}}
+                                                            </div>
+                                                            {{-- End Modal Edit --}}
 
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
+                                                        </td>
+
+                                                    </tr>
                                                 @endforeach
 
                                             </tbody>
 
                                         </table>
+
+                                        {{-- <h1>Tes table</h1>
+                                        <table class="table mb-12">
+                                            <thead>
+                                                <tr>
+                                                    <td>Alamat</td>
+                                                    <td>Tujuan</td>
+                                                    <td>Merek Mobil</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($dataPemesanan as $pemesanan)
+                                                    <tr>
+                                                        <td>{{ $pemesanan->tujuan }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+
+                                        </table> --}}
 
                                     </div>
                                 </div>

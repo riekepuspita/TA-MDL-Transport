@@ -29,10 +29,8 @@
                                         <p class="text-muted">Bergabunglah dan daftarkan diri Anda disini !</p>
                                     </div>
                                     <div class="p-2 mt-4">
-                                        <form action="/registrasiuser" method="POST">
+                                        <form action="/registrasiuser" method="POST" enctype="multipart/form-data">
                                             @csrf
-
-
                                             <div class="mb-3">
                                                 <label class="form-label" for="namaLengkap">Nama Lengkap</label>
                                                 <input type="text" class="form-control" name="namaUser" id="namaUser"
@@ -50,11 +48,49 @@
                                                     placeholder="Masukkan Password">
                                             </div>
 
+                                            <div class="mb-3">
+                                                <label for="example-nik-input" class="col-md-3 col-form-label">NIK</label>
+                                                <div class="col-md-12">
+                                                    <input class="form-control" name="noNIK" type="text" value=""
+                                                        id="noNIK" placeholder="Masukkan NIK" required>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="example-role-input" class="col-md-12 col-form-label">Jenis Kelamin</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
+                                                        <option value="" selected disabled hidden>
+                                                            -- Pilih Jenis Kelamin --</option>
+                                                        <option value="1">Laki-laki</option>
+                                                        <option value="2">Perempuan</option>
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="example-alamat-input" class="col-md-3 col-form-label">Alamat</label>
+                                                <div class="col-md-12">
+                                                    <input class="form-control" name="alamat" type="text" value=""
+                                                        id="alamat" placeholder="Masukkan Alamat Lengkap" required>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="example-tel-input" class="col-md-3 col-form-label">No HP</label>
+                                                <div class="col-md-12">
+                                                    <input class="form-control" name="noHP" type="tel" value=""
+                                                        id="noHP" placeholder="Masukkan No HP" pattern="[0-9]+"
+                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="mb-3">
+                                                <label for="uploadKTP" class="form-label">Unggah KTP</label>
+                                                <input type="file" class="form-control" id="uploadKTP" name="uploadKTP" accept=".jpg, .jpeg, .png" required>
+                                                <div class="form-text">Silakan unggah gambar KTP Anda (format: JPG, JPEG, PNG).</div>
+                                            </div> --}}
                                             <div class="mt-3 text-end">
                                                 <button class="btn btn-primary w-sm waves-effect waves-light" style="background-color: #008080;"
                                                     type="submit">Registrasi</button>
                                             </div>
-
                                             {{-- <div class="mt-4 text-center">
                                                 <div class="signin-other-title">
                                                     <h5 class="font-size-14 mb-3 title" style="color: #999;">atau</h5>

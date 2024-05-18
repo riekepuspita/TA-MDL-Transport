@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan', function () {
             return view('menu.laporan');
         });
+
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         // Tambahkan rute-rute lain yang memerlukan otorisasi superadmin di sini
 
     // Rute yang hanya dapat diakses oleh superadmin

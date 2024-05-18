@@ -7,7 +7,6 @@
 @section('content')
     <div id="layout-wrapper">
         @include('landingpage.header')
-
         <!-- Carousel Start -->
         <div class="container-fluid px-0 mb-5">
             <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -140,7 +139,8 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="store-item position-relative text-center">
-                            <img class="img-fluid" src="{{ asset('gambarMobil/Toyota Avanza 2022 Silver.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('gambarMobil/Toyota Avanza 2022 Silver.jpg') }}"
+                                alt="">
                             <div class="p-4">
                                 <div class="text-center mb-3">
                                     <small class="fa fa-star text-secondary"></small>
@@ -186,8 +186,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="store-item position-relative text-center">
-                            <img class="img-fluid" src="{{ asset('gambarMobil/Inova.png') }}"
-                                alt="">
+                            <img class="img-fluid" src="{{ asset('gambarMobil/Inova.png') }}" alt="">
                             <div class="p-4">
                                 <div class="text-center mb-3">
                                     <small class="fa fa-star text-secondary"></small>

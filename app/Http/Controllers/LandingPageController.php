@@ -6,14 +6,18 @@ use App\Models\DataMobil;
 use App\Models\DataPenyewa;
 use Illuminate\Http\Request;
 use App\Models\DataPemesanan;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LandingPageController extends Controller
 {
 
     public function homeIndex()
     {
+        $user = User::all();
         return view('mdltransport', [
-            "title" => "MDL Transport"
+            "title" => "MDL Transport",
+            "user" => $user
         ]);
     }
 
@@ -61,41 +65,40 @@ class LandingPageController extends Controller
     public function reservasi($noPolisi)
     {
         $data = DataMobil::where('noPolisi', $noPolisi)->first();
-        
+        $user = Auth::user();
+
+        $idUser = $user->idUser;
+
         if (!$data) {
             return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
         }
 
         return view('reservasi', [
             "title" => "Mobil",
-            'mobil' => $data
-        ]);
+            'mobil' => $data,
+        ], compact('user', 'idUser'));
+
+        // return view('reservasi', ["title" => "Mobil"], compact('data', 'user'));
     }
 
-        public function insertreservasi(Request $request)
+    public function insertreservasi(Request $request)
     {
         // Validasi request
         $validatedData = $request->validate([
-            'noNIK' => 'required',
-            'namaLengkap' => 'required',
-            'jeniskelamin' => 'required',
-            'alamat' => 'required',
-            'noHP' => 'required',
-            'created_at' => 'required',
-            'tanggalMulai' => 'required',
-            'tanggalSelesai' => 'required',
-            'tujuan' => 'required',
-            'mobil_noPolisi' => 'required', // Tambahkan validasi untuk mobil_noPolisi
+            'created_at' => 'required|date',
+            'tanggalMulai' => 'required|date',
+            'tanggalSelesai' => 'required|date',
+            'tujuan' => 'required|string|max:255',
+            'mobil_noPolisi' => 'required|string|max:20',
         ]);
+
+        // Dapatkan pengguna yang sedang login
+        $user = Auth::user();
 
         // Simpan data penyewa
         $penyewa = new DataPenyewa();
-        $penyewa->noNIK = $validatedData['noNIK'];
-        $penyewa->namaLengkap = $validatedData['namaLengkap'];
-        $penyewa->jeniskelamin = $validatedData['jeniskelamin'];
-        $penyewa->alamat = $validatedData['alamat'];
-        $penyewa->noHP = $validatedData['noHP'];
         $penyewa->created_at = $validatedData['created_at'];
+        $penyewa->user_idUser = $user->idUser; // Tambahkan user_idUser
         $penyewa->save();
 
         // Simpan data pemesanan
@@ -111,10 +114,11 @@ class LandingPageController extends Controller
         return redirect()->route('detailreservasi', ['idPemesanan' => $pemesanan->idPemesanan])->with('success', 'Data berhasil disimpan');
     }
 
-        public function detailreservasi($idPemesanan)
+    public function detailreservasi($idPemesanan)
     {
-        $pemesanan = DataPemesanan::findOrFail($idPemesanan);
-        
+        //$pemesanan = DataPemesanan::findOrFail($idPemesanan);
+        $pemesanan = DataPemesanan::with(['penyewa', 'penyewa.user', 'mobil'])->findOrFail($idPemesanan);
+
         $penyewa = $pemesanan->penyewa;
 
         // Dapatkan data mobil berdasarkan nomor polisi dari DataMobil
