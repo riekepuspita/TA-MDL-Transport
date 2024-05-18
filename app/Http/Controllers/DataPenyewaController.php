@@ -15,16 +15,44 @@ class DataPenyewaController extends Controller
 {
 
     public function index()
-    {
-        $penyewa = DataPenyewa::all();
-        $dataPemesanan = DataPemesanan::all();
-        $mobil = DataMobil::all();
-        $user = User::all();
+{
+    // Mengambil semua data DataPenyewa
+    $penyewa = DataPenyewa::all();
 
-        //$pemesanans = DataPemesanan::with(['penyewa', 'mobil'])->get();
+    // Mengambil semua data DataMobil
+    $mobil = DataMobil::all();
 
-        return view('menu.datapenyewa', compact('penyewa', 'mobil', 'dataPemesanan', 'user'));
+    // Mengambil semua data User
+    $user = User::all();
+
+    // Inisialisasi array kosong untuk menampung data pemesanan
+    $dataPemesanan = [];
+
+    // Loop melalui setiap DataPenyewa untuk mengambil data pemesanannya
+    foreach ($penyewa as $penyewaItem) {
+        // Mengambil data pemesanan terkait dengan DataPenyewa saat ini
+        $pemesanan = $penyewaItem->pemesanan;
+        
+        // Menambahkan data pemesanan ke dalam array $dataPemesanan
+        $dataPemesanan[$penyewaItem->idPenyewa] = $pemesanan;
     }
+
+    // Memasukkan informasi mobil yang dipilih ke dalam data pemesanan
+    foreach ($pemesanan as $pesan) {
+        // Ambil nomor polisi mobil yang dipilih dari pemesanan
+        $selectedCarNoPolisi = $pesan->mobil_noPolisi;
+
+        // Cari mobil yang dipilih dari tabel DataMobil
+        $selectedCar = DataMobil::where('noPolisi', $selectedCarNoPolisi)->first();
+
+        // Tambahkan informasi mobil yang dipilih ke dalam objek pemesanan
+        $pemesanan->mobil_dipilih = $selectedCar;
+    }
+
+    // Mengembalikan view dengan data yang sudah dikumpulkan
+    return view('menu.datapenyewa', compact('penyewa', 'mobil', 'dataPemesanan', 'user'));
+}
+
 
     public function insertpenyewa(Request $request)
     {
@@ -84,7 +112,8 @@ class DataPenyewaController extends Controller
         // Mengambil user yang terkait dengan penyewa
         $user = $penyewa->user;
 
-        $pemesanan = DataPemesanan::where('penyewa_idPenyewa', $idPenyewa)->first();
+        // $pemesanan = DataPemesanan::where('penyewa_idPenyewa', $idPenyewa)->first();
+        $pemesanan = DataPemesanan::all();
 
         return view('datapenyewa', compact('penyewa', 'pemesanan', 'user'));
     }

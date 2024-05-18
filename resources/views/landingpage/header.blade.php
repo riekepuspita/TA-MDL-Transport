@@ -27,8 +27,54 @@
                         <a href="/contact"
                             class="nav-item nav-link {{ $title === 'Contact' ? 'active' : '' }}">Contact</a>
                     </div>
+
                     <div class="border-start ps-4 d-none d-lg-block">
                         @auth
+                            <div class="dropdown d-inline-block">
+                                <button type="button" class="btn header-item user text-start d-flex align-items-center"
+                                    id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/profil.png') }}"
+                                        alt="Header Avatar" style="width: 30px; height: 30px;">
+                                        <div class="user-info ms-2 d-none d-xl-inline-block">
+                                            <span class="user-name">{{ $user->namaUser }}</span>
+                                            <br> <!-- Tambahkan jeda baris di sini -->
+                                            <span class="user-email" style="font-size: 14px; color: blue;">{{ $user->email }}</span>
+                                        </div>
+                                        
+                                </button>
+
+
+                                <div class="dropdown-menu dropdown-menu-end pt-0">
+                                    <a class="dropdown-item" href="#"><i
+                                            class='bx bx-user-circle text-muted font-size-18 align-middle me-1'></i> <span
+                                            class="align-middle">My Account</span></a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class='bx bx-log-out text-muted font-size-18 align-middle me-1'></i> <span
+                                            class="align-middle">Logout</span>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
+                        @else
+                            <a href="/login" class="btn btn-secondary">LOGIN</a>
+                        @endauth
+                    </div>
+                    
+                    
+                    
+
+                    {{-- <div class="border-start ps-4 d-none d-lg-block">
+                        @auth
+
+                        <div class="user-info">
+                            <p>Welcome, {{ $user->namaUser }}</p>
+                            <p>Email: {{ $user->email }}</p>
+                        </div>
+
                             <a href="{{ route('logout') }}" class="btn btn-secondary"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 LOGOUT
@@ -39,7 +85,7 @@
                         @else
                             <a href="/login" class="btn btn-secondary">LOGIN</a>
                         @endauth
-                    </div>
+                    </div> --}}
                 </div>
             </nav>
         </div>

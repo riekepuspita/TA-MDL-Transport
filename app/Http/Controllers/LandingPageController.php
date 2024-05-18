@@ -14,7 +14,11 @@ class LandingPageController extends Controller
 
     public function homeIndex()
     {
-        $user = User::all();
+        // $user = User::all();
+
+        //Ambil data user yang login
+        $user = Auth::user();
+
         return view('mdltransport', [
             "title" => "MDL Transport",
             "user" => $user
@@ -23,8 +27,11 @@ class LandingPageController extends Controller
 
     public function aboutIndex()
     {
+        $user = Auth::user();
+
         return view('about', [
-            "title" => "About"
+            "title" => "About",
+            "user" => $user
         ]);
     }
 
@@ -32,15 +39,19 @@ class LandingPageController extends Controller
     {
         $data = DataMobil::all(); // Mengambil semua data mobil dari database
         $title = "Mobil"; // Definisikan variabel title
+        $user = Auth::user();
         // dd($data);
 
-        return view('mobil', compact('data', 'title')); // Menampilkan halaman landingpage dengan mengirimkan data mobil dan title
+        return view('mobil', compact('data', 'title', 'user')); // Menampilkan halaman landingpage dengan mengirimkan data mobil dan title
     }
 
     public function contactIndex()
     {
+        $user = Auth::user();
+
         return view('contact', [
-            "title" => "Contact"
+            "title" => "Contact",
+            "user" => $user
         ]);
     }
 
@@ -95,9 +106,19 @@ class LandingPageController extends Controller
         // Dapatkan pengguna yang sedang login
         $user = Auth::user();
 
+        $dataPenyewa = DataPenyewa::where('user_idUser', $user->idUser)->first();
+        if (!$dataPenyewa) {
+            return redirect()->route('mobilmdltransport')->with('error', 'Data penyewa tidak ditemukan');       
+         }
+
         // Simpan data penyewa
         $penyewa = new DataPenyewa();
         $penyewa->created_at = $validatedData['created_at'];
+        $penyewa->namaLengkap = $dataPenyewa->namaUser;
+        $penyewa->noNIK = $dataPenyewa->noNIK;
+        $penyewa->jeniskelamin = $dataPenyewa->jeniskelamin;
+        $penyewa->alamat = $dataPenyewa->alamat;
+        $penyewa->noHP = $dataPenyewa->noHP;
         $penyewa->user_idUser = $user->idUser; // Tambahkan user_idUser
         $penyewa->save();
 
@@ -118,19 +139,18 @@ class LandingPageController extends Controller
     {
         //$pemesanan = DataPemesanan::findOrFail($idPemesanan);
         $pemesanan = DataPemesanan::with(['penyewa', 'penyewa.user', 'mobil'])->findOrFail($idPemesanan);
-
         $penyewa = $pemesanan->penyewa;
-
         // Dapatkan data mobil berdasarkan nomor polisi dari DataMobil
         $mobil = DataMobil::where('noPolisi', $pemesanan->noPolisi)->first();
-
+        $user = Auth::user();
         // dd($pemesanan);
 
         return view('detailreservasi', [
             "title" => "Mobil",
             "pemesanan" => $pemesanan,
             "penyewa" => $penyewa,
-            "mobil" => $mobil // Tambahkan data mobil ke array
+            "mobil" => $mobil, // Tambahkan data mobil ke array
+            "user" => $user
         ]);
     }
 }
