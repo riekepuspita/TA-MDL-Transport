@@ -177,7 +177,6 @@
                                                                                         value="{{ $row->created_at->format('Y-m-d') }}"
                                                                                         required>
                                                                                 </div>
-
                                                                                 <div class="form-group">
                                                                                     <label for="mobil_noPolisi">Pilih Mobil</label>
                                                                                     <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi">
@@ -189,24 +188,6 @@
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                                
-                                                                                @if(isset($dataPemesanan) && count($dataPemesanan) > 0)
-                                                                                    @foreach($dataPemesanan as $pemesanan)
-                                                                                        @if(isset($pemesanan->mobil_noPolisi))
-                                                                                            <div class="selected-car-info">
-                                                                                                <h4>Mobil Yang Dipilih:</h4>
-                                                                                                <ul>
-                                                                                                    <li>No Polisi: {{ $pemesanan->mobil_noPolisi->noPolisi }}</li>
-                                                                                                    <li>Merek: {{ $pemesanan->mobil_noPolisi->merekMobil }}</li>
-                                                                                                    <li>Model: {{ $pemesanan->mobil_noPolisi->modelMobil }}</li>
-                                                                                                    <!-- Tambahkan informasi lain yang Anda butuhkan -->
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                @endif
-                                                                                
-                                                                                
                                                                                 
 
                                                                                 <div class="mb-3 row">

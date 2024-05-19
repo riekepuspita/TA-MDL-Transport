@@ -32,6 +32,6 @@ class DataPemesanan extends Model
 
     public function mobil()
     {
-        return $this->belongsTo(DataMobil::class, 'mobil_noPolisi'); // Sesuaikan dengan nama kolom kunci asing jika berbeda
+        return $this->belongsTo(DataMobil::class, 'mobil_noPolisi', 'noPolisi'); // Sesuaikan dengan nama kolom kunci asing jika berbeda
     }
 }

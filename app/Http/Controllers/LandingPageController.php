@@ -61,6 +61,7 @@ class LandingPageController extends Controller
         $data = DataMobil::where('noPolisi', $noPolisi)->first();
         // dd($data);
 
+        $user = Auth::user();
         // Jika data mobil tidak ditemukan, bisa ditangani sesuai kebutuhan, misalnya redirect ke halaman lain
         if (!$data) {
             return redirect()->route('mobil')->with('error', 'Mobil tidak ditemukan');
@@ -70,6 +71,7 @@ class LandingPageController extends Controller
         return view('detailmobil', [
             "title" => "Mobil",
             "mobil" => $data,
+            "user" => $user
         ]);
     }
 
@@ -112,19 +114,19 @@ class LandingPageController extends Controller
          }
 
         // Simpan data penyewa
-        $penyewa = new DataPenyewa();
-        $penyewa->created_at = $validatedData['created_at'];
-        $penyewa->namaLengkap = $dataPenyewa->namaUser;
-        $penyewa->noNIK = $dataPenyewa->noNIK;
-        $penyewa->jeniskelamin = $dataPenyewa->jeniskelamin;
-        $penyewa->alamat = $dataPenyewa->alamat;
-        $penyewa->noHP = $dataPenyewa->noHP;
-        $penyewa->user_idUser = $user->idUser; // Tambahkan user_idUser
-        $penyewa->save();
+        // $penyewa = new DataPenyewa();
+        // $penyewa->created_at = $validatedData['created_at'];
+        // $penyewa->namaLengkap = $dataPenyewa->namaUser;
+        // $penyewa->noNIK = $dataPenyewa->noNIK;
+        // $penyewa->jeniskelamin = $dataPenyewa->jeniskelamin;
+        // $penyewa->alamat = $dataPenyewa->alamat;
+        // $penyewa->noHP = $dataPenyewa->noHP;
+        // $penyewa->user_idUser = $user->idUser; // Tambahkan user_idUser
+        // $penyewa->save();
 
         // Simpan data pemesanan
         $pemesanan = new DataPemesanan();
-        $pemesanan->penyewa_idPenyewa = $penyewa->idPenyewa;
+        $pemesanan->penyewa_idPenyewa = $dataPenyewa->idPenyewa;
         $pemesanan->mobil_noPolisi = $validatedData['mobil_noPolisi']; // Gunakan nilai mobil_noPolisi yang diterima
         $pemesanan->tanggalMulai = $validatedData['tanggalMulai'];
         $pemesanan->tanggalSelesai = $validatedData['tanggalSelesai'];

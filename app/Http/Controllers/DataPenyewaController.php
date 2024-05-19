@@ -16,13 +16,8 @@ class DataPenyewaController extends Controller
 
     public function index()
 {
-    // Mengambil semua data DataPenyewa
     $penyewa = DataPenyewa::all();
-
-    // Mengambil semua data DataMobil
     $mobil = DataMobil::all();
-
-    // Mengambil semua data User
     $user = User::all();
 
     // Inisialisasi array kosong untuk menampung data pemesanan
@@ -35,18 +30,6 @@ class DataPenyewaController extends Controller
         
         // Menambahkan data pemesanan ke dalam array $dataPemesanan
         $dataPemesanan[$penyewaItem->idPenyewa] = $pemesanan;
-    }
-
-    // Memasukkan informasi mobil yang dipilih ke dalam data pemesanan
-    foreach ($pemesanan as $pesan) {
-        // Ambil nomor polisi mobil yang dipilih dari pemesanan
-        $selectedCarNoPolisi = $pesan->mobil_noPolisi;
-
-        // Cari mobil yang dipilih dari tabel DataMobil
-        $selectedCar = DataMobil::where('noPolisi', $selectedCarNoPolisi)->first();
-
-        // Tambahkan informasi mobil yang dipilih ke dalam objek pemesanan
-        $pemesanan->mobil_dipilih = $selectedCar;
     }
 
     // Mengembalikan view dengan data yang sudah dikumpulkan

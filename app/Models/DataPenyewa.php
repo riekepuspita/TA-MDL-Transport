@@ -24,7 +24,7 @@ class DataPenyewa extends Model
         'user_idUser',
 
     ];
-  
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -43,5 +43,11 @@ class DataPenyewa extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_idUser');
+    }
+
+    // Pemesanan model
+    public function mobil()
+    {
+        return $this->belongsTo(DataMobil::class, 'mobil_id', 'idmobil');
     }
 }
