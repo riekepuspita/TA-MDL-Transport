@@ -45,9 +45,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
-                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                {{-- <button class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#tambahPenyewa">Tambah
-                                    Penyewa</button>
+                                    Penyewa</button> --}}
                                 {{-- <a href="/tambahpenyewa" type="button" class="btn btn-success">Tambah Penyewa</a> --}}
                             </div>
                             @if ($message = Session::get('success'))
@@ -177,18 +177,53 @@
                                                                                         value="{{ $row->created_at->format('Y-m-d') }}"
                                                                                         required>
                                                                                 </div>
+
+                                                                                {{-- <div class="form-group">
+                                                                                    <label for="mobil_noPolisi">Pilih
+                                                                                        Mobil</label>
+                                                                                    <select name="mobil_noPolisi"
+                                                                                        class="form-select"
+                                                                                        id="mobil_noPolisi">
+                                                                                        <option value="" disabled>--
+                                                                                            Pilih Mobil --</option>
+                                                                                        @if ($row->pemesanan)
+                                                                                            <option value="1"
+                                                                                                {{ $row->datapenyewa->jeniskelamin == 'lakilaki' ? 'selected' : '' }}>
+                                                                                                Laki-laki
+                                                                                            </option>
+                                                                                            <option value="2"
+                                                                                                {{ $row->datapenyewa->jeniskelamin == 'perempuan' ? 'selected' : '' }}>
+                                                                                                Perempuan
+                                                                                            </option>
+                                                                                        @endif
+                                                                                    </select>
+                                                                                </div> --}}
+
                                                                                 <div class="form-group">
                                                                                     <label for="mobil_noPolisi">Pilih Mobil</label>
                                                                                     <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi">
-                                                                                        <option value="" disabled>-- Pilih Mobil --</option>
+                                                                                        <!-- Gunakan PHP untuk menentukan opsi mobil -->
                                                                                         @foreach ($mobil as $mobilItem)
-                                                                                            <option value="{{ $mobilItem->noPolisi }}">
-                                                                                                 {{ $mobilItem->noPolisi }} - {{ $mobilItem->merekMobil }} {{ $mobilItem->modelMobil }}
+                                                                                            @php
+                                                                                                $selected = '';
+                                                                                                foreach ($dataPemesanan as $idPenyewa => $pemesanans) {
+                                                                                                    foreach ($pemesanans as $pemesanan) {
+                                                                                                        if ($pemesanan->penyewa_idPenyewa == $row->idPenyewa && $pemesanan->mobil_noPolisi == $mobilItem->noPolisi) {
+                                                                                                            $selected = 'selected';
+                                                                                                            break 2; // Keluar dari kedua loop foreach
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            @endphp
+                                                                                            <option value="{{ $mobilItem->noPolisi }}" {{ $selected }}>
+                                                                                                {{ $mobilItem->noPolisi }} - {{ $mobilItem->merekMobil }} {{ $mobilItem->modelMobil }}
                                                                                             </option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
                                                                                 
+
+
 
                                                                                 <div class="mb-3 row">
                                                                                     <label for="tanggalMulai" class="col-form-label">Tanggal Mulai</label>

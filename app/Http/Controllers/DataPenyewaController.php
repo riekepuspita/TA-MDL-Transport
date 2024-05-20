@@ -16,7 +16,9 @@ class DataPenyewaController extends Controller
 
     public function index()
 {
+    // $penyewa = DataPenyewa::with('pemesanan.mobil')->get();
     $penyewa = DataPenyewa::all();
+    $dataPemesanan = DataPemesanan::all();
     $mobil = DataMobil::all();
     $user = User::all();
 
@@ -59,7 +61,6 @@ class DataPenyewaController extends Controller
         $penyewa = DataPenyewa::create([
             'noNIK' => $validatedData['noNIK'],
             'user_idUser' => $validatedData['user_idUser'],
-
             'jeniskelamin' => $validatedData['jeniskelamin'],
             'alamat' => $validatedData['alamat'],
             'noHP' => $validatedData['noHP'],
@@ -102,49 +103,125 @@ class DataPenyewaController extends Controller
     }
 
     public function updatepenyewa(Request $request, $idPenyewa)
-    {
-        // Validasi request
-        $validatedData = $request->validate([
-            'noNIK' => 'required',
-            'namaLengkap' => 'required',
-            'jeniskelamin' => 'required',
-            'alamat' => 'required',
-            'noHP' => 'required',
-            'created_at' => 'required',
+{
+    // Validasi request untuk data penyewa dan pemesanan
+    $validatedData = $request->validate([
+        'noNIK' => 'required',
+        'namaLengkap' => 'required',
+        'jeniskelamin' => 'required',
+        'alamat' => 'required',
+        'noHP' => 'required',
+        'created_at' => 'required|date',
+        'tanggalMulai' => 'required|date',
+        'tanggalSelesai' => 'required|date',
+        'tujuan' => 'required|string',
+        'keberangkatan' => 'nullable|date_format:Y-m-d\TH:i',
+        'mobil_noPolisi' => 'required|string|max:20',  // Tambahkan validasi untuk mobil_noPolisi
+    ]);
+
+    // Perbarui data penyewa
+    $penyewa = DataPenyewa::findOrFail($idPenyewa);
+    $penyewa->update([
+        'noNIK' => $validatedData['noNIK'],
+        'namaLengkap' => $validatedData['namaLengkap'],
+        'jeniskelamin' => $validatedData['jeniskelamin'],
+        'alamat' => $validatedData['alamat'],
+        'noHP' => $validatedData['noHP'],
+        'created_at' => $validatedData['created_at'],
+    ]);
+
+    // Perbarui nama user di tabel users
+    $user = User::findOrFail($penyewa->user_idUser);
+    $user->update([
+        'noNIK' => $validatedData['noNIK'],
+        'namaUser' => $validatedData['namaLengkap'],
+        'jeniskelamin' => $validatedData['jeniskelamin'],
+        'alamat' => $validatedData['alamat'],
+        'noHP' => $validatedData['noHP'],
+        
+    ]);
+
+    // Periksa apakah data pemesanan sudah ada atau belum
+    $pemesanan = DataPemesanan::where('penyewa_idPenyewa', $idPenyewa)->first();
+
+    if ($pemesanan) {
+        // Perbarui data pemesanan yang ada
+        $pemesanan->update([
+            'mobil_noPolisi' => $validatedData['mobil_noPolisi'],  // Tambahkan mobil_noPolisi
+            'tanggalMulai' => $validatedData['tanggalMulai'],
+            'tanggalSelesai' => $validatedData['tanggalSelesai'],
+            'tujuan' => $validatedData['tujuan'],
+            'keberangkatan' => $validatedData['keberangkatan'],
+
         ]);
-
-        // Perbarui data penyewa
-        $penyewa = DataPenyewa::findOrFail($idPenyewa);
-        $penyewa->update([
-            'noNIK' => $validatedData['noNIK'],
-            'namaLengkap' => $validatedData['namaLengkap'],
-            'jeniskelamin' => $validatedData['jeniskelamin'],
-            'alamat' => $validatedData['alamat'],
-            'noHP' => $validatedData['noHP'],
-            'created_at' => $validatedData['created_at'],
+    } else {
+        // Buat data pemesanan baru
+        DataPemesanan::create([
+            'penyewa_idPenyewa' => $idPenyewa,
+            'mobil_noPolisi' => $validatedData['mobil_noPolisi'],  // Tambahkan mobil_noPolisi
+            'tanggalMulai' => $validatedData['tanggalMulai'],
+            'tanggalSelesai' => $validatedData['tanggalSelesai'],
+            'tujuan' => $validatedData['tujuan'],
+            'keberangkatan' => $validatedData['keberangkatan'],
         ]);
-
-        // Perbarui data pemesanan yang terkait jika perlu
-        $pemesanan = DataPemesanan::where('penyewa_idPenyewa', $idPenyewa)->first();
-        if ($pemesanan) {
-            $pemesanan->update([
-                'mobil_noPolisi' => $request->mobil_noPolisi,
-                'tanggalMulai' => $request->tanggalMulai,
-                'tanggalSelesai' => $request->tanggalSelesai,
-                'tujuan' => $request->tujuan,
-                'keberangkatan' => $request->keberangkatan,
-            ]);
-        }
-
-        // Menyimpan pesan sukses ke dalam session
-        Session::flash('alert', [
-            'type' => 'success',
-            'title' => 'Data Berhasil Diperbarui',
-            'message' => "",
-        ]);
-
-        return redirect()->route('datapenyewa');
     }
+
+    // Menyimpan pesan sukses ke dalam session
+    Session::flash('alert', [
+        'type' => 'success',
+        'title' => 'Data Berhasil Diperbarui',
+        'message' => "",
+    ]);
+
+    return redirect()->route('datapenyewa');
+}
+
+
+
+    // public function updatepenyewa(Request $request, $idPenyewa)
+    // {
+    //     // Validasi request
+    //     $validatedData = $request->validate([
+    //         'noNIK' => 'required',
+    //         'namaLengkap' => 'required',
+    //         'jeniskelamin' => 'required',
+    //         'alamat' => 'required',
+    //         'noHP' => 'required',
+    //         'created_at' => 'required',
+    //     ]);
+
+    //     // Perbarui data penyewa
+    //     $penyewa = DataPenyewa::findOrFail($idPenyewa);
+    //     $penyewa->update([
+    //         'noNIK' => $validatedData['noNIK'],
+    //         'namaLengkap' => $validatedData['namaLengkap'],
+    //         'jeniskelamin' => $validatedData['jeniskelamin'],
+    //         'alamat' => $validatedData['alamat'],
+    //         'noHP' => $validatedData['noHP'],
+    //         'created_at' => $validatedData['created_at'],
+    //     ]);
+
+    //     // Perbarui data pemesanan yang terkait jika perlu
+    //     $pemesanan = DataPemesanan::where('penyewa_idPenyewa', $idPenyewa)->first();
+    //     if ($pemesanan) {
+    //         $pemesanan->update([
+    //             'mobil_noPolisi' => $request->mobil_noPolisi,
+    //             'tanggalMulai' => $request->tanggalMulai,
+    //             'tanggalSelesai' => $request->tanggalSelesai,
+    //             'tujuan' => $request->tujuan,
+    //             'keberangkatan' => $request->keberangkatan,
+    //         ]);
+    //     }
+
+    //     // Menyimpan pesan sukses ke dalam session
+    //     Session::flash('alert', [
+    //         'type' => 'success',
+    //         'title' => 'Data Berhasil Diperbarui',
+    //         'message' => "",
+    //     ]);
+
+    //     return redirect()->route('datapenyewa');
+    // }
 
     public function delete($idPenyewa)
     {

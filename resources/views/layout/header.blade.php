@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="dropdown d-inline-block">
+                {{-- <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="icon-sm" data-feather="bell"></i>
@@ -165,7 +165,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- <div class="dropdown d-none d-sm-inline-block">
                     <button type="button" class="btn header-item light-dark" id="mode-setting-btn">

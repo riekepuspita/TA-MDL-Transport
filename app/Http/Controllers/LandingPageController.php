@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\DataPemesanan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class LandingPageController extends Controller
 {
@@ -75,24 +76,47 @@ class LandingPageController extends Controller
         ]);
     }
 
+    // public function reservasi($noPolisi)
+    // {
+    //     $data = DataMobil::where('noPolisi', $noPolisi)->first();
+    //     $user = Auth::user();
+
+    //     $idUser = $user->idUser;
+
+    //     if (!$data) {
+    //         return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
+    //     }
+
+    //     return view('reservasi', [
+    //         "title" => "Mobil",
+    //         'mobil' => $data,
+    //     ], compact('user', 'idUser'));
+
+    //     // return view('reservasi', ["title" => "Mobil"], compact('data', 'user'));
+    // }
+
     public function reservasi($noPolisi)
-    {
-        $data = DataMobil::where('noPolisi', $noPolisi)->first();
-        $user = Auth::user();
-
-        $idUser = $user->idUser;
-
-        if (!$data) {
-            return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
-        }
-
-        return view('reservasi', [
-            "title" => "Mobil",
-            'mobil' => $data,
-        ], compact('user', 'idUser'));
-
-        // return view('reservasi', ["title" => "Mobil"], compact('data', 'user'));
+{
+    // Cek apakah pengguna sudah login
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu');
     }
+
+    $data = DataMobil::where('noPolisi', $noPolisi)->first();
+    $user = Auth::user();
+
+    $idUser = $user->idUser;
+
+    if (!$data) {
+        return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
+    }
+
+    return view('reservasi', [
+        "title" => "Mobil",
+        'mobil' => $data,
+    ], compact('user', 'idUser'));
+}
+
 
     public function insertreservasi(Request $request)
     {
@@ -110,8 +134,8 @@ class LandingPageController extends Controller
 
         $dataPenyewa = DataPenyewa::where('user_idUser', $user->idUser)->first();
         if (!$dataPenyewa) {
-            return redirect()->route('mobilmdltransport')->with('error', 'Data penyewa tidak ditemukan');       
-         }
+            return redirect()->route('mobilmdltransport')->with('error', 'Data penyewa tidak ditemukan');
+        }
 
         // Simpan data penyewa
         // $penyewa = new DataPenyewa();
@@ -132,6 +156,44 @@ class LandingPageController extends Controller
         $pemesanan->tanggalSelesai = $validatedData['tanggalSelesai'];
         $pemesanan->tujuan = $validatedData['tujuan'];
         $pemesanan->save();
+
+        // Kirim notifikasi WhatsApp
+        $data = [
+            'api_key' => 'VbxBHKDunZYEBJjA10u4edyXRcGWlq',
+            'sender' => '085335086890',
+            'number' => '081359742459',
+            'message' => 'Hallo, terdapat reservasi masuk, segera cek pada system MDL Transport'
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://wa.izam.men/send-message",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        // echo $response;
+
+        if ($response) {
+            // Pesan berhasil dikirim
+        } else {
+            // Pesan gagal dikirim, Anda bisa menambahkan log atau notifikasi di sini
+            return 'Pesan gagal dikirim: ' . $response;
+        }
 
         // Redirect kembali dengan pesan sukses atau apapun yang diperlukan
         return redirect()->route('detailreservasi', ['idPemesanan' => $pemesanan->idPemesanan])->with('success', 'Data berhasil disimpan');

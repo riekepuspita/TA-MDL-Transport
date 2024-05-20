@@ -89,7 +89,7 @@
                                                                 User
                                                             @endif
                                                         </td>
-                                                        <td>{{ $row->statusUser }}</td>
+                                                        {{-- <td>{{ $row->statusUser }}</td> --}}
 
                                                         <td>
                                                             @if ($row->statusUser == 'aktif')
