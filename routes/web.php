@@ -40,6 +40,7 @@ Route::get('/detailmobil/{noPolisi}', [LandingPageController::class, 'detailMobi
 Route::get('/reservasi/{noPolisi}', [LandingPageController::class, 'reservasi'])->name('reservasi');
 Route::post('/insertreservasi', [LandingPageController::class, 'insertreservasi'])->name('insertreservasi');
 Route::get('/detailreservasi/{idPemesanan}', [LandingPageController::class, 'detailreservasi'])->name('detailreservasi');
+Route::delete('/batalpemesanan/{idPemesanan}', [LandingPageController::class, 'batalPemesanan'])->name('batalPemesanan');
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

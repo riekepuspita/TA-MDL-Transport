@@ -34,14 +34,16 @@
                                 <button type="button" class="btn header-item user text-start d-flex align-items-center"
                                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/profil.png') }}"
-                                        alt="Header Avatar" style="width: 30px; height: 30px;">
-                                        <div class="user-info ms-2 d-none d-xl-inline-block">
-                                            <span class="user-name">{{ $user->namaUser }}</span>
-                                            <br> <!-- Tambahkan jeda baris di sini -->
-                                            <span class="user-email" style="font-size: 14px; color: blue;">{{ $user->email }}</span>
-                                        </div>
-                                        
+                                    <img class="rounded-circle header-profile-user"
+                                        src="{{ asset('assets/images/users/profil.png') }}" alt="Header Avatar"
+                                        style="width: 30px; height: 30px;">
+                                    <div class="user-info ms-2 d-none d-xl-inline-block">
+                                        <span class="user-name">{{ $user->namaUser }}</span>
+                                        <br> <!-- Tambahkan jeda baris di sini -->
+                                        <span class="user-email"
+                                            style="font-size: 14px; color: blue;">{{ $user->email }}</span>
+                                    </div>
+
                                 </button>
 
 
@@ -49,8 +51,11 @@
                                     <a class="dropdown-item" href="#"><i
                                             class='bx bx-user-circle text-muted font-size-18 align-middle me-1'></i> <span
                                             class="align-middle">My Account</span></a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class='bx bx-user-circle text-muted font-size-18 align-middle me-1'></i> <span
+                                            class="align-middle">Riwayat Pemesanan</span></a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class='bx bx-log-out text-muted font-size-18 align-middle me-1'></i> <span
                                             class="align-middle">Logout</span>
                                     </a>
@@ -63,9 +68,9 @@
                             <a href="/login" class="btn btn-secondary">LOGIN</a>
                         @endauth
                     </div>
-                    
-                    
-                    
+
+
+
 
                     {{-- <div class="border-start ps-4 d-none d-lg-block">
                         @auth

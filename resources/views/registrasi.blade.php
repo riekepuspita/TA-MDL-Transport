@@ -82,11 +82,11 @@
                                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                 </div>
                                             </div>
-                                            {{-- <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label for="uploadKTP" class="form-label">Unggah KTP</label>
                                                 <input type="file" class="form-control" id="uploadKTP" name="uploadKTP" accept=".jpg, .jpeg, .png" required>
                                                 <div class="form-text">Silakan unggah gambar KTP Anda (format: JPG, JPEG, PNG).</div>
-                                            </div> --}}
+                                            </div>
                                             <div class="mt-3 text-end">
                                                 <button class="btn btn-primary w-sm waves-effect waves-light" style="background-color: #008080;"
                                                     type="submit">Registrasi</button>

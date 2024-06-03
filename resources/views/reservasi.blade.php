@@ -104,21 +104,21 @@
                                 <div class="mb-3 row">
                                     <label for="example-tel-input" class="col-md-3 col-form-label">Hari/ tanggal</label>
                                     <div class="col-md-12">
-                                        <input class="form-control" name="created_at" type="date" value=""
+                                        <input class="form-control" min="{{ date('Y-m-d') }}" name="created_at" type="date" value=""
                                             id="created_at" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="example-tel-input" class="col-md-3 col-form-label">Tanggal Mulai</label>
+                                    <label for="example-tel-input" class="col-md-5 col-form-label">Tanggal Mulai Sewa</label>
                                     <div class="col-md-12">
-                                        <input class="form-control" name="tanggalMulai" type="date" value=""
+                                        <input class="form-control" min="{{ date('Y-m-d') }}" name="tanggalMulai" type="date" value=""
                                             id="tanggalMulai" placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="example-tel-input" class="col-md-3 col-form-label">Tanggal Selesai</label>
+                                    <label for="example-tel-input" class="col-md-5 col-form-label">Tanggal Selesai Sewa</label>
                                     <div class="col-md-12">
-                                        <input class="form-control" name="tanggalSelesai" type="date" value=""
+                                        <input class="form-control" min="{{ date('Y-m-d') }}" name="tanggalSelesai" type="date" value=""
                                             id="tanggalSelesai" placeholder="" required>
                                     </div>
                                 </div>

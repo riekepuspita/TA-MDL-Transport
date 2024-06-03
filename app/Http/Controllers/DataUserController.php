@@ -34,6 +34,7 @@ class DataUserController extends Controller
             'jeniskelamin' => 'required',
             'alamat' => 'required',
             'noHP' => 'required',
+            'uploadKTP' => 'required|file', // Validasi untuk file KTP yang diunggah
         ]);
 
         if ($validator->fails()) {
@@ -44,6 +45,10 @@ class DataUserController extends Controller
                 'message' => 'Ada inputan yang salah!',
             ]);
         } else {
+
+            $fileKTPName = $request->file('uploadKTP')->getClientOriginalName();
+            $request->file('uploadKTP')->move('uploadKTP/', $fileKTPName);
+
             // dd($validator);
             $user = User::create([
                 'namaUser' => $request->namaUser,
@@ -61,7 +66,10 @@ class DataUserController extends Controller
                 'jeniskelamin' => $request->jeniskelamin,
                 'alamat' => $request->alamat,
                 'noHP' => $request->noHP,
+                'uploadKTP' => $fileKTPName, // Validasi untuk file KTP yang diunggah
             ]);
+
+           
 
             // dd($penyewa);
 

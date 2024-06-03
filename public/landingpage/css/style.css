@@ -464,7 +464,7 @@
 
 /*** Footer ***/
 .footer {
-    color: #B0B9AE;
+    color: #b0b9ae;
 }
 
 .footer .btn.btn-link {
@@ -472,7 +472,7 @@
     margin-bottom: 5px;
     padding: 0;
     text-align: left;
-    color: #B0B9AE;
+    color: #b9b6ae;
     font-weight: normal;
     text-transform: capitalize;
     transition: .3s;

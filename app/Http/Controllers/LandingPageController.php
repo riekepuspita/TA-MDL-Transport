@@ -9,9 +9,21 @@ use App\Models\DataPemesanan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
+use App\Models\Pembayaran;
+use Midtrans\Snap;
+use Midtrans\Config;
 
 class LandingPageController extends Controller
 {
+    public function __construct()
+    {
+        // Atur kredensial Midtrans
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+    }
 
     public function homeIndex()
     {
@@ -76,46 +88,27 @@ class LandingPageController extends Controller
         ]);
     }
 
-    // public function reservasi($noPolisi)
-    // {
-    //     $data = DataMobil::where('noPolisi', $noPolisi)->first();
-    //     $user = Auth::user();
-
-    //     $idUser = $user->idUser;
-
-    //     if (!$data) {
-    //         return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
-    //     }
-
-    //     return view('reservasi', [
-    //         "title" => "Mobil",
-    //         'mobil' => $data,
-    //     ], compact('user', 'idUser'));
-
-    //     // return view('reservasi', ["title" => "Mobil"], compact('data', 'user'));
-    // }
-
     public function reservasi($noPolisi)
-{
-    // Cek apakah pengguna sudah login
-    if (!Auth::check()) {
-        return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu');
+    {
+        // Cek apakah pengguna sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu');
+        }
+
+        $data = DataMobil::where('noPolisi', $noPolisi)->first();
+        $user = Auth::user();
+
+        $idUser = $user->idUser;
+
+        if (!$data) {
+            return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
+        }
+
+        return view('reservasi', [
+            "title" => "Mobil",
+            'mobil' => $data,
+        ], compact('user', 'idUser'));
     }
-
-    $data = DataMobil::where('noPolisi', $noPolisi)->first();
-    $user = Auth::user();
-
-    $idUser = $user->idUser;
-
-    if (!$data) {
-        return redirect()->route('mobilmdltransport')->with('error', 'Mobil tidak ditemukan');
-    }
-
-    return view('reservasi', [
-        "title" => "Mobil",
-        'mobil' => $data,
-    ], compact('user', 'idUser'));
-}
 
 
     public function insertreservasi(Request $request)
@@ -160,8 +153,8 @@ class LandingPageController extends Controller
         // Kirim notifikasi WhatsApp
         $data = [
             'api_key' => 'VbxBHKDunZYEBJjA10u4edyXRcGWlq',
-            'sender' => '085335086890',
-            'number' => '081359742459',
+            'sender' => '6285335086890',
+            'number' => '6281359742459',
             'message' => 'Hallo, terdapat reservasi masuk, segera cek pada system MDL Transport'
         ];
 
@@ -209,12 +202,53 @@ class LandingPageController extends Controller
         $user = Auth::user();
         // dd($pemesanan);
 
+        // Definisikan parameter transaksi
+        $transactionParams = [
+            'transaction_details' => [
+                'order_id' => Str::uuid(), // Gunakan UUID untuk membuat order_id unik
+                'gross_amount' => $pemesanan->mobil->hargaSewa, // Ganti dengan jumlah yang sesuai
+            ],
+            'customer_details' => [
+                'first_name' => $penyewa->namaLengkap,
+                'email' => $penyewa->user->email,
+                'phone' => $penyewa->noHP,
+            ],
+        ];
+
+        $snapToken = Snap::getSnapToken($transactionParams);
+
+        // Simpan data transaksi ke tabel pembayaran
+        $pembayaran = new Pembayaran();
+        $pembayaran->pemesanan_idPemesanan = $pemesanan->idPemesanan;
+        $pembayaran->user_idUser = $user->idUser;
+        $pembayaran->penyewa_idPenyewa = $penyewa->idPenyewa;
+        $pembayaran->tanggalPembayaran = now(); // Atur tanggal pembayaran ke waktu saat ini
+        $pembayaran->totalPembayaran = $transactionParams['transaction_details']['gross_amount'];
+        $pembayaran->statusPembayaran = 'berhasil'; // Atur status awal sesuai kebutuhan
+        $pembayaran->save();
+
         return view('detailreservasi', [
             "title" => "Mobil",
             "pemesanan" => $pemesanan,
             "penyewa" => $penyewa,
-            "mobil" => $mobil, // Tambahkan data mobil ke array
-            "user" => $user
+            "mobil" => $mobil,
+            "user" => $user,
+            "snapToken" => $snapToken,
+            "pembayaran" => $pembayaran
         ]);
+    }
+
+    public function batalPemesanan($idPemesanan)
+    {
+        // Temukan pemesanan berdasarkan ID
+        $pemesanan = DataPemesanan::find($idPemesanan);
+
+        if ($pemesanan) {
+            // Hapus pemesanan jika ditemukan
+            $pemesanan->delete();
+            return redirect()->route('mobilmdltransport')->with('success', 'Pemesanan berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Pemesanan tidak ditemukan.');
+        }
     }
 }

@@ -24,7 +24,12 @@ class RegistrasiController extends Controller
             'jeniskelamin' => 'required',
             'alamat' => 'required',
             'noHP' => 'required',
+            'uploadKTP' => 'required|file', // Validasi untuk file KTP yang diunggah
         ]);
+
+        // Simpan file KTP yang diunggah ke penyimpanan yang sesuai (misalnya penyimpanan lokal)
+        $fileKTPName = $request->file('uploadKTP')->getClientOriginalName();
+        $request->file('uploadKTP')->move('uploadKTP/', $fileKTPName);
 
         // Membuat record User baru
         $user = User::create([
@@ -41,7 +46,8 @@ class RegistrasiController extends Controller
             'jeniskelamin' => $request->jeniskelamin,
             'alamat' => $request->alamat,
             'noHP' => $request->noHP,
-            'user_idUser' => $user->idUser
+            'user_idUser' => $user->idUser,
+            'uploadKTP' => $fileKTPName, // Menyimpan nama file KTP yang diunggah
         ]);
 
         // Menyimpan record DataPenyewa yang terkait dengan user

@@ -20,6 +20,7 @@ class DataPenyewa extends Model
         'jeniskelamin',
         'alamat',
         'noHP',
+        'uploadKTP',
         'created_at',
         'user_idUser',
 

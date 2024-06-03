@@ -200,55 +200,93 @@
                                                                                 </div> --}}
 
                                                                                 <div class="form-group">
-                                                                                    <label for="mobil_noPolisi">Pilih Mobil</label>
-                                                                                    <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi">
+                                                                                    <label for="mobil_noPolisi">Pilih
+                                                                                        Mobil</label>
+                                                                                    <select name="mobil_noPolisi"
+                                                                                        class="form-select"
+                                                                                        id="mobil_noPolisi">
                                                                                         <!-- Gunakan PHP untuk menentukan opsi mobil -->
                                                                                         @foreach ($mobil as $mobilItem)
                                                                                             @php
                                                                                                 $selected = '';
-                                                                                                foreach ($dataPemesanan as $idPenyewa => $pemesanans) {
-                                                                                                    foreach ($pemesanans as $pemesanan) {
-                                                                                                        if ($pemesanan->penyewa_idPenyewa == $row->idPenyewa && $pemesanan->mobil_noPolisi == $mobilItem->noPolisi) {
-                                                                                                            $selected = 'selected';
+                                                                                                foreach (
+                                                                                                    $dataPemesanan
+                                                                                                    as $idPenyewa =>
+                                                                                                        $pemesanans
+                                                                                                ) {
+                                                                                                    foreach (
+                                                                                                        $pemesanans
+                                                                                                        as $pemesanan
+                                                                                                    ) {
+                                                                                                        if (
+                                                                                                            $pemesanan->penyewa_idPenyewa ==
+                                                                                                                $row->idPenyewa &&
+                                                                                                            $pemesanan->mobil_noPolisi ==
+                                                                                                                $mobilItem->noPolisi
+                                                                                                        ) {
+                                                                                                            $selected =
+                                                                                                                'selected';
                                                                                                             break 2; // Keluar dari kedua loop foreach
                                                                                                         }
                                                                                                     }
                                                                                                 }
                                                                                             @endphp
-                                                                                            <option value="{{ $mobilItem->noPolisi }}" {{ $selected }}>
-                                                                                                {{ $mobilItem->noPolisi }} - {{ $mobilItem->merekMobil }} {{ $mobilItem->modelMobil }}
+                                                                                            <option
+                                                                                                value="{{ $mobilItem->noPolisi }}"
+                                                                                                {{ $selected }}>
+                                                                                                {{ $mobilItem->noPolisi }}
+                                                                                                -
+                                                                                                {{ $mobilItem->merekMobil }}
+                                                                                                {{ $mobilItem->modelMobil }}
                                                                                             </option>
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
-                                                                                
+
 
 
 
                                                                                 <div class="mb-3 row">
-                                                                                    <label for="tanggalMulai" class="col-form-label">Tanggal Mulai</label>
-                                                                                    <input class="form-control" name="tanggalMulai" type="date" id="tanggalMulai"
-                                                                                           placeholder="Masukkan Tanggal Mulai" required
-                                                                                           value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->tanggalMulai }}@endforeach">
+                                                                                    <label for="tanggalMulai"
+                                                                                        class="col-form-label">Tanggal
+                                                                                        Mulai</label>
+                                                                                    <input class="form-control"
+                                                                                        name="tanggalMulai" type="date"
+                                                                                        id="tanggalMulai"
+                                                                                        placeholder="Masukkan Tanggal Mulai"
+                                                                                        required
+                                                                                        value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->tanggalMulai }} @endforeach">
                                                                                 </div>
 
                                                                                 <div class="mb-3 row">
-                                                                                    <label for="tanggalSelesai" class="col-form-label">Tanggal Selesai</label>
-                                                                                    <input class="form-control" name="tanggalSelesai" type="date" id="tanggalSelesai"
-                                                                                           placeholder="Masukkan Tanggal Selesai" required
-                                                                                           value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->tanggalSelesai }}@endforeach">
+                                                                                    <label for="tanggalSelesai"
+                                                                                        class="col-form-label">Tanggal
+                                                                                        Selesai</label>
+                                                                                    <input class="form-control"
+                                                                                        name="tanggalSelesai"
+                                                                                        type="date" id="tanggalSelesai"
+                                                                                        placeholder="Masukkan Tanggal Selesai"
+                                                                                        required
+                                                                                        value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->tanggalSelesai }} @endforeach">
                                                                                 </div>
                                                                                 <div class="mb-3 row">
-                                                                                    <label for="tujuan" class="col-form-label">Tujuan</label>
-                                                                                    <input class="form-control" name="tujuan" type="text" id="tujuan" required
-                                                                                           value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->tujuan }}@endforeach">
+                                                                                    <label for="tujuan"
+                                                                                        class="col-form-label">Tujuan</label>
+                                                                                    <input class="form-control"
+                                                                                        name="tujuan" type="text"
+                                                                                        id="tujuan" required
+                                                                                        value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->tujuan }} @endforeach">
                                                                                 </div>
-                                                                                
+
                                                                                 <div class="mb-3 row">
-                                                                                    <label for="keberangkatan" class="col-form-label">Keberangkatan</label>
-                                                                                    <input class="form-control" name="keberangkatan" type="datetime-local" id="keberangkatan"
-                                                                                           placeholder="Masukkan Keberangkatan"
-                                                                                           value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->keberangkatan }}@endforeach">
+                                                                                    <label for="keberangkatan"
+                                                                                        class="col-form-label">Keberangkatan</label>
+                                                                                    <input class="form-control"
+                                                                                        name="keberangkatan"
+                                                                                        type="datetime-local"
+                                                                                        id="keberangkatan"
+                                                                                        placeholder="Masukkan Keberangkatan"
+                                                                                        value="@foreach ($dataPemesanan[$row->idPenyewa] as $pesan){{ $pesan->keberangkatan }} @endforeach">
                                                                                 </div>
 
                                                                                 <div class="modal-footer">

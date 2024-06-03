@@ -254,6 +254,7 @@
                                                                                         required>
                                                                                 </div>
 
+
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"
                                                                                         class="btn btn-secondary"
@@ -355,6 +356,12 @@
                             <input type="tel" class="form-control" id="noHP" name="noHP"
                                 placeholder="Masukkan No HP Penyewa" pattern="[0-9]+"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="uploadKTP" class="form-label">Unggah KTP</label>
+                            <input type="file" class="form-control" id="uploadKTP" name="uploadKTP" accept=".jpg, .jpeg, .png" required>
+                            <div class="form-text">Silakan unggah gambar KTP Anda (format: JPG, JPEG, PNG).</div>
                         </div>
 
                     </div>

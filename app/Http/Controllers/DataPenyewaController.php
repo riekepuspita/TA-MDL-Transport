@@ -48,6 +48,7 @@ class DataPenyewaController extends Controller
             'jeniskelamin' => 'required',
             'alamat' => 'required',
             'noHP' => 'required',
+            // 'uploadKTP' => 'required|file', // Validasi untuk file KTP yang diunggah
             'created_at' => 'required',
             'tanggalMulai' => 'required',
             'tanggalSelesai' => 'required',
@@ -57,6 +58,10 @@ class DataPenyewaController extends Controller
             'user_idUser' => 'required|exists:users,id',
         ]);
 
+         // Simpan file KTP yang diunggah ke penyimpanan yang sesuai (misalnya penyimpanan lokal)
+        //  $fileKTPName = $request->file('uploadKTP')->getClientOriginalName();
+        //  $request->file('uploadKTP')->move('uploadKTP/', $fileKTPName);
+
         // Buat penyewa baru
         $penyewa = DataPenyewa::create([
             'noNIK' => $validatedData['noNIK'],
@@ -65,6 +70,7 @@ class DataPenyewaController extends Controller
             'alamat' => $validatedData['alamat'],
             'noHP' => $validatedData['noHP'],
             'created_at' => $validatedData['created_at'],
+            // 'uploadKTP' => $fileKTPName, // Menyimpan nama file KTP yang diunggah
         ]);
 
 
