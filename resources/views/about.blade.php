@@ -22,8 +22,6 @@
                 </div>
             </div>
             <!-- Page Header End -->
-
-
             <!-- About Start -->
             <div class="container-xxl py-5">
                 <div class="container">
@@ -79,7 +77,6 @@
                                     pengalaman transportasi yang memuaskan dan membangun hubungan jangka panjang dengan
                                     pelanggan kami. Bersama MDL Transport, Anda dapat mengandalkan solusi transportasi yang
                                     efisien dan handal untuk keperluan pribadi atau bisnis Anda.</p>
-
                             </div>
                             <div class="col-sm-4">
                                 <img class="img-fluid bg-white w-100" src="{{ asset('landingpage/img/bg2.jpg') }}"
@@ -89,7 +86,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     </body>
     <!-- About End -->
     @include('landingpage.footer')

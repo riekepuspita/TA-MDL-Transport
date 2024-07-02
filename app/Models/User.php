@@ -38,4 +38,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(DataPenyewa::class, 'user_idUser');
     }
+
+    public function pemesanan()
+{
+    return $this->hasMany(DataPemesanan::class, 'penyewa_idPenyewa');
+}
 }

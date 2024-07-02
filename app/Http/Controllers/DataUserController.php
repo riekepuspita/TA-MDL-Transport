@@ -22,8 +22,6 @@ class DataUserController extends Controller
 
     public function insertuser(Request $request)
     {
-        // dd($request->all());
-        // User::create($request->all());
 
         $validator = Validator::make($request->all(), [
             'namaUser' => 'required',
@@ -34,7 +32,7 @@ class DataUserController extends Controller
             'jeniskelamin' => 'required',
             'alamat' => 'required',
             'noHP' => 'required',
-            'uploadKTP' => 'required|file', // Validasi untuk file KTP yang diunggah
+            'uploadKTP' => 'required|file',
         ]);
 
         if ($validator->fails()) {
@@ -68,11 +66,6 @@ class DataUserController extends Controller
                 'noHP' => $request->noHP,
                 'uploadKTP' => $fileKTPName, // Validasi untuk file KTP yang diunggah
             ]);
-
-           
-
-            // dd($penyewa);
-
 
             Session::flash('alert', [
                 'type' => 'success',
@@ -146,37 +139,6 @@ class DataUserController extends Controller
 
         return redirect()->route('datauser');
     }
-
-    // public function deleteuser($idUser)
-    // {
-    //     $data = User::find($idUser);
-
-    //     if ($data) {
-    //         $data->delete();
-    //         return redirect()->route('datauser');
-    //         // ->with('success', 'Data Berhasil Dihapus');
-    //     }
-    // }
-
-    // public function deleteuser($idUser){
-    // $data = User::find($idUser);
-
-    // if($data) {
-    //     Session::flash('alert', [
-    //         'type' => 'success',
-    //         'title' => 'Data '.$data->namaUser.' Berhasil Dihapus',
-    //         'message' => "",
-    //     ]); 
-    //     $data->delete();
-    // } else {
-    //     Session::flash('alert', [
-    //         'type' => 'error',
-    //         'title' => 'Hapus Data Gagal',
-    //         'message' => 'ID Admin Tidak Valid!',
-    //     ]); 
-    // }
-    // return back();
-    // }
 
     public function deleteuser($idUser)
     {

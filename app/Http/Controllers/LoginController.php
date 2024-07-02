@@ -9,9 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function  index(){
-        $user = User::all();
-        return view('login', compact('user'));
+    public function  index()
+    {
+        if (auth()->check() && auth()->user()->level == 'user') {
+            return redirect('/mdltransport');
+        } else if (auth()->check() && auth()->user()->level == 'admin' || auth()->check()  && auth()->user()->level == 'superadmin') {
+            return redirect('/dashboard');
+        } else {
+            $user = User::all();
+            return view('login', compact('user'));
+        }
     }
 
     public function login(Request $request)
@@ -20,9 +27,9 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-    
+
         $credentials = $request->only('email', 'password');
-    
+
         if (Auth::attempt($credentials)) {
             // Login berhasil
             $user = Auth::user();
@@ -38,12 +45,11 @@ class LoginController extends Controller
                 return redirect()->route('mdltransport')->with('success', 'Login berhasil !');
             }
         }
-    
         // Login gagal
         return redirect()->route('login')->with('error', 'Login gagal. Periksa email dan password Anda.');
     }
-    
-    
+
+
 
 
 

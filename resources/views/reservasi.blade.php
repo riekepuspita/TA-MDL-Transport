@@ -59,55 +59,6 @@
                             <form action="/insertreservasi" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="mobil_noPolisi" value="{{ $mobil->noPolisi }}">
-                                {{-- <div class="mb-3 row">
-                                    <label for="example-nik-input" class="col-md-3 col-form-label">NIK</label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" name="noNIK" type="text" value=""
-                                            id="noNIK" placeholder="Masukkan NIK" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="example-namaLengkap-input" class="col-md-3 col-form-label">Nama
-                                        Lengkap</label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" name="namaLengkap" type="text" value=""
-                                            id="namaLengkap" placeholder="Masukkan Nama Lengkap" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="example-role-input" class="col-md-3 col-form-label">Jenis Kelamin</label>
-                                    <div class="col-md-12">
-                                        <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
-                                            <option value="" selected disabled hidden>
-                                                -- Pilih Jenis Kelamin --</option>
-                                            <option value="1">Laki-laki</option>
-                                            <option value="2">Perempuan</option>
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="example-alamat-input" class="col-md-3 col-form-label">Alamat</label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" name="alamat" type="text" value=""
-                                            id="alamat" placeholder="Masukkan Alamat Lengkap" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="example-tel-input" class="col-md-3 col-form-label">No HP</label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" name="noHP" type="tel" value=""
-                                            id="noHP" placeholder="Masukkan No HP" pattern="[0-9]+"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                                    </div>
-                                </div> --}}
-                                <div class="mb-3 row">
-                                    <label for="example-tel-input" class="col-md-3 col-form-label">Hari/ tanggal</label>
-                                    <div class="col-md-12">
-                                        <input class="form-control" min="{{ date('Y-m-d') }}" name="created_at" type="date" value=""
-                                            id="created_at" placeholder="" required>
-                                    </div>
-                                </div>
                                 <div class="mb-3 row">
                                     <label for="example-tel-input" class="col-md-5 col-form-label">Tanggal Mulai Sewa</label>
                                     <div class="col-md-12">

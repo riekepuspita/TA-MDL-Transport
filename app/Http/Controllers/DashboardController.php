@@ -18,14 +18,4 @@ class DashboardController extends Controller
         // return($data);
         return view('dashboard', compact('data', 'mobil', 'penyewa'));
     }
-   
-   // public function index()
-   // {
-   //  $penyewa = DataPenyewa::count();
-   //  // $user = User::where('level','Admin')->count();
-   //  $mobil = DataMobil::count();
-    
-
-   //  return view('dashboard', compact('mobil','penyewa'));
-   // }  
 }

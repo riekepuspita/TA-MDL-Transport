@@ -103,20 +103,36 @@
                                     <td>:</td>
                                     <td>{{ $pemesanan->mobil->hargaSewa }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>:</td>
+                                    <td>
+                                        @if ($pembayaran->statusPembayaran === 'berhasil')
+                                            Telah Dibayar
+                                        @elseif ($pembayaran->created_at->diffInHours(\Carbon\Carbon::now()) > 1)
+                                            <span>Belum Dibayar</span>
+                                        @else
+                                            Menunggu Pembayaran
+                                        @endif
+                                    </td>
+                                </tr>
                             </table>
-                            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                                <form action="/batalpemesanan/{{ $pemesanan->idPemesanan }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-secondary" type="submit"
-                                        onclick="return confirm('Apakah Anda yakin ingin membatalkan pemesanan ini?')"
-                                        style="margin-right: 10px; margin-bottom: 20px;">Batal</button>
-                                </form>
-                                <button class="btn btn-secondary" id="pay-later-button"
-                                    style="margin-right: 10px; margin-bottom: 20px;">Bayar Nanti</button>
-                                <button class="btn btn-secondary" id="pay-button" style="margin-bottom: 20px;">Bayar
-                                    Sekarang</button>
-                            </div>
+                            {{-- @if ($pembayaran->created_at->diffInHours(\Carbon\Carbon::now()) < 1 || $pembayaran->statusPembayaran !== 'berhasil') --}}
+                            @if ($pembayaran->statusPembayaran !== 'berhasil')
+                                <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+                                    <form action="/batalpemesanan/{{ $pemesanan->idPemesanan }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-secondary" type="submit"
+                                            onclick="return confirm('Apakah Anda yakin ingin membatalkan pemesanan ini?')"
+                                            style="margin-right: 10px; margin-bottom: 20px;">Batal</button>
+                                    </form>
+                                    <a href="/mdltransport" class="btn btn-secondary" id="pay-later-button"
+                                        style="margin-right: 10px; margin-bottom: 20px;">Bayar Nanti</a>
+                                    <button class="btn btn-secondary" id="pay-button" style="margin-bottom: 20px;">Bayar
+                                        Sekarang</button>
+                                </div>
+                            @endif
                         </div>
 
                     </div>
@@ -150,9 +166,13 @@
             }
         </script>
 
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
+
+        {{-- @dd($pembayaran) --}}
 
         <script type="text/javascript">
             // For example trigger on button clicked, or any time you need
@@ -162,6 +182,10 @@
                     onSuccess: function(result) {
                         // Panggil fungsi handlePaymentSuccess ketika pembayaran berhasil
                         handlePaymentSuccess(result);
+                    },
+                    onSuccess: function(result) {
+                        window.location.href =
+                            '{{ route('detailreservasi', ['idPemesanan' => $pembayaran->pemesanan_idPemesanan, 'status' => 'berhasil']) }}'
                     },
                     onPending: function(result) {
                         /* You may add your own implementation here /

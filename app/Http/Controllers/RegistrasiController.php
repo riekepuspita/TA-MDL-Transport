@@ -12,8 +12,8 @@ class RegistrasiController extends Controller
     {
         return view('registrasi');
     }
-     
-        public function registrasiuser(Request $request)
+
+    public function registrasiuser(Request $request)
     {
         // Validasi inputan
         $request->validate([
@@ -38,26 +38,18 @@ class RegistrasiController extends Controller
             'password' => bcrypt($request->password),
             'statusUser' => 'aktif'
         ]);
-
-        // Membuat record DataPenyewa yang terkait dengan user yang baru dibuat
-        $penyewa = new DataPenyewa([
-            'namaLengkap'=> $user->namaUser,
-            'noNIK' => $request->noNIK,
-            'jeniskelamin' => $request->jeniskelamin,
-            'alamat' => $request->alamat,
-            'noHP' => $request->noHP,
-            'user_idUser' => $user->idUser,
-            'uploadKTP' => $fileKTPName, // Menyimpan nama file KTP yang diunggah
-        ]);
-
-        // Menyimpan record DataPenyewa yang terkait dengan user
-        $user->datapenyewa()->save($penyewa);
-
-        // dd($penyewa);
+        
+        $datapenyewa = new DataPenyewa();
+        $datapenyewa->namaLengkap =  $user->namaUser;
+        $datapenyewa->noNIK = $request->noNIK;
+        $datapenyewa->jenisKelamin = $request->jeniskelamin;
+        $datapenyewa->alamat = $request->alamat;
+        $datapenyewa->noHP = $request->noHP;
+        $datapenyewa->user_idUser = $user->idUser;
+        $datapenyewa->uploadKTP = $fileKTPName;
+        $datapenyewa->save();
 
         // Pengalihan ke halaman login
         return redirect('login');
     }
-
-
 }

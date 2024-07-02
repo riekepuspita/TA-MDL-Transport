@@ -8,7 +8,6 @@
     @include('landingpage.header')
 
     <body>
-
         <!-- Page Header Start -->
         <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container text-center py-5">
@@ -23,7 +22,6 @@
             </div>
         </div>
         <!-- Page Header End -->
-
         <!-- Detail Mobil Start -->
         <div class="container py-5">
             <div class="row">
@@ -40,14 +38,10 @@
                     <a href="/mobil" class="btn btn-secondary rounded-pill py-2 px-4 m-2" style="float:right;">Kembali</a>
                     <a href="/reservasi/{{ $mobil->noPolisi }}" class="btn btn-dark rounded-pill py-2 px-4 m-2 " style="float:right;">Reservasi <i
                         class="fa fa-cart-plus ms-2"></i></a>
-                    
-                    <!-- Tambahkan informasi lainnya sesuai kebutuhan -->
                 </div>
             </div>
         </div>
         <!-- Detail Mobil End -->
-
-
     </body>
     <!-- Store End -->
     @include('landingpage.footer')

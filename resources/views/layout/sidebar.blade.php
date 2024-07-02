@@ -55,12 +55,12 @@
                         </a>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="/laporan">
                             <i class="bx bx-file icon nav-icon"></i>
                             <span class="menu-item" data-key="t-laporan">Laporan</span>
                         </a>
-                    </li>
+                    </li> --}}
                 @endif
             </ul>
         </div>

@@ -15,7 +15,6 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
@@ -33,7 +32,6 @@
                         </div>
                     </div>
                     <!-- end page title -->
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
@@ -68,16 +66,6 @@
                                                 @foreach ($user as $row)
                                                     <tr>
                                                         <th scope="row">{{ $no++ }}</th>
-
-                                                        {{-- <td>{{ $row->namaUser }}</td>
-                                                        <td>{{ $row->email }}</td>
-                                                        @if ($row->datapenyewa)
-                                                            <td>{{ $row->datapenyewa->noNIK }}</td>
-                                                            <td>{{ $row->datapenyewa->jeniskelamin }}</td>
-                                                        @else
-                                                            <td colspan="2">Data Penyewa Tidak Ada</td>
-                                                        @endif --}}
-
                                                         <td>{{ $row->namaUser }}</td>
                                                         <td>{{ $row->email }}</td>
                                                         <td>
@@ -89,8 +77,6 @@
                                                                 User
                                                             @endif
                                                         </td>
-                                                        {{-- <td>{{ $row->statusUser }}</td> --}}
-
                                                         <td>
                                                             @if ($row->statusUser == 'aktif')
                                                                 Aktif
@@ -98,7 +84,6 @@
                                                                 Tidak Aktif
                                                             @endif
                                                         </td>
-
                                                         <td>
                                                             <a href="" title="Edit Data"
                                                                 class="btn btn-warning btn-sm" data-bs-toggle="modal"
@@ -109,7 +94,6 @@
                                                                 onclick="confirmDelete('{{ $row->idUser }}')">
                                                                 <i class="bx bx-trash"></i>
                                                             </button>
-
                                                             {{-- Start Modal Edit --}}
                                                             <div class="modal fade" id="edituser{{ $row->idUser }}"
                                                                 tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -253,8 +237,6 @@
                                                                                         value="@if ($row->datapenyewa) {{ $row->datapenyewa->noHP }} @endif"
                                                                                         required>
                                                                                 </div>
-
-
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"
                                                                                         class="btn btn-secondary"
@@ -263,15 +245,12 @@
                                                                                         class="btn btn-primary">Simpan
                                                                                         Perubahan</button>
                                                                                 </div>
-
                                                                             </form>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             {{-- End Modal Edit --}}
-
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -357,13 +336,11 @@
                                 placeholder="Masukkan No HP Penyewa" pattern="[0-9]+"
                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')"required>
                         </div>
-
                         <div class="mb-3">
                             <label for="uploadKTP" class="form-label">Unggah KTP</label>
                             <input type="file" class="form-control" id="uploadKTP" name="uploadKTP" accept=".jpg, .jpeg, .png" required>
                             <div class="form-text">Silakan unggah gambar KTP Anda (format: JPG, JPEG, PNG).</div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -374,7 +351,6 @@
         </div>
     </div>
 @endsection
-
 
 @section('script')
     <script>

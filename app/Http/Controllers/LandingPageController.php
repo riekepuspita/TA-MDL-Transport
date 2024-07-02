@@ -53,9 +53,8 @@ class LandingPageController extends Controller
         $data = DataMobil::all(); // Mengambil semua data mobil dari database
         $title = "Mobil"; // Definisikan variabel title
         $user = Auth::user();
-        // dd($data);
 
-        return view('mobil', compact('data', 'title', 'user')); // Menampilkan halaman landingpage dengan mengirimkan data mobil dan title
+        return view('mobil', compact('data', 'title', 'user')); 
     }
 
     public function contactIndex()
@@ -68,11 +67,44 @@ class LandingPageController extends Controller
         ]);
     }
 
+    public function riwayatpemesanan()
+    {
+        // Periksa apakah pengguna telah login
+        if (Auth::check()) {
+            // Dapatkan ID pengguna yang sedang login
+            $idUser = Auth::id();
+    
+            // Dapatkan riwayat pemesanan berdasarkan ID pengguna yang sedang login
+            $riwayatPemesanan = DataPemesanan::whereHas('penyewa', function ($query) use ($idUser) {
+                $query->where('user_idUser', $idUser);
+            })->with(['penyewa', 'mobil', 'pembayaran'])->get();
+    
+            // Jika tidak ada riwayat pemesanan, kembalikan respons kosong atau respons yang sesuai
+            if ($riwayatPemesanan->isEmpty()) {
+                return response()->json(['message' => 'Tidak ada riwayat pemesanan.'], 404);
+            }
+    
+            // Menambahkan URL gambar mobil ke setiap item dalam riwayat pemesanan
+            $riwayatPemesanan->each(function($item) {
+                if ($item->mobil && $item->mobil->gambarMobil) {
+                    $item->mobil->gambar_url = asset('gambarMobil/' . $item->mobil->gambarMobil);
+                    $item->mobil->merekMobil = $item->mobil->merekMobil; // Pastikan 'merek' adalah nama kolom di tabel 'mobils'
+                    $item->mobil->modelMobil = $item->mobil->modelMobil; // Pastikan 'model' adalah nama kolom di tabel 'mobils'
+                }
+            });
+    
+            // Mengembalikan data riwayat pemesanan sebagai respons JSON
+            return response()->json($riwayatPemesanan);
+        } else {
+            // Jika pengguna belum login, kembalikan pesan kesalahan
+            return response()->json(['message' => 'Pengguna belum login.'], 401);
+        }
+    }
+    
     public function detailmobil($noPolisi)
     {
         // Mengambil data mobil berdasarkan nomor polisi
         $data = DataMobil::where('noPolisi', $noPolisi)->first();
-        // dd($data);
 
         $user = Auth::user();
         // Jika data mobil tidak ditemukan, bisa ditangani sesuai kebutuhan, misalnya redirect ke halaman lain
@@ -110,12 +142,11 @@ class LandingPageController extends Controller
         ], compact('user', 'idUser'));
     }
 
-
     public function insertreservasi(Request $request)
     {
         // Validasi request
         $validatedData = $request->validate([
-            'created_at' => 'required|date',
+            // 'created_at' => 'required|date',
             'tanggalMulai' => 'required|date',
             'tanggalSelesai' => 'required|date',
             'tujuan' => 'required|string|max:255',
@@ -125,25 +156,25 @@ class LandingPageController extends Controller
         // Dapatkan pengguna yang sedang login
         $user = Auth::user();
 
-        $dataPenyewa = DataPenyewa::where('user_idUser', $user->idUser)->first();
-        if (!$dataPenyewa) {
+        $existingDataPenyewa = DataPenyewa::where('user_idUser', $user->idUser)->first();
+        if (!$existingDataPenyewa) {
             return redirect()->route('mobilmdltransport')->with('error', 'Data penyewa tidak ditemukan');
         }
 
-        // Simpan data penyewa
-        // $penyewa = new DataPenyewa();
-        // $penyewa->created_at = $validatedData['created_at'];
-        // $penyewa->namaLengkap = $dataPenyewa->namaUser;
-        // $penyewa->noNIK = $dataPenyewa->noNIK;
-        // $penyewa->jeniskelamin = $dataPenyewa->jeniskelamin;
-        // $penyewa->alamat = $dataPenyewa->alamat;
-        // $penyewa->noHP = $dataPenyewa->noHP;
-        // $penyewa->user_idUser = $user->idUser; // Tambahkan user_idUser
-        // $penyewa->save();
+        // Simpan data penyewa baru dengan data yang ada
+        $newPenyewa = new DataPenyewa();
+        $newPenyewa->created_at = date('Y-m-d H:i:s');
+        $newPenyewa->namaLengkap = $existingDataPenyewa->namaLengkap;
+        $newPenyewa->noNIK = $existingDataPenyewa->noNIK;
+        $newPenyewa->jeniskelamin = $existingDataPenyewa->jeniskelamin;
+        $newPenyewa->alamat = $existingDataPenyewa->alamat;
+        $newPenyewa->noHP = $existingDataPenyewa->noHP;
+        $newPenyewa->user_idUser = $user->idUser;
+        $newPenyewa->save();
 
-        // Simpan data pemesanan
+        // Simpan data pemesanan baru
         $pemesanan = new DataPemesanan();
-        $pemesanan->penyewa_idPenyewa = $dataPenyewa->idPenyewa;
+        $pemesanan->penyewa_idPenyewa = $newPenyewa->idPenyewa;
         $pemesanan->mobil_noPolisi = $validatedData['mobil_noPolisi']; // Gunakan nilai mobil_noPolisi yang diterima
         $pemesanan->tanggalMulai = $validatedData['tanggalMulai'];
         $pemesanan->tanggalSelesai = $validatedData['tanggalSelesai'];
@@ -192,7 +223,7 @@ class LandingPageController extends Controller
         return redirect()->route('detailreservasi', ['idPemesanan' => $pemesanan->idPemesanan])->with('success', 'Data berhasil disimpan');
     }
 
-    public function detailreservasi($idPemesanan)
+    public function detailreservasi($idPemesanan, Request $request)
     {
         //$pemesanan = DataPemesanan::findOrFail($idPemesanan);
         $pemesanan = DataPemesanan::with(['penyewa', 'penyewa.user', 'mobil'])->findOrFail($idPemesanan);
@@ -224,8 +255,13 @@ class LandingPageController extends Controller
         $pembayaran->penyewa_idPenyewa = $penyewa->idPenyewa;
         $pembayaran->tanggalPembayaran = now(); // Atur tanggal pembayaran ke waktu saat ini
         $pembayaran->totalPembayaran = $transactionParams['transaction_details']['gross_amount'];
-        $pembayaran->statusPembayaran = 'berhasil'; // Atur status awal sesuai kebutuhan
+        $pembayaran->statusPembayaran = $request->status ?? 'menunggu'; // Atur status awal sesuai kebutuhan
+        // $pembayaran->token=$snapToken;
+
+        // dd($pembayaran);
+
         $pembayaran->save();
+
 
         return view('detailreservasi', [
             "title" => "Mobil",
@@ -238,17 +274,34 @@ class LandingPageController extends Controller
         ]);
     }
 
+    public function ispaid(Pembayaran $pembayaran)
+    {
+            $pembayaran->update(['statusPembayaran'=>'berhasil']);
+
+            return response()->json(['message'=>'ok']);
+    }
+
     public function batalPemesanan($idPemesanan)
     {
         // Temukan pemesanan berdasarkan ID
         $pemesanan = DataPemesanan::find($idPemesanan);
 
         if ($pemesanan) {
-            // Hapus pemesanan jika ditemukan
+            // Temukan data penyewa yang terkait dengan pemesanan
+            $penyewa = $pemesanan->penyewa; // Sesuaikan dengan relasi yang Anda miliki
+
+            // Hapus pemesanan
             $pemesanan->delete();
-            return redirect()->route('mobilmdltransport')->with('success', 'Pemesanan berhasil dihapus.');
+
+            // Hapus data penyewa
+            if ($penyewa) {
+                $penyewa->delete();
+            }
+
+            return redirect()->route('mobilmdltransport')->with('success', 'Pemesanan dan data penyewa berhasil dihapus.');
         } else {
             return redirect()->back()->with('error', 'Pemesanan tidak ditemukan.');
         }
     }
+
 }

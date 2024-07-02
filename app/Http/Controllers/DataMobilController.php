@@ -17,12 +17,6 @@ class DataMobilController extends Controller
         return view('menu.datamobil', compact('data'));
     }
 
-    // public function tambahmobil()
-    // {
-    //     // dd($data);
-    //     return view('menu.tambahmobil');
-    // }
-
     public function insertmobil(Request $request)
     {
         $data = DataMobil::create($request->all());    
@@ -85,37 +79,6 @@ class DataMobilController extends Controller
         return redirect()->route('datamobil');
     }
 
-    // public function updatemobil(Request $request, $noPolisi)
-    // {
-    //     // $data = DataMobil::where('noPolisi', $noPolisi)->first();
-    //     // // $data = DataMobil::find($noPolisi);
-
-    //     // Session::flash('alert', [
-    //     //     'type' => 'success',
-    //     //     'title' => 'Data Berhasil Diubah',
-    //     //     'message' => "",
-    //     // ]);
-
-    //     // $data->update($request->all());
-    //     // return redirect()->route('datamobil');
-
-    //     $data = DataMobil::findOrFail($noPolisi);
-
-    //     $data->merekMobil = $request->merekMobil;
-    //     $data->modelMobil = $request->modelMobil;
-    //     $data->kapasitasMobil = $request->kapasitasMobil;
-    //     $data->tahunMobil = $request->tahunMobil;
-    //     $data->deskripsiMobil = $request->deskripsiMobil;
-    //     $data->hargaSewa = $request->hargaSewa;
-    //     $data->statusMobil = $request->statusMobil;
-    //     if ($request->hasFile('gambarMobil')) {
-    //         $request->file('gambarMobil')->move('gambarMobil/', $request->file('gambarMobil')->getClientOriginalName());
-    //         $data->gambarMobil = $request->file('gambarMobil')->getClientOriginalName();
-    //     }
-
-    //     $data->save();
-    //     return redirect()->route('datamobil');
-    // }
     public function deletemobil($noPolisi)
     {
         $data = DataMobil::find($noPolisi);
@@ -148,27 +111,4 @@ class DataMobilController extends Controller
         }
         return back();
     }
-    
-
-    // public function deletemobil($noPolisi)
-    // {
-    //     // $data = DataMobil::where('noPolisi', $noPolisi)->first();
-    //     $data = DataMobil::find($noPolisi);
-
-    //     if ($data) {
-    //         Session::flash('alert', [
-    //             'type' => 'success',
-    //             'title' => 'Data ' . $data->modelMobil . ' Berhasil Dihapus',
-    //             'message' => "",
-    //         ]);
-    //         $data->delete();
-    //     } else {
-    //         Session::flash('alert', [
-    //             'type' => 'error',
-    //             'title' => 'Hapus Data Gagal',
-    //             'message' => 'ID Mobil Tidak Valid!',
-    //         ]);
-    //     }
-    //     return back();
-    // }
 }

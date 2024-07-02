@@ -12,7 +12,7 @@ class DataPemesanan extends Model
     protected $table = 'pemesanan';
     protected $guarded = ['idPemesanan'];
     protected $primaryKey = 'idPemesanan';
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $fillable = [
         'penyewa_idPenyewa', // tambahkan kolom penyewa_idPenyewa ke fillable
@@ -21,6 +21,7 @@ class DataPemesanan extends Model
         'tanggalSelesai',
         'tujuan',
         'keberangkatan',
+        
         // tambahkan bidang lain yang diperlukan
     ];
 
@@ -34,4 +35,15 @@ class DataPemesanan extends Model
     {
         return $this->belongsTo(DataMobil::class, 'mobil_noPolisi', 'noPolisi'); // Sesuaikan dengan nama kolom kunci asing jika berbeda
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_idUser');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'pemesanan_idPemesanan');
+    }
+    
 }

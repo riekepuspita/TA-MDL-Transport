@@ -10,10 +10,8 @@
         @include('layout.sidebar')
 
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
-
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
@@ -31,7 +29,6 @@
                         </div>
                     </div>
                     <!-- end page title -->
-
                     <div class="row">
                         <div class="col-lg-12">
                             {{-- <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
@@ -56,10 +53,8 @@
                                                     <th>Gambar Mobil</th>
                                                     <th>Merk Mobil</th>
                                                     <th>Model Mobil</th>
-                                                    {{-- <th>Deskripsi Mobil</th> --}}
                                                     <th>Harga Mobil</th>
                                                     <th>Status</th>
-                                                    {{-- <th>Gambar Mobil</th> --}}
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -74,9 +69,7 @@
                                                         </td>
                                                         <td>{{ $mobil->merekMobil }}</td>
                                                         <td>{{ $mobil->modelMobil }}</td>
-                                                        {{-- <td>{{ $row->deskripsiMobil }}</td> --}}
                                                         <td>{{ $mobil->hargaSewa }}</td>
-                                                        {{-- <td>{{ $row->statusMobil }}</td> --}}
                                                         <td>
                                                             @if ($mobil->statusMobil == 'tersedia')
                                                                 Tersedia
@@ -85,13 +78,12 @@
                                                             @endif
                                                         </td>
                                                         <td>
-
-                                                            <a href="/tampilkanmobil/{{ $mobil->noPolisi }}" title="Edit Data"
-                                                                class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                            <a href="/tampilkanmobil/{{ $mobil->noPolisi }}"
+                                                                title="Edit Data" class="btn btn-warning btn-sm"
+                                                                data-bs-toggle="modal"
                                                                 data-bs-target="#editmobil{{ $mobil->noPolisi }}">
                                                                 <i class="bx bx-pencil"></i>
                                                             </a>
-
                                                             <div class="modal fade" id="editmobil{{ $mobil->noPolisi }}"
                                                                 tabindex="-1" aria-labelledby="exampleModalLabel"
                                                                 aria-hidden="true">
@@ -157,10 +149,12 @@
                                                                                         value="{{ $mobil->tahunMobil }}">
                                                                                 </div>
                                                                                 <div class="mb-3">
-                                                                                    <label for="deskripsiMobil" class="col-form-label">Deskripsi Mobil</label>
+                                                                                    <label for="deskripsiMobil"
+                                                                                        class="col-form-label">Deskripsi
+                                                                                        Mobil</label>
                                                                                     <textarea class="form-control" id="deskripsiMobil" name="deskripsiMobil" required>{{ $mobil->deskripsiMobil }}</textarea>
                                                                                 </div>
-                                                                                
+
                                                                                 <div class="mb-3">
                                                                                     <label for="hargaSewa"
                                                                                         class="col-form-label">Harga
@@ -200,22 +194,21 @@
                                                                                         class="form-control"
                                                                                         id="gambarMobil"
                                                                                         name="gambarMobil"
-                                                                                        accept=".jpg, .jpeg, .png"
-                                                                                        >
+                                                                                        accept=".jpg, .jpeg, .png">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
                                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                                    <button type="submit"
-                                                                                    class="btn btn-primary">Simpan Perubahan</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Simpan
+                                                                                    Perubahan</button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                             <a href="/deletemobil/{{ $mobil->noPolisi }}"
                                                                 title="Hapus Data" class="btn btn-danger btn-sm"
                                                                 onclick="confirmDelete('{{ $mobil->noPolisi }}')">
@@ -251,33 +244,38 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="noPolisi" class="col-form-label">No Polisi</label>
-                            <input type="text" class="form-control" id="noPolisi" name="noPolisi" placeholder="Masukkan No Polisi" required>
+                            <input type="text" class="form-control" id="noPolisi" name="noPolisi"
+                                placeholder="Masukkan No Polisi" required>
                         </div>
                         <div class="mb-3">
                             <label for="merekMobil" class="col-form-label">Merek Mobil</label>
-                            <input type="text" class="form-control" id="merekMobil" name="merekMobil" placeholder="Masukkan Merek Mobil" required>
+                            <input type="text" class="form-control" id="merekMobil" name="merekMobil"
+                                placeholder="Masukkan Merek Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="modelMobil" class="col-form-label">Model Mobil </label>
-                            <input type="text" class="form-control" id="modelMobil" name="modelMobil" placeholder="Masukkan Model Mobil" required>
+                            <input type="text" class="form-control" id="modelMobil" name="modelMobil"
+                                placeholder="Masukkan Model Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="kapasitasMobil" class="col-form-label">Kapasitas Mobil</label>
-                            <input type="text" class="form-control" id="kapasitasMobil" name="kapasitasMobil" placeholder="Masukkan Kapasitas Mobil"
-                                required>
+                            <input type="text" class="form-control" id="kapasitasMobil" name="kapasitasMobil"
+                                placeholder="Masukkan Kapasitas Mobil" required>
                         </div>
                         <div class="mb-3">
-                            <label for="tahunMobil"     class="col-form-label">Tahun Mobil</label>
-                            <input type="text" class="form-control" id="tahunMobil" name="tahunMobil" placeholder="Masukkan Tahun Mobil" required>
+                            <label for="tahunMobil" class="col-form-label">Tahun Mobil</label>
+                            <input type="text" class="form-control" id="tahunMobil" name="tahunMobil"
+                                placeholder="Masukkan Tahun Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="deskripsiMobil" class="col-form-label">Deskripsi Mobil</label>
-                            <input type="text" class="form-control" id="deskripsiMobil" name="deskripsiMobil" placeholder="Masukkan Deskripsi Mobil"
-                                required>
+                            <input type="text" class="form-control" id="deskripsiMobil" name="deskripsiMobil"
+                                placeholder="Masukkan Deskripsi Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="hargaSewa" class="col-form-label">Harga Sewa</label>
-                            <input type="text" class="form-control" id="hargaSewa" name="hargaSewa" placeholder="Masukkan Harga Sewa Mobil" required>
+                            <input type="text" class="form-control" id="hargaSewa" name="hargaSewa"
+                                placeholder="Masukkan Harga Sewa Mobil" required>
                         </div>
                         <div class="mb-3">
                             <label for="statusMobil" class="col-form-label">Status Mobil</label>
@@ -289,15 +287,6 @@
                                 </option>
                             </select>
                         </div>
-                        {{-- <div class="mb-3">
-                            <label for="statusMobil" class="col-form-label">StatusMobil</label>
-                            <select class="form-select" id="jeniskelamin" name="jeniskelamin" required>
-                                <option value="1" {{ $mobil->statusMobil == 'tersedia' ? 'selected' : '' }}>
-                                    Tersedia</option>
-                                <option value="2" {{ $mobil->statusMobil == 'tidak tersedia' ? 'selected' : '' }}>
-                                    Tidak Tersedia</option>
-                            </select>
-                        </div> --}}
                         <div class="mb-3">
                             <label for="gambarMobil" class="col-form-label">Gambar Mobil</label>
                             <input type="file" class="form-control" id="gambarMobil" name="gambarMobil"

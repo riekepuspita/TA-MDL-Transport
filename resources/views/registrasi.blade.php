@@ -9,7 +9,7 @@
     <body data-layout="horizontal" data-topbar="dark">
 
         <div class="authentication-bg"
-            style="background-image: url('{{ asset('assets/images/bg-teal.jpeg') }}'); background-size: cover; background-position: center;">
+            style="background-image: url('{{ asset('assets/images/pastel.jpeg') }}'); background-size: cover; background-position: center;">
             <div class="container">
                 <div class="d-flex flex-column min-vh-100 px-3 pt-4">
                     <div class="row justify-content-center my-auto">
@@ -17,15 +17,15 @@
 
                             <div class="text-center mb-4">
                                 <a href="index.html">
-                                    <img src="{{ asset('assets/images/mdl.png') }}" alt="" height="50"> <span
-                                        class="logo-txt">MDL Transport</span>
+                                    <img src="{{ asset('assets/images/mdl.png') }}" alt="" height="50"> 
+                                    <h1 style="color: rgb(210, 126, 47); display: inline-block; font-size: 20px;">MDL Transport</h1>
                                 </a>
                             </div>
 
                             <div class="card">
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
-                                        <h5 class="text" style="color: teal;">Registrasi Akun</h5>
+                                        <h5 class="text" style="color: rgb(210, 126, 47);">Registrasi Akun</h5>
                                         <p class="text-muted">Bergabunglah dan daftarkan diri Anda disini !</p>
                                     </div>
                                     <div class="p-2 mt-4">
@@ -88,7 +88,7 @@
                                                 <div class="form-text">Silakan unggah gambar KTP Anda (format: JPG, JPEG, PNG).</div>
                                             </div>
                                             <div class="mt-3 text-end">
-                                                <button class="btn btn-primary w-sm waves-effect waves-light" style="background-color: #008080;"
+                                                <button class="btn btn-primary w-sm waves-effect waves-light" style="background-color: rgb(210, 126, 47);"
                                                     type="submit">Registrasi</button>
                                             </div>
                                             {{-- <div class="mt-4 text-center">
@@ -113,7 +113,7 @@
 
                                             <div class="mt-4 text-center">
                                                 <p class="text-muted mb-0">Sudah punya akun ? <a href="{{ route('login') }}"
-                                                        class="fw-medium text" style="color: teal;"> Login</a></p>
+                                                        class="fw-medium text" style="color: rgb(210, 126, 47);;"> Login</a></p>
                                             </div>
                                         </form>
                                     </div>

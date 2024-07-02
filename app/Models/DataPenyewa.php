@@ -51,4 +51,16 @@ class DataPenyewa extends Model
     {
         return $this->belongsTo(DataMobil::class, 'mobil_id', 'idmobil');
     }
+
+    public function pembayaran()
+    {
+        return $this->hasMany(Pembayaran::class, 'penyewa_idPenyewa');
+    }
+
+    public function index()
+    {
+        return $this->join('pemesanan', 'pemesanan.penyewa_idPenyewa', '=', 'penyewa.idPenyewa')
+            // ->join('pembayaran', 'pembayaran.pemesanan_idPemesanan', '=', 'pembayaran.idPembayaran')
+            ->get();
+    }
 }

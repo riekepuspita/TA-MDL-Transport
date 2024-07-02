@@ -12,7 +12,7 @@ class Pembayaran extends Model
     // protected $guarded = ['noPolisi'];
     protected $primaryKey = 'idPembayaran';
     public $incrementing = false; // Tambahkan ini jika noPolisi bukanlah sebuah kolom yang auto-increment
-    public $timestamps = false;
+    // public $timestamps = false;
 
 
     protected $fillable = [
@@ -26,8 +26,15 @@ class Pembayaran extends Model
 
     ];
 
+    public function pemesanan()
+    {
+        return $this->belongsTo(DataPemesanan::class, 'pemesanan_idPemesanan');
+    }
+
     public function penyewa()
     {
-        return $this->belongsTo(DataPenyewa::class, 'idPenyewa');
+        return $this->belongsTo(DataPenyewa::class, 'penyewa_idPenyewa');
     }
+    
+
 }
