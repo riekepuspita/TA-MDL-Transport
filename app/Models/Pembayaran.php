@@ -26,5 +26,8 @@ class Pembayaran extends Model
 
     ];
 
-
+    public function penyewa()
+    {
+        return $this->belongsTo(DataPenyewa::class, 'idPenyewa');
+    }
 }
