@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\DataPenyewaController;
 use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\DataUserPenyewaController;
 use App\Http\Controllers\LandingPageController;
 use App\Models\DataPenyewa;
 
@@ -21,7 +22,7 @@ use App\Models\DataPenyewa;
 |
 */
 
-Route::get('/mdltransport', [LandingPageController::class, 'homeIndex'])->name('mdltransport');
+Route::get('/', [LandingPageController::class, 'homeIndex'])->name('/');
 Route::get('/about', [LandingPageController::class, 'aboutIndex'])->name('aboutmdltransport');
 Route::get('/mobil', [LandingPageController::class, 'mobilIndex'])->name('mobilmdltransport');
 Route::get('/contact', [LandingPageController::class, 'contactIndex'])->name('contactmdltransport');
@@ -43,6 +44,9 @@ Route::post('/registrasiuser', [RegistrasiController::class, 'registrasiuser'])-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/datauserpenyewa', [DataUserPenyewaController::class, 'index'])->name('datauserpenyewa');
+    // Route::get('/tambahpenyewa', [DataPenyewaController::class, 'tambahpenyewa'])->name('tambahpenyewa');
 
     Route::get('/datapenyewa', [DataPenyewaController::class, 'index'])->name('datapenyewa');
     Route::get('/tambahpenyewa', [DataPenyewaController::class, 'tambahpenyewa'])->name('tambahpenyewa');
@@ -73,6 +77,14 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/updateuser/{idUser}', [DataUserController::class, 'updateuser'])->name('updateuser');
         Route::get('/deleteuser/{idUser}', [DataUserController::class, 'deleteuser'])->name('deleteuser');
 
+
+        Route::get('/datauserpenyewa', [DataUserPenyewaController::class, 'index'])->name('datauserpenyewa');
+        Route::get('/tambahuserpenyewa', [DataUserPenyewaController::class, 'tambahuserpenyewa'])->name('tambahuserpenyewa');
+        Route::post('/insertuserpenyewa', [DataUserPenyewaController::class, 'insertuserpenyewa'])->name('insertuserpenyewa');
+        Route::put('/tampilkanuserpenyewa/{idUser}', [DataUserPenyewaController::class, 'tampilkanuserpenyewa'])->name('tampilkanuserpenyewa');
+        Route::put('/updateuserpenyewa/{idUser}', [DataUserPenyewaController::class, 'updateuserpenyewa'])->name('updateuserpenyewa');
+        Route::get('/deleteuserpenyewa/{idUser}', [DataUserPenyewaController::class, 'deleteuserpenyewa'])->name('deleteuserpenyewa');
+        
         // Route::get('/datapenyewa', [DataPenyewaController::class, 'index'])->name('datapenyewa');
         // Route::get('/tambahpenyewa', [DataPenyewaController::class, 'tambahpenyewa'])->name('tambahpenyewa');
         // Route::post('/insertpenyewa', [DataPenyewaController::class, 'insertpenyewa'])->name('insertpenyewa');

@@ -14,7 +14,7 @@
                 <h1 class="display-2 text-dark mb-4 animated slideInDown">Detail Mobil</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('mdltransport') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('mobilmdltransport') }}">Mobil</a></li>
                         <li class="breadcrumb-item text-dark" aria-current="page">{{ $mobil->merekMobil }}</li>
                     </ol>

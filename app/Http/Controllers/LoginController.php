@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function  index()
     {
         if (auth()->check() && auth()->user()->level == 'user') {
-            return redirect('/mdltransport');
+            return redirect('/');
         } else if (auth()->check() && auth()->user()->level == 'admin' || auth()->check()  && auth()->user()->level == 'superadmin') {
             return redirect('/dashboard');
         } else {
@@ -42,7 +42,7 @@ class LoginController extends Controller
                 }
             } else {
                 // Jika pengguna adalah pengguna biasa, arahkan ke halaman landing page
-                return redirect()->route('mdltransport')->with('success', 'Login berhasil !');
+                return redirect()->route('/')->with('success', 'Login berhasil !');
             }
         }
         // Login gagal

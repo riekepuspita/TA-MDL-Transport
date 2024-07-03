@@ -41,10 +41,18 @@
                             </a>
                         </li>
                     @endif
+
+                    <li>
+                        <a href="/datauserpenyewa">
+                            <i class="bx bx-user-plus icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-datauserpenyewa">Data Penyewa</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="/datapenyewa">
-                            <i class="bx bx-user-plus icon nav-icon"></i>
-                            <span class="menu-item" data-key="t-datapenyewa">Data Penyewa</span>
+                            <i class="bx bx-money icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-datapenyewa">Data Transaksi</span>
                         </a>
                     </li>
 

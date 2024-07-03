@@ -20,7 +20,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="/mdltransport"
+                        <a href="/"
                             class="nav-item nav-link {{ $title === 'MDL Transport' ? 'active' : '' }}">Home</a>
                         <a href="/about" class="nav-item nav-link {{ $title === 'About' ? 'active' : '' }}">About</a>
                         <a href="/mobil" class="nav-item nav-link {{ $title === 'Mobil' ? 'active' : '' }}">Mobil</a>
@@ -154,10 +154,10 @@
                                 tableHtml += "<td>" + item.tujuan + "</td>";
                                 tableHtml += "<td>" + item.tanggalMulai + "</td>";
                                 tableHtml += "<td>" + item.tanggalSelesai + "</td>";
-                                // tableHtml += "<td><a href='detailreservasi/" + item.idPemesanan
-                                //      + 
-                                //      "?status=" + item.pembayaran.statusPembayaran + 
-                                //     "' class='btn btn-primary'>Detail Reservasi</a></td>";
+                                tableHtml += "<td><a href='detailreservasi/" + item.idPemesanan
+                                     + 
+                                     "?status=" + item.pembayaran.statusPembayaran + 
+                                    "' class='btn btn-primary'>Detail Reservasi</a></td>";
                                 tableHtml += "</tr>";
                             });
                             tableHtml += "</tbody></table>";

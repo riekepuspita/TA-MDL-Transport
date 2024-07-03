@@ -32,7 +32,7 @@ class LandingPageController extends Controller
         //Ambil data user yang login
         $user = Auth::user();
 
-        return view('mdltransport', [
+        return view('/mdltransport', [
             "title" => "MDL Transport",
             "user" => $user
         ]);
@@ -186,7 +186,7 @@ class LandingPageController extends Controller
             'api_key' => 'VbxBHKDunZYEBJjA10u4edyXRcGWlq',
             'sender' => '6285335086890',
             'number' => '6281359742459',
-            'message' => 'Hallo, terdapat reservasi masuk, segera cek pada system MDL Transport'
+            'message' => 'Hallo, terdapat reservasi masuk dari *' . $user->namaUser . '*, segera cek pada system MDL Transport'
         ];
 
         $curl = curl_init();

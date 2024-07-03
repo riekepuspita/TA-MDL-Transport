@@ -14,7 +14,7 @@
                 <h1 class="display-2 text-dark mb-4 animated slideInDown">Reservasi</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('mdltransport') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('mobilmdltransport') }}">Mobil</a></li>
                         <li class="breadcrumb-item"><a
                                 href="/detailmobil/{{ $mobil->noPolisi }}">{{ $mobil->merekMobil }}</a></li>
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-success me-3">Kirim</button>
+                                    <button type="submit" class="btn btn-success me-3">Pesan</button>
                                     <a href="/mobil" class="btn btn-danger me-3" type="button">Batal</a>
                                 </div>
                             </form>

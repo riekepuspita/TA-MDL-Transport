@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Data Penyewa
+    Data Transaksi Penyewa
 @endsection
 
 @section('head')
@@ -18,11 +18,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Data Penyewa</h4>
+                                <h4 class="mb-0">Data Transaksi</h4>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Data Penyewa</li>
+                                        <li class="breadcrumb-item active">Data Transaksi Penyewa</li>
                                     </ol>
                                 </div>
                             </div>
@@ -34,6 +34,7 @@
                             <label for="month">Bulan:</label>
                             <select name="month" id="month">
                                 <option value="">Pilih Bulan</option>
+                                <option value="{{ date('n') }}" selected>{{ date('F') }}</option>
                                 @for ($i = 1; $i <= 12; $i++)
                                     <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 1)) }}</option>
                                 @endfor
@@ -41,7 +42,8 @@
                             <label for="year">Tahun:</label>
                             <select name="year" id="year">
                                 <option value="">Pilih Tahun</option>
-                                @for ($i = date('Y'); $i >= 1900; $i--)
+                                <option value="{{ date('Y') }}" selected >{{ date('Y') }}</option>
+                                @for ($i = date('Y')-1; $i >= 1900; $i--)
                                     <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor
                             </select>
@@ -67,22 +69,23 @@
                                         <table class="table mb-12">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
+                                                    {{-- <th>No</th> --}}
                                                     <th>NIK</th>
                                                     <th>Nama Lengkap</th>
                                                     <th>No HP</th>
                                                     {{-- <th>Hari dan Tanggal</th> --}}
                                                     <th>Tanggal Mulai</th>
+                                                    <th>Status Pembayaran</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
+                                                {{-- @php
                                                     $no = 1;
-                                                @endphp
+                                                @endphp --}}
                                                 @foreach ($penyewa as $row)
                                                     <tr>
-                                                        <th scope="row">{{ $no++ }}</th>
+                                                        {{-- <th scope="row">{{ $no++ }}</th> --}}
                                                         <td>{{ $row->noNIK }}</td>
 
                                                         @if ($row->user)
@@ -93,6 +96,22 @@
                                                         {{-- <td>{{ $row->created_at->format('d F Y') }}</td> --}}
                                                         <td>{{ optional($dataPemesanan[$row->idPenyewa]->first())->tanggalMulai }}
                                                             {{-- </div> --}}
+                                                            <td>
+                                                                @if($row->pembayaran->isNotEmpty())
+                                                                    @php
+                                                                        $statusPembayaran = $row->pembayaran->last()->statusPembayaran;
+                                                                    @endphp
+                                                                    @if($statusPembayaran === 'berhasil')
+                                                                        <i class="fas fa-check-circle" style="color: green;"></i>
+                                                                    @elseif($statusPembayaran === 'menunggu')
+                                                                        <i class="fas fa-hourglass-half" style="color: orange;"></i>
+                                                                    @else
+                                                                        <i class="fas fa-times-circle" style="color: red;"></i>
+                                                                    @endif
+                                                                @else
+                                                                    <span>Belum Ada Pembayaran</span>
+                                                                @endif
+                                                            </td>
                                                         </td>
                                                         <td>
                                                             {{-- Button Edit Modal --}}
@@ -447,174 +466,355 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script>
+        // $(document).ready(function() {
+        //     $('#filterForm').on('submit', function(e) {
+        //         e.preventDefault();
+
+        //         var month = $('#month').val();
+        //         var year = $('#year').val();
+
+        //         $.ajax({
+        //             url: "{{ route('filterpenyewa') }}",
+        //             method: 'GET',
+        //             data: {
+        //                 month: month,
+        //                 year: year,
+        //             },
+        //             success: function(response) {
+        //                 var tbody = $('table tbody');
+        //                 tbody.empty();
+
+        //                 $.each(response, function(index, penyewa) {
+        //                     var pemesanan = penyewa.pemesanan[0] || {};
+        //                     var tanggalMulai = pemesanan.tanggalMulai || '';
+        //                     var statusPembayaran = penyewa.pembayaran.length > 0 ? penyewa.pembayaran[penyewa.pembayaran.length - 1].statusPembayaran : 'Belum Ada Pembayaran';
+        //                     var modalId = `editpenyewa${penyewa.idPenyewa}`;
+        //                     var row = `
+        //         <tr>
+        //             <!--<td>${index + 1}</td>}-->
+        //             <td>${penyewa.noNIK}</td>
+        //             <td>${penyewa.user ? penyewa.user.namaUser : ''}</td>
+        //             <td>${penyewa.noHP}</td>
+        //             <td>${tanggalMulai}</td>
+        //             <td>${statusPembayaran}</td>
+        //             <td> 
+        //                 <a href="#" title="Edit Data" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+        //                     data-bs-target="#${modalId}">
+        //                 <i class="bx bx-pencil"></i></a>
+        //                 <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        //                     <div class="modal-dialog">
+        //                         <div class="modal-content">
+        //                             <div class="modal-header">
+        //                                 <h5 class="modal-title" id="exampleModalLabel">Edit Data Penyewa</h5>
+        //                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        //                             </div>
+        //                             <div class="modal-body">
+        //                                 <form id="updateForm${penyewa.idPenyewa}" action="http://localhost:8000/updatepenyewa/${penyewa.idPenyewa}" method="POST">
+        //                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        //                                     <input type="hidden" name="_method" value="PUT">
+        //                                     <div class="form-group">
+        //                                         <label for="noNIK">NIK</label>
+        //                                         <input type="text" name="noNIK" class="form-control" id="noNIK${penyewa.idPenyewa}" value="${penyewa.noNIK}" required>
+        //                                     </div>
+        //                                     <div class="form-group">
+        //                                         <label for="namaLengkap">Nama Lengkap</label>
+        //                                         <input type="text" name="namaLengkap" class="form-control" id="namaLengkap${penyewa.idPenyewa}" value="${penyewa.user ? penyewa.user.namaUser : ''}" required>
+        //                                     </div>
+        //                                     <div class="mb-3">
+        //                                         <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
+        //                                         <select class="form-select" id="jeniskelamin${penyewa.idPenyewa}" name="jeniskelamin" required>
+        //                                             <option value="1" ${penyewa.jeniskelamin == 'lakilaki' ? 'selected' : ''}>Laki-laki</option>
+        //                                             <option value="2" ${penyewa.jeniskelamin == 'perempuan' ? 'selected' : ''}>Perempuan</option>
+        //                                         </select>
+        //                                     </div>
+        //                                     <div class="form-group">
+        //                                         <label for="alamat">Alamat</label>
+        //                                         <input type="text" name="alamat" class="form-control" id="alamat${penyewa.idPenyewa}" value="${penyewa.alamat}" required>
+        //                                     </div>
+        //                                     <div class="form-group">
+        //                                         <label for="noHP">No HP</label>
+        //                                         <input type="tel" name="noHP" class="form-control" id="noHP${penyewa.idPenyewa}" value="${penyewa.noHP}" required>
+        //                                     </div>
+        //                                     <!--<div class="form-group">
+        //                                         <label for="created_at">Hari / Tanggal</label>
+        //                                         <input type="text" name="created_at" class="form-control" id="created_at${penyewa.idPenyewa}" value="${moment(penyewa.created_at).format('DD/MM/YYYY')}" readonly disabled required>
+        //                                     </div>-->
+        //                                     <div class="form-group">
+        //                                         <label for="mobil_noPolisi">Pilih Mobil</label>
+        //                                         <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi${penyewa.idPenyewa}">
+        //                                             @foreach ($mobil as $mobilItem)
+        //                                             <option value="{{ $mobilItem->noPolisi }}" ${pemesanan.mobil_noPolisi === '{{ $mobilItem->noPolisi }}' ? 'selected' : ''}>
+        //                                                 {{ $mobilItem->noPolisi }} - {{ $mobilItem->merekMobil }} {{ $mobilItem->modelMobil }}
+        //                                             </option>
+        //                                             @endforeach
+        //                                         </select>
+        //                                     </div>
+        //                                     <div class="mb-3 row">
+        //                                         <label for="tanggalMulai" class="col-form-label">Tanggal Mulai</label>
+        //                                         <input class="form-control" name="tanggalMulai" type="date" id="tanggalMulai${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Mulai" required value="${pemesanan.tanggalMulai}">
+        //                                     </div>
+        //                                     <div class="mb-3 row">
+        //                                         <label for="tanggalSelesai" class="col-form-label">Tanggal Selesai</label>
+        //                                         <input class="form-control" name="tanggalSelesai" type="date" id="tanggalSelesai${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Selesai" required value="${pemesanan.tanggalSelesai}">
+        //                                     </div>
+        //                                     <div class="mb-3 row">
+        //                                         <label for="tujuan" class="col-form-label">Tujuan</label>
+        //                                         <input class="form-control" name="tujuan" type="text" id="tujuan${penyewa.idPenyewa}" required value="${pemesanan.tujuan}">
+        //                                     </div>
+        //                                     <div class="mb-3 row">
+        //                                         <label for="keberangkatan" class="col-form-label">Keberangkatan</label>
+        //                                         <input class="form-control" name="keberangkatan" type="datetime-local" id="keberangkatan${penyewa.idPenyewa}" placeholder="Masukkan Keberangkatan" value="${moment(pemesanan.keberangkatan).format('YYYY-MM-DDTHH:mm')}">
+        //                                     </div>
+        //                                     ${penyewa.pembayaran.map(pembayaran => `
+        //                                                 <div class="mb-3 row">
+        //                                                     <label for="tanggalPembayaran" class="col-form-label">Tanggal Pembayaran</label>
+        //                                                     <input class="form-control" name="tanggalPembayaran" type="datetime-local" value="${moment(pembayaran.tanggalPembayaran).format('YYYY-MM-DDTHH:mm')}" id="tanggalPembayaran${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Pembayaran">
+        //                                                 </div>
+        //                                                 <div class="mb-3 row">
+        //                                                     <label for="totalPembayaran" class="col-form-label">Total Pembayaran</label>
+        //                                                     <input class="form-control" name="totalPembayaran[]" type="text" value="${pembayaran.totalPembayaran}" id="totalPembayaran${penyewa.idPenyewa}" placeholder="">
+        //                                                 </div>
+        //                                                 <div class="mb-3 row">
+        //                                                     <label for="statusPembayaran" class="col-form-label">Status Pembayaran</label>
+        //                                                     <input class="form-control" name="statusPembayaran[]" type="text" value="${pembayaran.statusPembayaran}" id="statusPembayaran${penyewa.idPenyewa}" placeholder="">
+        //                                                 </div>
+        //                                                 `).join('')}
+        //                                     <div class="modal-footer">
+        //                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        //                                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        //                                     </div>
+        //                                 </form>
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //                 <button class="btn btn-danger btn-sm" onclick="confirmDelete('${penyewa.idPenyewa}')">Hapus</button>
+        //             </td>
+        //         </tr>
+        //         `;
+        //                     tbody.append(row);
+
+        //                     // Attach submit event to the dynamically created form
+        //                     $(`#updateForm${penyewa.idPenyewa}`).on('submit', function(
+        //                         e) {
+        //                         e.preventDefault();
+
+        //                         var form = $(this);
+        //                         var actionUrl = form.attr('action');
+        //                         var formData = form.serialize();
+
+        //                         $.ajax({
+        //                             url: actionUrl,
+        //                             method: 'POST',
+        //                             data: formData,
+        //                             success: function(response) {
+        //                                 location.reload();
+        //                                 $('#' + modalId).modal(
+        //                                     'hide');
+        //                                 // Optionally, refresh the table data here
+        //                             },
+        //                             error: function(xhr) {
+        //                                 console.log(xhr
+        //                                     .responseText
+        //                                     ); // Display server error messages
+        //                                 alert(
+        //                                     'Terjadi kesalahan, silakan coba lagi.'
+        //                                     );
+        //                             }
+        //                         });
+        //                     });
+        //                 });
+        //             },
+        //             error: function(error) {
+        //                 console.log(error);
+        //             }
+        //         });
+        //     });
+
+        //     // Fungsi untuk menangani aksi klik tombol "Edit"
+        //     $(document).on('click', '.edit-btn', function() {
+        //         var idPenyewa = $(this).data('idPenyewa');
+        //         $('#editpenyewa' + idPenyewa).modal('show');
+        //     });
+        // });
+
+
         $(document).ready(function() {
-            $('#filterForm').on('submit', function(e) {
-                e.preventDefault();
+            
+    $('#filterForm').on('submit', function(e) {
+        e.preventDefault();
 
-                var month = $('#month').val();
-                var year = $('#year').val();
+        var month = $('#month').val();
+        var year = $('#year').val();
 
-                $.ajax({
-                    url: "{{ route('filterpenyewa') }}",
-                    method: 'GET',
-                    data: {
-                        month: month,
-                        year: year,
-                    },
-                    success: function(response) {
-                        var tbody = $('table tbody');
-                        tbody.empty();
+        $.ajax({
+            url: "{{ route('filterpenyewa') }}",
+            method: 'GET',
+            data: {
+                month: month,
+                year: year,
+            },
+            success: function(response) {
+                var tbody = $('table tbody');
+                tbody.empty();
 
-                        $.each(response, function(index, penyewa) {
-                            var pemesanan = penyewa.pemesanan[0] || {};
-                            var tanggalMulai = pemesanan.tanggalMulai || '';
-                            var modalId = `editpenyewa${penyewa.idPenyewa}`;
-                            var row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${penyewa.noNIK}</td>
-                    <td>${penyewa.user ? penyewa.user.namaUser : ''}</td>
-                    <td>${penyewa.noHP}</td>
-                    <td>${tanggalMulai}</td>
-                    <td> 
-                        <a href="#" title="Edit Data" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#${modalId}">
-                        <i class="bx bx-pencil"></i></a>
-                        <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Penyewa</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="updateForm${penyewa.idPenyewa}" action="http://localhost:8000/updatepenyewa/${penyewa.idPenyewa}" method="POST">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="_method" value="PUT">
-                                            <div class="form-group">
-                                                <label for="noNIK">NIK</label>
-                                                <input type="text" name="noNIK" class="form-control" id="noNIK${penyewa.idPenyewa}" value="${penyewa.noNIK}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="namaLengkap">Nama Lengkap</label>
-                                                <input type="text" name="namaLengkap" class="form-control" id="namaLengkap${penyewa.idPenyewa}" value="${penyewa.user ? penyewa.user.namaUser : ''}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
-                                                <select class="form-select" id="jeniskelamin${penyewa.idPenyewa}" name="jeniskelamin" required>
-                                                    <option value="1" ${penyewa.jeniskelamin == 'lakilaki' ? 'selected' : ''}>Laki-laki</option>
-                                                    <option value="2" ${penyewa.jeniskelamin == 'perempuan' ? 'selected' : ''}>Perempuan</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="alamat">Alamat</label>
-                                                <input type="text" name="alamat" class="form-control" id="alamat${penyewa.idPenyewa}" value="${penyewa.alamat}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="noHP">No HP</label>
-                                                <input type="tel" name="noHP" class="form-control" id="noHP${penyewa.idPenyewa}" value="${penyewa.noHP}" required>
-                                            </div>
-                                            <!--<div class="form-group">
-                                                <label for="created_at">Hari / Tanggal</label>
-                                                <input type="text" name="created_at" class="form-control" id="created_at${penyewa.idPenyewa}" value="${moment(penyewa.created_at).format('DD/MM/YYYY')}" readonly disabled required>
-                                            </div>-->
-                                            <div class="form-group">
-                                                <label for="mobil_noPolisi">Pilih Mobil</label>
-                                                <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi${penyewa.idPenyewa}">
-                                                    @foreach ($mobil as $mobilItem)
-                                                    <option value="{{ $mobilItem->noPolisi }}" ${pemesanan.mobil_noPolisi === '{{ $mobilItem->noPolisi }}' ? 'selected' : ''}>
-                                                        {{ $mobilItem->noPolisi }} - {{ $mobilItem->merekMobil }} {{ $mobilItem->modelMobil }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="tanggalMulai" class="col-form-label">Tanggal Mulai</label>
-                                                <input class="form-control" name="tanggalMulai" type="date" id="tanggalMulai${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Mulai" required value="${pemesanan.tanggalMulai}">
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="tanggalSelesai" class="col-form-label">Tanggal Selesai</label>
-                                                <input class="form-control" name="tanggalSelesai" type="date" id="tanggalSelesai${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Selesai" required value="${pemesanan.tanggalSelesai}">
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="tujuan" class="col-form-label">Tujuan</label>
-                                                <input class="form-control" name="tujuan" type="text" id="tujuan${penyewa.idPenyewa}" required value="${pemesanan.tujuan}">
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <label for="keberangkatan" class="col-form-label">Keberangkatan</label>
-                                                <input class="form-control" name="keberangkatan" type="datetime-local" id="keberangkatan${penyewa.idPenyewa}" placeholder="Masukkan Keberangkatan" value="${moment(pemesanan.keberangkatan).format('YYYY-MM-DDTHH:mm')}">
-                                            </div>
-                                            ${penyewa.pembayaran.map(pembayaran => `
-                                                        <div class="mb-3 row">
-                                                            <label for="tanggalPembayaran" class="col-form-label">Tanggal Pembayaran</label>
-                                                            <input class="form-control" name="tanggalPembayaran" type="datetime-local" value="${moment(pembayaran.tanggalPembayaran).format('YYYY-MM-DDTHH:mm')}" id="tanggalPembayaran${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Pembayaran">
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="totalPembayaran" class="col-form-label">Total Pembayaran</label>
-                                                            <input class="form-control" name="totalPembayaran[]" type="text" value="${pembayaran.totalPembayaran}" id="totalPembayaran${penyewa.idPenyewa}" placeholder="">
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label for="statusPembayaran" class="col-form-label">Status Pembayaran</label>
-                                                            <input class="form-control" name="statusPembayaran[]" type="text" value="${pembayaran.statusPembayaran}" id="statusPembayaran${penyewa.idPenyewa}" placeholder="">
-                                                        </div>
-                                                        `).join('')}
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                            </div>
-                                        </form>
+                $.each(response, function(index, penyewa) {
+                    var pemesanan = penyewa.pemesanan[0] || {};
+                    var tanggalMulai = pemesanan.tanggalMulai || '';
+                    var statusPembayaran = 'Belum Ada Pembayaran';
+                    var pembayaranIcon = '<span>Belum Ada Pembayaran</span>';
+
+                    if (penyewa.pembayaran.length > 0) {
+                        var lastPembayaran = penyewa.pembayaran[penyewa.pembayaran.length - 1];
+                        statusPembayaran = lastPembayaran.statusPembayaran;
+
+                        if (statusPembayaran === 'berhasil') {
+                            pembayaranIcon = '<i class="fas fa-check-circle" style="color: green;"></i>';
+                        } else if (statusPembayaran === 'menunggu') {
+                            pembayaranIcon = '<i class="fas fa-hourglass-half" style="color: orange;"></i>';
+                        } else {
+                            pembayaranIcon = '<i class="fas fa-times-circle" style="color: red;"></i>';
+                        }
+                    }
+
+                    var modalId = `editpenyewa${penyewa.idPenyewa}`;
+                    var row = `
+                    <tr>
+                        <td>${penyewa.noNIK}</td>
+                        <td>${penyewa.user ? penyewa.user.namaUser : ''}</td>
+                        <td>${penyewa.noHP}</td>
+                        <td>${tanggalMulai}</td>
+                        <td>${pembayaranIcon}</td>
+                        <td> 
+                            <a href="#" title="Edit Data" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#${modalId}">
+                            <i class="bx bx-pencil"></i></a>
+                            <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Data Penyewa</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="updateForm${penyewa.idPenyewa}" action="http://localhost:8000/updatepenyewa/${penyewa.idPenyewa}" method="POST">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_method" value="PUT">
+                                                <div class="form-group">
+                                                    <label for="noNIK">NIK</label>
+                                                    <input type="text" name="noNIK" class="form-control" id="noNIK${penyewa.idPenyewa}" value="${penyewa.noNIK}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="namaLengkap">Nama Lengkap</label>
+                                                    <input type="text" name="namaLengkap" class="form-control" id="namaLengkap${penyewa.idPenyewa}" value="${penyewa.user ? penyewa.user.namaUser : ''}" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="jeniskelamin" class="col-form-label">Jenis Kelamin</label>
+                                                    <select class="form-select" id="jeniskelamin${penyewa.idPenyewa}" name="jeniskelamin" required>
+                                                        <option value="1" ${penyewa.jeniskelamin == 'lakilaki' ? 'selected' : ''}>Laki-laki</option>
+                                                        <option value="2" ${penyewa.jeniskelamin == 'perempuan' ? 'selected' : ''}>Perempuan</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="alamat">Alamat</label>
+                                                    <input type="text" name="alamat" class="form-control" id="alamat${penyewa.idPenyewa}" value="${penyewa.alamat}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="noHP">No HP</label>
+                                                    <input type="tel" name="noHP" class="form-control" id="noHP${penyewa.idPenyewa}" value="${penyewa.noHP}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="mobil_noPolisi">Pilih Mobil</label>
+                                                    <select name="mobil_noPolisi" class="form-select" id="mobil_noPolisi${penyewa.idPenyewa}">
+                                                        @foreach ($mobil as $mobilItem)
+                                                        <option value="{{ $mobilItem->noPolisi }}" ${pemesanan.mobil_noPolisi === '{{ $mobilItem->noPolisi }}' ? 'selected' : ''}>
+                                                            {{ $mobilItem->noPolisi }} - {{ $mobilItem->merekMobil }} {{ $mobilItem->modelMobil }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="tanggalMulai" class="col-form-label">Tanggal Mulai</label>
+                                                    <input class="form-control" name="tanggalMulai" type="date" id="tanggalMulai${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Mulai" required value="${pemesanan.tanggalMulai}">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="tanggalSelesai" class="col-form-label">Tanggal Selesai</label>
+                                                    <input class="form-control" name="tanggalSelesai" type="date" id="tanggalSelesai${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Selesai" required value="${pemesanan.tanggalSelesai}">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="tujuan" class="col-form-label">Tujuan</label>
+                                                    <input class="form-control" name="tujuan" type="text" id="tujuan${penyewa.idPenyewa}" required value="${pemesanan.tujuan}">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="keberangkatan" class="col-form-label">Keberangkatan</label>
+                                                    <input class="form-control" name="keberangkatan" type="datetime-local" id="keberangkatan${penyewa.idPenyewa}" placeholder="Masukkan Keberangkatan" value="${moment(pemesanan.keberangkatan).format('YYYY-MM-DDTHH:mm')}">
+                                                </div>
+                                                ${penyewa.pembayaran.map(pembayaran => `
+                                                <div class="mb-3 row">
+                                                    <label for="tanggalPembayaran" class="col-form-label">Tanggal Pembayaran</label>
+                                                    <input class="form-control" name="tanggalPembayaran" type="datetime-local" value="${moment(pembayaran.tanggalPembayaran).format('YYYY-MM-DDTHH:mm')}" id="tanggalPembayaran${penyewa.idPenyewa}" placeholder="Masukkan Tanggal Pembayaran">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="totalPembayaran" class="col-form-label">Total Pembayaran</label>
+                                                    <input class="form-control" name="totalPembayaran[]" type="text" value="${pembayaran.totalPembayaran}" id="totalPembayaran${penyewa.idPenyewa}" placeholder="">
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="statusPembayaran" class="col-form-label">Status Pembayaran</label>
+                                                    <input class="form-control" name="statusPembayaran[]" type="text" value="${pembayaran.statusPembayaran}" id="statusPembayaran${penyewa.idPenyewa}" placeholder="">
+                                                </div>
+                                                `).join('')}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <button class="btn btn-danger btn-sm" onclick="confirmDelete('${penyewa.idPenyewa}')">Hapus</button>
-                    </td>
-                </tr>
-                `;
-                            tbody.append(row);
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete('${penyewa.idPenyewa}')">Hapus</button>
+                        </td>
+                    </tr>
+                    `;
+                    tbody.append(row);
 
-                            // Attach submit event to the dynamically created form
-                            $(`#updateForm${penyewa.idPenyewa}`).on('submit', function(
-                                e) {
-                                e.preventDefault();
+                    // Attach submit event to the dynamically created form
+                    $(`#updateForm${penyewa.idPenyewa}`).on('submit', function(e) {
+                        e.preventDefault();
 
-                                var form = $(this);
-                                var actionUrl = form.attr('action');
-                                var formData = form.serialize();
+                        var form = $(this);
+                        var actionUrl = form.attr('action');
+                        var formData = form.serialize();
 
-                                $.ajax({
-                                    url: actionUrl,
-                                    method: 'POST',
-                                    data: formData,
-                                    success: function(response) {
-                                        location.reload();
-                                        $('#' + modalId).modal(
-                                            'hide');
-                                        // Optionally, refresh the table data here
-                                    },
-                                    error: function(xhr) {
-                                        console.log(xhr
-                                            .responseText
-                                            ); // Display server error messages
-                                        alert(
-                                            'Terjadi kesalahan, silakan coba lagi.'
-                                            );
-                                    }
-                                });
-                            });
+                        $.ajax({
+                            url: actionUrl,
+                            method: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                location.reload();
+                                $('#' + modalId).modal('hide');
+                            },
+                            error: function(xhr) {
+                                console.log(xhr.responseText);
+                                alert('Terjadi kesalahan, silakan coba lagi.');
+                            }
                         });
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
+                    });
                 });
-            });
-
-            // Fungsi untuk menangani aksi klik tombol "Edit"
-            $(document).on('click', '.edit-btn', function() {
-                var idPenyewa = $(this).data('idPenyewa');
-                $('#editpenyewa' + idPenyewa).modal('show');
-            });
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
+    });
+
+    // Fungsi untuk menangani aksi klik tombol "Edit"
+    $(document).on('click', '.edit-btn', function() {
+        var idPenyewa = $(this).data('idPenyewa');
+        $('#editpenyewa' + idPenyewa).modal('show');
+    });
+});
+
+
     </script>
 @endsection

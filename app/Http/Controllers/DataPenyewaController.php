@@ -9,6 +9,8 @@ use App\Models\DataPenyewa;
 use Illuminate\Http\Request;
 use App\Models\DataPemesanan;
 use Illuminate\Support\Facades\Session;
+use Symfony\Contracts\Service\Attribute\Required;
+
 // use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +19,10 @@ class DataPenyewaController extends Controller
 
     public function index(Request $request)
     {
-        $penyewa = DataPenyewa::all();
+         // Mengambil data penyewa, diurutkan berdasarkan created_at dalam urutan menurun
+        $penyewa = DataPenyewa::with('pemesanan', 'pembayaran', 'user')
+        ->orderBy('created_at', 'desc')
+        ->get();
 
         // Mendapatkan data pemesanan, mobil, user, dan pembayaran
         $dataPemesanan = DataPemesanan::all();
@@ -138,8 +143,9 @@ class DataPenyewaController extends Controller
             'tujuan' => 'required|string',
             'keberangkatan' => 'nullable|date_format:Y-m-d\TH:i',
             'mobil_noPolisi' => 'required|string|max:20',  // Tambahkan validasi untuk mobil_noPolisi
+            'statusPembayaran' => 'required',
         ]);
-        // return($request);
+        // return($validatedData);
 
         // Perbarui data penyewa
         $penyewa = DataPenyewa::findOrFail($idPenyewa);
@@ -176,6 +182,7 @@ class DataPenyewaController extends Controller
 
             ]);
         } else {
+
             // Buat data pemesanan baru
             DataPemesanan::create([
                 'penyewa_idPenyewa' => $idPenyewa,
@@ -186,6 +193,26 @@ class DataPenyewaController extends Controller
                 'keberangkatan' => $validatedData['keberangkatan'],
             ]);
         }
+
+        $pembayaran = Pembayaran::where('pemesanan_idPemesanan',$pemesanan->idPemesanan)->first();
+
+        if ($pembayaran){
+            $pembayaran->update([
+                'statusPembayaran' => $validatedData['statusPembayaran'][0],
+            ]);
+        } else {
+            Pembayaran::create([
+                'pemesanan_idPemesanan' => $pemesanan->idPemesanan,
+                'user_idUser' => $validatedData['user_idUser'],
+                'penyewa_idPenyewa' => $validatedData['penyewa_idPenyewa'],
+                'tanggalPembayaran' => $validatedData['tanggalPembayaran'],
+                'totalPembayaran' => $validatedData['totalPembayaran'],
+                'statusPembayaran' => $validatedData['statusPembayaran'][0],
+
+            ]);
+        }
+
+
 
         // Menyimpan pesan sukses ke dalam session
         Session::flash('alert', [

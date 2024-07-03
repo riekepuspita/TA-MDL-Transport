@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Data User
+    Data Penyewa
 @endsection
 
 @section('head')
@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0">Data User</h4>
+                                <h4 class="mb-0">Data Penyewa</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -36,7 +36,7 @@
                         <div class="col-lg-12">
                             <div style="display: flex; justify-content: flex-end; margin-right: 30px; margin-bottom: 15px;">
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahuser">Tambah
-                                    User</button>
+                                    Penyewa</button>
                                 {{-- <a href="/tambahuser" type="button" class="btn btn-success" >Tambah User</a> --}}
                             </div>
                             @if ($message = Session::get('success'))
@@ -51,7 +51,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nama User</th>
+                                                    <th>Nama Penyewa</th>
                                                     <th>Email</th>
                                                     <th>Level</th>
                                                     <th>Status</th>
@@ -111,7 +111,7 @@
                                                                         <div class="modal-body">
 
                                                                             <form
-                                                                                action="{{ route('updateuser', $row->idUser) }}"
+                                                                                action="{{ route('updateuserpenyewa', $row->idUser) }}"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 @method('PUT')
@@ -182,7 +182,7 @@
                                                                                     </select>
                                                                                 </div>
 
-                                                                                {{-- <div class="mb-3">
+                                                                                <div class="mb-3">
                                                                                     <label for="noNIK"
                                                                                         class="col-form-label">NIK</label>
                                                                                     <input type="text"
@@ -236,7 +236,7 @@
                                                                                         placeholder="Masukkan No HP Penyewa"
                                                                                         value="@if ($row->datapenyewa) {{ $row->datapenyewa->noHP }} @endif"
                                                                                         required>
-                                                                                </div> --}}
+                                                                                </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"
                                                                                         class="btn btn-secondary"
@@ -276,7 +276,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/insertuser" method="POST" enctype="multipart/form-data">
+                <form action="/insertuserpenyewa" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -366,7 +366,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Jika pengguna menekan "Ya", maka arahkan ke URL penghapusan
-                    window.location.href = "/deleteuser/" + idUser;
+                    window.location.href = "/deleteuserpenyewa/" + idUser;
                 }
             });
         }

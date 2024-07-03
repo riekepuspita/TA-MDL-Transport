@@ -30,7 +30,7 @@
                 <h1 class="display-2 text-dark mb-4 animated slideInDown">Detail Reservasi</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('mdltransport') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('mobilmdltransport') }}">Mobil</a></li>
                         <li class="breadcrumb-item"><a href="">Reservasi</a></li>
                         <li class="breadcrumb-item text-dark" aria-current="page">Detail Reservasi</li>
@@ -109,8 +109,8 @@
                                     <td>
                                         @if ($pembayaran->statusPembayaran === 'berhasil')
                                             Telah Dibayar
-                                        @elseif ($pembayaran->created_at->diffInHours(\Carbon\Carbon::now()) > 1)
-                                            <span>Belum Dibayar</span>
+                                        {{-- @elseif ($pembayaran->created_at->diffInHours(\Carbon\Carbon::now()) > 1)
+                                            <span>Belum Dibayar</span> --}}
                                         @else
                                             Menunggu Pembayaran
                                         @endif
@@ -127,7 +127,7 @@
                                             onclick="return confirm('Apakah Anda yakin ingin membatalkan pemesanan ini?')"
                                             style="margin-right: 10px; margin-bottom: 20px;">Batal</button>
                                     </form>
-                                    <a href="/mdltransport" class="btn btn-secondary" id="pay-later-button"
+                                    <a href="/" class="btn btn-secondary" id="pay-later-button"
                                         style="margin-right: 10px; margin-bottom: 20px;">Bayar Nanti</a>
                                     <button class="btn btn-secondary" id="pay-button" style="margin-bottom: 20px;">Bayar
                                         Sekarang</button>

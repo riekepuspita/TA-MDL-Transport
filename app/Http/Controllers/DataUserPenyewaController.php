@@ -8,19 +8,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class DataUserController extends Controller
+
+class DataUserPenyewaController extends Controller
 {
     public function index()
     {
-        //$user = User::all();
-        $user = User::where('level', '=', 'admin')->get();
-        $penyewa = DataPenyewa::all();
+       //$user = User::all();
+       $user = User::with('datapenyewa')->where('level', '=', 'user')->get();
+       $penyewa = DataPenyewa::all();
 
-        // dd($data);
-        return view('menu.datauser', compact('user', 'penyewa'));
+       // dd($data);
+        return view('menu.datauserpenyewa', compact('user', 'penyewa'));
     }
 
-    public function insertuser(Request $request)
+    public function insertuserpenyewa(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
@@ -28,6 +29,11 @@ class DataUserController extends Controller
             'email' => 'required',
             'level' => 'required',
             'statusUser' => 'required',
+            'noNIK' => 'required',
+            'jeniskelamin' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
+            'uploadKTP' => 'required|file',
         ]);
 
         if ($validator->fails()) {
@@ -52,15 +58,15 @@ class DataUserController extends Controller
             ]);
 
             // Menyimpan data penyewa ke database
-            // $penyewa = DataPenyewa::create([
-            //     'user_idUser' => $user->idUser, // foreign key untuk menghubungkan dengan tabel users
-            //     'namaLengkap' => $user->namaUser,
-            //     'noNIK' => $request->noNIK,
-            //     'jeniskelamin' => $request->jeniskelamin,
-            //     'alamat' => $request->alamat,
-            //     'noHP' => $request->noHP,
-            //     'uploadKTP' => $fileKTPName, // Validasi untuk file KTP yang diunggah
-            // ]);
+            $penyewa = DataPenyewa::create([
+                'user_idUser' => $user->idUser, // foreign key untuk menghubungkan dengan tabel users
+                'namaLengkap' => $user->namaUser,
+                'noNIK' => $request->noNIK,
+                'jeniskelamin' => $request->jeniskelamin,
+                'alamat' => $request->alamat,
+                'noHP' => $request->noHP,
+                'uploadKTP' => $fileKTPName, // Validasi untuk file KTP yang diunggah
+            ]);
 
             Session::flash('alert', [
                 'type' => 'success',
@@ -72,7 +78,7 @@ class DataUserController extends Controller
         return redirect()->route('datauser');
     }
 
-    public function tampilkanuser($idUser)
+    public function tampilkanuserpenyewa($idUser)
     {
 
         $user = User::find($idUser);
@@ -81,7 +87,7 @@ class DataUserController extends Controller
         return view('menu.tampiluser', compact('user', 'penyewa'));
     }
 
-    public function updateuser(Request $request, $idUser)
+    public function updateuserpenyewa(Request $request, $idUser)
     {
 
         $validatedData = $request->validate([
@@ -89,6 +95,10 @@ class DataUserController extends Controller
             'email' => 'required',
             'level' => 'required',
             'statusUser' => 'required',
+            'noNIK' => 'required',
+            'jeniskelamin' => 'required',
+            'alamat' => 'required',
+            'noHP' => 'required',
         ]);
 
         $user = User::findOrFail($request->idUser);
@@ -101,16 +111,16 @@ class DataUserController extends Controller
 
         ]);
 
-        // $penyewa = DataPenyewa::where('user_idUser', $idUser)->first();
-        // if ($penyewa) {
-        //     $penyewa->update([
-        //         'user_iduser' => $request->user_idUser,
-        //         'noNIK' => $request->noNIK,
-        //         'jeniskelamin' => $request->jeniskelamin,
-        //         'alamat' => $request->alamat,
-        //         'noHP' => $request->noHP,
-        //     ]);
-        // }
+        $penyewa = DataPenyewa::where('user_idUser', $idUser)->first();
+        if ($penyewa) {
+            $penyewa->update([
+                'user_iduser' => $request->user_idUser,
+                'noNIK' => $request->noNIK,
+                'jeniskelamin' => $request->jeniskelamin,
+                'alamat' => $request->alamat,
+                'noHP' => $request->noHP,
+            ]);
+        }
         // $user->namaUser = $request->namaUser;
         // $user->email = $request->email;
         // $user->level = $request->level;
@@ -131,7 +141,7 @@ class DataUserController extends Controller
         return redirect()->route('datauser');
     }
 
-    public function deleteuser($idUser)
+    public function deleteuserpenyewa($idUser)
     {
         $user = User::find($idUser);
 
